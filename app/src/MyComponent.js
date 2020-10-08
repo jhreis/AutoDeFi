@@ -1,6 +1,6 @@
 import React from "react";
 import { newContextComponents } from "@drizzle/react-components";
-import logo from "./logo.png";
+import logo from "./assets/logo.png";
 import Web3 from "web3";
 
 import CompoundFacade from "./contracts/CompoundFacade.json";
@@ -60,64 +60,8 @@ export default ({ drizzle, drizzleState }) => {
         <Test 
           drizzle={drizzle}
           drizzleState={drizzleState}
-          foo="test?"
         />
-
-        {/* <p>
-          <strong>Generate: </strong>
-          <ContractForm
-            drizzle={drizzle}
-            contract="Generator"
-            method="generateNewFacade"
-          />
-
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="Generator"
-            method="facadeInstances"
-            methodArgs={[drizzleState.accounts[0]]}
-          />
-
-
-        </p> */}
       </div>
-
-      {/* <div className="section">
-        <h2>ComplexStorage</h2>
-        <p>
-          Finally this contract shows data types with additional considerations.
-          Note in the code the strings below are converted from bytes to UTF-8
-          strings and the device data struct is iterated as a list.
-        </p>
-        <p>
-          <strong>String 1: </strong>
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="ComplexStorage"
-            method="string1"
-            toUtf8
-          />
-        </p>
-        <p>
-          <strong>String 2: </strong>
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="ComplexStorage"
-            method="string2"
-            toUtf8
-          />
-        </p>
-        <strong>Single Device Data: </strong>
-        <ContractData
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-          contract="ComplexStorage"
-          method="singleDD"
-        />
-      </div> */}
     </div>
   );
 };
@@ -161,7 +105,9 @@ class Test extends React.Component {
 
       // Adding new contract!
       let web3 = new Web3()
-      let web3Contract = new web3.eth.Contract(CompoundFacade.abi, newFacade)
+      let web3Contract = new web3.eth.Contract(CompoundFacade.abi, newFacade, { from: nextProps.drizzleState.accounts[0] })
+      console.log("asdfasdf", nextProps.drizzle.web3.currentProvider)
+      web3Contract.setProvider(nextProps.drizzle.web3.currentProvider);
       const contractConfig = { web3Contract, contractName: newFacade }
       
       // let r = await web3Contract
@@ -170,6 +116,15 @@ class Test extends React.Component {
       nextProps.drizzle.addContract(contractConfig, events)
       console.log("Added new contract", newFacade, "added?", web3Contract)
       
+      /**
+       * 
+        * options - Object (optional): The options of the contract. Some are used as fallbacks for calls and transactions:
+          from - String: The address transactions should be made from.
+          gasPrice - String: The gas price in wei to use for transactions.
+          gas - Number: The maximum gas provided for a transaction (gas limit).
+          data - String: The byte code of the contract. Used when the contract gets deployed.
+       * 
+       */
       
       // Attempt to remove old one
       const oldFacade = this.state.facadeAddress
@@ -186,15 +141,8 @@ class Test extends React.Component {
   }
 
   render() {
-    const { foo, drizzle, drizzleState } = this.props
+    const { drizzle, drizzleState } = this.props
     const userWallet = drizzleState.accounts[0]
-
-    // const state = drizzle.store.getState()
-
-    let facadeAddress = null
-    if (facadeAddress) {
-      console.log("test", facadeAddress)
-    }
 
     // var displayData = this.props.contracts["Generator"]["facadeInstances"][this.state.dataKey].value;
     // drizzle.contracts["Generator"].methods["facadeInstances"].cacheCall(...[facadeAddress])
@@ -212,24 +160,52 @@ class Test extends React.Component {
 
     return (
     <div>
-      <strong>Generate: {foo}</strong>
-      <ContractForm
-        drizzle={drizzle}
-        contract="Generator"
-        method="generateNewFacade"
-      />
-
-      <ContractData
+      <GeneratorComponent
         drizzle={drizzle}
         drizzleState={drizzleState}
-        contract="Generator"
-        method="facadeInstances"
-        methodArgs={[userWallet]}
+        facadeAddress={this.state.facadeAddress}
       />
 
       {facadeComponent}
     </div>
     )
+  }
+}
+
+class GeneratorComponent extends React.Component {
+  render() {
+    const { drizzle, drizzleState, facadeAddress } = this.props
+
+    let noFacade = (
+      <div>
+        <strong>Generate: </strong>
+        <ContractForm
+          drizzle={drizzle}
+          contract="Generator"
+          method="generateNewFacade"
+        />
+      </div>
+    )
+
+    let hasFacade = (
+      <div>
+        {/* TODO: Remove at some point */}
+        {noFacade}
+
+        {facadeAddress}
+        
+        {/* Not actually needed: */}
+        {/* <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract="Generator"
+          method="facadeInstances"
+          methodArgs={[drizzleState.accounts[0]]}
+        /> */}
+      </div>
+    )
+
+    return facadeAddress ? hasFacade : noFacade
   }
 }
 
@@ -249,6 +225,12 @@ class FacadeComponent extends React.Component {
           drizzle={drizzle}
           contract={contractName}
           method="deposit"
+        />
+
+        <ContractForm
+          drizzle={drizzle}
+          contract={contractName}
+          method="withdraw"
         />
       </div>
     )
