@@ -1,6 +1,9 @@
 import React from "react";
 import { newContextComponents } from "@drizzle/react-components";
 import logo from "./logo.png";
+import Web3 from "web3";
+
+import CompoundFacade from "./contracts/CompoundFacade.json";
 
 const { AccountData, ContractData, ContractForm } = newContextComponents;
 
@@ -45,49 +48,40 @@ export default ({ drizzle, drizzleState }) => {
         <ContractForm drizzle={drizzle} contract="SimpleStorage" method="set" />
       </div>
 
-      {/* <div className="section">
-        <h2>TutorialToken</h2>
+      <div className="section">
+        <h2>Generate Your Personal Compound Contract</h2>
         <p>
           Here we have a form with custom, friendly labels. Also note the token
           symbol will not display a loading indicator. We've suppressed it with
           the <code>hideIndicator</code> prop because we know this variable is
           constant.
         </p>
-        <p>
-          <strong>Total Supply: </strong>
-          <ContractData
+
+        <Test 
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          foo="test?"
+        />
+
+        {/* <p>
+          <strong>Generate: </strong>
+          <ContractForm
             drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="TutorialToken"
-            method="totalSupply"
-            methodArgs={[{ from: drizzleState.accounts[0] }]}
-          />{" "}
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="TutorialToken"
-            method="symbol"
-            hideIndicator
+            contract="Generator"
+            method="generateNewFacade"
           />
-        </p>
-        <p>
-          <strong>My Balance: </strong>
+
           <ContractData
             drizzle={drizzle}
             drizzleState={drizzleState}
-            contract="TutorialToken"
-            method="balanceOf"
+            contract="Generator"
+            method="facadeInstances"
             methodArgs={[drizzleState.accounts[0]]}
           />
-        </p>
-        <h3>Send Tokens</h3>
-        <ContractForm
-          drizzle={drizzle}
-          contract="TutorialToken"
-          method="transfer"
-          labels={["To Address", "Amount to Send"]}
-        />
-      </div> */}
+
+
+        </p> */}
+      </div>
 
       {/* <div className="section">
         <h2>ComplexStorage</h2>
@@ -127,3 +121,139 @@ export default ({ drizzle, drizzleState }) => {
     </div>
   );
 };
+
+class Test extends React.Component {
+  constructor(props, context) {
+    super(props)
+
+    console.log(props.drizzle.contracts)
+    // this.contracts = context.drizzle.contracts
+
+    this.state = {
+      facadeAddress: null
+    }
+  }
+
+  is0Address(address) {
+    // TODO: Future improvement
+    // web3.toBigNumber(address).isZero()
+    return address == '0x0000000000000000000000000000000000000000'
+  }
+
+  async facadeAddress(props) {
+    const facadeAddress = props.drizzleState.accounts[0]
+    let address = await props.drizzle.contracts.Generator.methods.facadeInstances(facadeAddress).call()
+    if (this.is0Address(address)) { return null }
+    return address
+  }
+
+  // Will not fix legacy component
+  // eslint-disable-next-line react/no-deprecated
+  async componentWillReceiveProps(nextProps) {
+
+    
+
+    const newFacade = await this.facadeAddress(nextProps)
+
+
+    if (this.state.facadeAddress != newFacade) {
+      console.log("Updating state to", newFacade, "from", this.state.facadeAddress)
+
+      // Adding new contract!
+      let web3 = new Web3()
+      let web3Contract = new web3.eth.Contract(CompoundFacade.abi, newFacade)
+      const contractConfig = { web3Contract, contractName: newFacade }
+      
+      // let r = await web3Contract
+
+      let events = ["Deposit", "Withdraw"]
+      nextProps.drizzle.addContract(contractConfig, events)
+      console.log("Added new contract", newFacade, "added?", web3Contract)
+      
+      
+      // Attempt to remove old one
+      const oldFacade = this.state.facadeAddress
+      if (oldFacade) {
+        nextProps.drizzle.deleteContract(oldFacade)
+        console.log("Removed old contract", oldFacade)
+      }
+
+      // Update the state
+      this.setState({
+        facadeAddress: newFacade
+      })
+    }
+  }
+
+  render() {
+    const { foo, drizzle, drizzleState } = this.props
+    const userWallet = drizzleState.accounts[0]
+
+    // const state = drizzle.store.getState()
+
+    let facadeAddress = null
+    if (facadeAddress) {
+      console.log("test", facadeAddress)
+    }
+
+    // var displayData = this.props.contracts["Generator"]["facadeInstances"][this.state.dataKey].value;
+    // drizzle.contracts["Generator"].methods["facadeInstances"].cacheCall(...[facadeAddress])
+
+    let facadeComponent = null
+
+    console.log("yoyoyo", this.state.facadeAddress)
+    if (this.state.facadeAddress) {
+      facadeComponent = <FacadeComponent 
+                          drizzle={drizzle}
+                          drizzleState={drizzleState}
+                          contractName={this.state.facadeAddress}
+                        />
+    }
+
+    return (
+    <div>
+      <strong>Generate: {foo}</strong>
+      <ContractForm
+        drizzle={drizzle}
+        contract="Generator"
+        method="generateNewFacade"
+      />
+
+      <ContractData
+        drizzle={drizzle}
+        drizzleState={drizzleState}
+        contract="Generator"
+        method="facadeInstances"
+        methodArgs={[userWallet]}
+      />
+
+      {facadeComponent}
+    </div>
+    )
+  }
+}
+
+class FacadeComponent extends React.Component {
+  render() {
+    const { drizzle, drizzleState, contractName } = this.props
+      /*
+      - Have just generated the new contract interface
+      - Need to render child tremplate
+      - Add contract to Drizzle, pass data to child, and render contents dyncamilly
+      */
+
+    return (
+      <div>
+        <strong>Deposit: </strong>
+        <ContractForm
+          drizzle={drizzle}
+          contract={contractName}
+          method="deposit"
+        />
+      </div>
+    )
+
+
+
+  }
+}
