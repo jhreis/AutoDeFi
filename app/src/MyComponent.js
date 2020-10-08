@@ -84,17 +84,20 @@ class Test extends React.Component {
       console.log("Updating state to", newFacade, "from", this.state.facadeAddress)
 
       // Adding new contract!
-      let web3 = new Web3()
-      let web3Contract = new web3.eth.Contract(CompoundFacade.abi, newFacade, { from: nextProps.drizzleState.accounts[0] })
-      console.log("asdfasdf", nextProps.drizzle.web3.currentProvider)
-      web3Contract.setProvider(nextProps.drizzle.web3.currentProvider);
-      const contractConfig = { web3Contract, contractName: newFacade }
-      
-      // let r = await web3Contract
+      if (newFacade != null) {
+        console.log("Generating new facade", newFacade)
+        let web3 = new Web3()
+        let web3Contract = new web3.eth.Contract(CompoundFacade.abi, newFacade, { from: nextProps.drizzleState.accounts[0] })
+        console.log("asdfasdf", nextProps.drizzle.web3.currentProvider)
+        web3Contract.setProvider(nextProps.drizzle.web3.currentProvider);
+        const contractConfig = { web3Contract, contractName: newFacade }
 
-      let events = ["Deposit", "Withdraw"]
-      nextProps.drizzle.addContract(contractConfig, events)
-      console.log("Added new contract", newFacade, "added?", web3Contract)
+        let events = ["Deposit", "Withdraw"]
+        nextProps.drizzle.addContract(contractConfig, events)
+        console.log("Added new contract", newFacade, "added?", web3Contract)
+      } else {
+        console.log("New facade is null, skipping")
+      }
       
       /**
        * 
@@ -105,18 +108,20 @@ class Test extends React.Component {
           data - String: The byte code of the contract. Used when the contract gets deployed.
        * 
        */
-      
-      // Attempt to remove old one
-      const oldFacade = this.state.facadeAddress
-      if (oldFacade) {
-        nextProps.drizzle.deleteContract(oldFacade)
-        console.log("Removed old contract", oldFacade)
-      }
 
-      // Update the state
+      // Important to update state before removing old facade to prevent state being misaligned
+      const oldFacade = this.state.facadeAddress
       this.setState({
         facadeAddress: newFacade
       })
+      
+      // Attempt to remove old one
+      if (oldFacade) {
+        nextProps.drizzle.deleteContract(oldFacade)
+        console.log("Removed old contract", oldFacade)
+      } else {
+        console.log("No old facade, skipping deletion")
+      }
     }
   }
 
@@ -158,7 +163,7 @@ class GeneratorComponent extends React.Component {
 
     let noFacade = (
       <div>
-        <strong>Generate: </strong>
+        <strong>Generate:</strong>
         <ContractForm
           drizzle={drizzle}
           contract="Generator"
@@ -205,6 +210,21 @@ class FacadeComponent extends React.Component {
     return (
       <div>
         <strong>Deposit:</strong>
+
+        <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract={contractName}
+          method="underlyingAssetSymbol"
+        />
+
+        <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract={contractName}
+          method="underlyingBalance"
+        />
+
         <ContractForm
           drizzle={drizzle}
           contract={contractName}
@@ -212,10 +232,31 @@ class FacadeComponent extends React.Component {
         />
 
         <strong>Withdraw All Funds:</strong>
+        <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract={contractName}
+          method="mintedAssetSymbol"
+        />
+
+        <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract={contractName}
+          method="mintedBalance"
+        />
+
         <ContractForm
           drizzle={drizzle}
           contract={contractName}
           method="withdraw"
+        />
+
+        <strong>Destroy facade, poof!:</strong>
+          <ContractForm
+            drizzle={drizzle}
+            contract="Generator"
+            method="destroyFacade"
         />
       </div>
     )
