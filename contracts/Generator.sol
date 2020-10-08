@@ -37,6 +37,11 @@ contract Generator {
         
         // facadeInstances[msg.sender] = 
     }
+
+    function destroyFacade() public {
+        // TODO: This drastically needs to be improved
+        facadeInstances[msg.sender] = address(0);
+    }
     
 }
 

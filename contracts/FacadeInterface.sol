@@ -7,4 +7,20 @@ interface Facade {
 
     function deposit() external;
     function withdraw() external;
+    
+    /// Returns the amount of the underlying token that is available for deposit
+    /// e.g. USDC, DAI
+    function underlyingBalance() external view returns(uint256);
+    
+    /// Returns the amount of the minted balance that is available for withdrawing
+    /// e.g. cUSDC, cDAI
+    function mintedBalance() external view returns(uint256);
+    
+    /// Returns the symbol for the underlying token that is available for deposit
+    /// e.g. USDC, DAI
+    function underlyingAssetSymbol() external view returns(string memory);
+    
+    /// Returns the symbol for the minted token that is available for withdrawing
+    /// e.g. cUSDC, cDAI
+    function mintedAssetSymbol() external view returns(string memory);
 }
