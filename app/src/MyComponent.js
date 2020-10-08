@@ -11,23 +11,11 @@ export default ({ drizzle, drizzleState }) => {
   // destructure drizzle and drizzleState from props
   return (
     <div className="App">
-      <div>
+      <div class="center">
         <img src={logo} alt="drizzle-logo" />
         <h1>Automatic DeFi Deposits!</h1>
-        <p>
-          Set. Forget. Earn.
-        </p>
-      </div>
-
-      {/* 
-      A few simple steps to setup automatic DeFi deposits!
-
-      1. Create a DeFi Smart Account
-      2. Provide API credentials and set recurring schedule
-      3. Earn 🚀🌖
-      */}
-
-      <div className="section">
+        <h2>Set. Forget. Earn.</h2>
+        <div className="section">
         <h2>A few simple steps to setup automatic DeFi deposits!</h2>
         <p>
           <ol>
@@ -36,11 +24,31 @@ export default ({ drizzle, drizzleState }) => {
             <li>Earn 🚀🌖</li>
           </ol>
         </p>
+        </div>
+      </div>
+        
+        {/* <h1>Automatic DeFi Deposits!</h1> */}
+        
+        <div class="shade2"></div>
 
-        <Test 
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-        />
+      {/* 
+      A few simple steps to setup automatic DeFi deposits!
+
+      1. Create a DeFi Smart Account
+      2. Provide API credentials and set recurring schedule
+      3. Earn 🚀🌖
+      */}
+      <div className="section" class="shade2">
+        <div class="blackboard">
+          <div class="form">
+            <label>adsf</label>
+            <Test 
+              drizzle={drizzle}
+              drizzleState={drizzleState}
+            />
+
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -161,13 +169,26 @@ class GeneratorComponent extends React.Component {
   render() {
     const { drizzle, drizzleState, facadeAddress } = this.props
 
+    let generateBtn = (prop) => {
+      return (
+      <button
+        key="submit"
+        className="pure-button"
+        type="button"
+        onClick={prop.handleSubmit}
+      >
+        Make
+      </button>)
+    }
+
     let noFacade = (
       <div>
-        <strong>Generate:</strong>
+        <label>Generate:</label>
         <ContractForm
           drizzle={drizzle}
           contract="Generator"
           method="generateNewFacade"
+          render={generateBtn}
         />
       </div>
     )
