@@ -8,3 +8,8 @@
   max-width: 720px;
   margin: 4rem auto auto;
 }
+
+body {
+  background-image: url("assets/background1.jpg");
+  background-color: #cccccc;
+ }

@@ -13,48 +13,28 @@ export default ({ drizzle, drizzleState }) => {
     <div className="App">
       <div>
         <img src={logo} alt="drizzle-logo" />
-        <h1>Drizzle Examples</h1>
+        <h1>Automatic DeFi Deposits!</h1>
         <p>
-          Examples of how to get started with Drizzle in various situations.
+          Set. Forget. Earn.
         </p>
       </div>
 
-      <div className="section">
-        <h2>Active Account</h2>
-        <AccountData
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-          accountIndex={0}
-          units="ether"
-          precision={3}
-        />
-      </div>
+      {/* 
+      A few simple steps to setup automatic DeFi deposits!
+
+      1. Create a DeFi Smart Account
+      2. Provide API credentials and set recurring schedule
+      3. Earn 🚀🌖
+      */}
 
       <div className="section">
-        <h2>SimpleStorage</h2>
+        <h2>A few simple steps to setup automatic DeFi deposits!</h2>
         <p>
-          This shows a simple ContractData component with no arguments, along
-          with a form to set its value.
-        </p>
-        <p>
-          <strong>Stored Value: </strong>
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="SimpleStorage"
-            method="storedData"
-          />
-        </p>
-        <ContractForm drizzle={drizzle} contract="SimpleStorage" method="set" />
-      </div>
-
-      <div className="section">
-        <h2>Generate Your Personal Compound Contract</h2>
-        <p>
-          Here we have a form with custom, friendly labels. Also note the token
-          symbol will not display a loading indicator. We've suppressed it with
-          the <code>hideIndicator</code> prop because we know this variable is
-          constant.
+          <ol>
+            <li>Create a DeFi Smart Account</li>
+            <li>Provide API credentials and set recurring schedule</li>
+            <li>Earn 🚀🌖</li>
+          </ol>
         </p>
 
         <Test 
@@ -218,15 +198,20 @@ class FacadeComponent extends React.Component {
       - Add contract to Drizzle, pass data to child, and render contents dyncamilly
       */
 
+    // Deposit
+    // USDC Balance
+    // Withdraw
+    // cUSDC Balance
     return (
       <div>
-        <strong>Deposit: </strong>
+        <strong>Deposit:</strong>
         <ContractForm
           drizzle={drizzle}
           contract={contractName}
           method="deposit"
         />
 
+        <strong>Withdraw All Funds:</strong>
         <ContractForm
           drizzle={drizzle}
           contract={contractName}
