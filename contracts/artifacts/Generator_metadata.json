@@ -1,0 +1,196 @@
+{
+	"compiler": {
+		"version": "0.7.4+commit.3f05b770"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					}
+				],
+				"name": "LogFacadeCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "LogFacadeDestroyed",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "facadeIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "destroyFacade",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "facades",
+				"outputs": [
+					{
+						"internalType": "contract Facade",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "integrationIndex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pairIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "generateNewFacade",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "integrations",
+				"outputs": [
+					{
+						"internalType": "contract Integration",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"LogFacadeCreated(address,address)": {
+					"notice": "All user addresses that have facades"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"facades(address,uint256)": {
+					"notice": "User Address => Facade Address, make type safe"
+				},
+				"integrations(uint256)": {
+					"notice": "The available protocols that are available to create facades for"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/Generator.sol": "Generator"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/CompoundFacade.sol": {
+			"keccak256": "0xee79221967dbe126f790848d6a939b1aa5536a2d11816fd4601871fc82f2878c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f5ebfe2ed808049fb23319459fc7fe8d9011c2239fd5089fcb085941ccda287",
+				"dweb:/ipfs/QmUR6F8zps3D7onXZrVGe8rP3Q2ip9A4S45YYz2HURgmma"
+			]
+		},
+		"localhost/contracts/FacadeInterface.sol": {
+			"keccak256": "0x17005f846592c0976914c79aa7221afa360fa1c431317e1fdafcfdc3ffe04f9b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://56f23994b48d7c53e5370cb60ced3b543110b348828b2cf65850ea8aa075c21d",
+				"dweb:/ipfs/QmSejfdA6UPFRgdJqsHNqWZy15QRHZCXXgihdF6C2Xo4eP"
+			]
+		},
+		"localhost/contracts/Generator.sol": {
+			"keccak256": "0x51a964bbe01a5040b47eca648eced36aaa867525a213c306594f8d56dec1f75f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f8fde399ebfaccc739f4c62abb6fe42b3bb6bd9130e64d28e962d1e47fe4b2ed",
+				"dweb:/ipfs/QmdbnYroTDJTNDRBPdtGxjsHvhwan9taopjQSmP5bdEjpr"
+			]
+		},
+		"localhost/contracts/IERC20.sol": {
+			"keccak256": "0x917b18ec908b66c182fcb54cf033eb8d6c850ac761fc4b6f4fd56a7f4f243266",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca8b2701a3aff778a8ef46c6c4fafb709fa4ebb7be67141959726873afb17a90",
+				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
+			]
+		},
+		"localhost/contracts/Integrator.sol": {
+			"keccak256": "0x0b265896371f7fa5d1eaa2c7c4126b383d3d8c2832fb3cfd52ba3d0ae7a5ef30",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a94a3d3dec86fab8b07d2087ee3a345fd7ef75db5760a17a631a877adead9307",
+				"dweb:/ipfs/QmYX6zMpQbnGXfYAbNhWkKzu1gzfgeRufpGGpnfEpj6M8Y"
+			]
+		}
+	},
+	"version": 1
+}

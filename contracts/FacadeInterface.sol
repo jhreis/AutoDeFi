@@ -1,12 +1,20 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.21 <0.7.0;
+pragma solidity ^0.7.0;
 
 interface Facade {
     event Deposit(address indexed facade, address indexed depositor);
     event Withdraw(address indexed facade);
 
-    function deposit() external;
+    /// This deposits assets into the underlying contract, from the current account
+    /// e.g. Account -> Compound
+    function depositToUnderlying() external;
+    
+    /// Withdraws funds from underlying contract, to EOA
+    /// e.g. Comound -> Account -> EOA
     function withdraw() external;
+    
+    /// Destroys the facade and transfers all funds to user wallet
+    function destroy() external;
     
     /// Returns the amount of the underlying token that is available for deposit
     /// e.g. USDC, DAI

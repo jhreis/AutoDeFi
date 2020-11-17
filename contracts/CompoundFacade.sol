@@ -1,80 +1,117 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.21 <0.7.0;
+pragma solidity ^0.7.0;
 
-// import "https://github.com/curvefi/curve-contract/blob/master/contracts/pool-templates/y/DepositTemplateY.vy";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/token/ERC20/IERC20.sol";
-
-// Ugh, for some reason this isn't a full ERC20 spec and only follows the IERC20 interface
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
+import './IERC20.sol';
 import './FacadeInterface.sol';
 
 contract CompoundFacade is Facade {
-    // TODO: These should be done via composition / dep injection
-    ERC20 constant USDC = ERC20(0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b);
-    
-    // address constant COMP = 0x5B281A6DdA0B271e91ae35DE655Ad301C976edb1;
-    ERC20 constant cUSDC = ERC20(0x5B281A6DdA0B271e91ae35DE655Ad301C976edb1);
-    
     uint256 constant MAX_INT = 2**256 - 1;
     
-    address public owner;
+    /// The owner of the specific account instance
+    address payable public owner;
     
-    constructor(address _owner) public {
-        owner = _owner;
-        USDC.approve(address(cUSDC), MAX_INT);
+    /// An address that is allowed to assist in certain functions to help with automation
+    /// This address never has full control over funds
+    /// e.g. sending funds back to `owner`'s wallet.
+    address public assistant;
+    
+    /// The address of the underlying token
+    /// e.g. USDC address
+    ERC20 public underlyingAssetAddress;
+    
+    /// The address of the token being minted
+    /// e.g. cUSDC address
+    ERC20 public mintingAssetAddress;
+    
+    /// The amount required before a deposit will be approved
+    uint256 public minimumUnderlyingForDeposit = 100;
+    
+    // Modifiers
+    
+    // Checks if caller is owner
+    modifier isOwner() {
+        require(msg.sender == owner, "Caller is not owner");
+        _;
     }
     
-    function deposit() external {
-        uint256 fullBalance = USDC.balanceOf(address(this));
+    // Checks to make sure the caller is friendly and is approved by owner to perform actions
+    modifier isFriendly() {
+        require(msg.sender == owner || msg.sender == assistant);
+        _;
+    }
+    
+    constructor(address payable _owner, ERC20 underlyingAsset, ERC20 mintingAsset) {
+        owner = _owner;
+        assistant = msg.sender;
+        
+        // This approves the contract (e.g. compound) to withdraw funds from the smart contract account
+        underlyingAsset.approve(address(mintingAsset), MAX_INT);
+    }
+    
+    /// This deposits funds into the underlying contract
+    function depositToUnderlying() override external {
+        uint256 fullBalance = underlyingAssetAddress.balanceOf(address(this));
+        
+        // TODO: Enable reward!
         
         bytes memory payload = abi.encodeWithSignature("mint(uint256)", fullBalance);
-        (bool success,) = address(cUSDC).call(payload);
+        (bool success,) = address(mintingAssetAddress).call(payload);
         require(success);
         emit Deposit(address(this), msg.sender);
-    
     }
     
-    function withdraw() external {
-        require(msg.sender == owner);
-        
+    function withdraw() override public isFriendly {
         // Pull assets out of Compound
-        uint256 fullBalance = cUSDC.balanceOf(address(this));
+        uint256 fullBalance = mintingAssetAddress.balanceOf(address(this));
         bytes memory payload = abi.encodeWithSignature("redeem(uint256)", fullBalance);
-        (bool success,) = address(cUSDC).call(payload);
+        (bool success,) = address(mintingAssetAddress).call(payload);
         require(success);
         
         // Actual, direct transfer to user wallet
-        uint256 allUSDC = USDC.balanceOf(address(this));
-        USDC.transfer(owner, allUSDC);
+        uint256 allUSDC = underlyingAssetAddress.balanceOf(address(this));
+        underlyingAssetAddress.transfer(owner, allUSDC);
 
         emit Withdraw(address(this));
-        
-        // TODO: Consider removing withdraw permissions
     }
+    
+    function destroy() override external isFriendly {
+        // Secure all ERC20 funds
+        withdraw();
+        
+        // Should be no ETH in contract
+        selfdestruct(owner);
+    }
+    
+    function setAssistant(address newAssistant) public isOwner {
+        assistant = newAssistant;
+    }
+
+    ////// Convenience functions that forward to the underlying contract
 
     /// Returns the amount of the underlying token that is available for deposit
     /// e.g. USDC, DAI
-    function underlyingBalance() external view returns(uint256) {
-      return USDC.balanceOf(address(this));
+    function underlyingBalance() override external view returns(uint256) {
+      return underlyingAssetAddress.balanceOf(address(this));
     }
     
     /// Returns the amount of the minted balance that is available for withdrawing
     /// e.g. cUSDC, cDAI
-    function mintedBalance() external view returns(uint256) {
-      return cUSDC.balanceOf(address(this));
+    function mintedBalance() override external view returns(uint256) {
+      return mintingAssetAddress.balanceOf(address(this));
     }
     
     /// Returns the symbol for the underlying token that is available for deposit
+    /// This is available directly on the asset address, but providing a convenience function
     /// e.g. USDC, DAI
-    function underlyingAssetSymbol() external view returns(string memory) {
-      return "USDC";
+    function underlyingAssetSymbol() override external view returns(string memory) {
+        return underlyingAssetAddress.symbol();
     }
     
     /// Returns the symbol for the minted token that is available for withdrawing
+    /// This is available directly on the asset address, but providing a convenience function
     /// e.g. cUSDC, cDAI
-    function mintedAssetSymbol() external view returns(string memory) {
-      return "cUSDC";
+    function mintedAssetSymbol() override external view returns(string memory) {
+        return mintingAssetAddress.symbol();
     }
     
 }

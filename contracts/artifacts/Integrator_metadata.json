@@ -1,0 +1,120 @@
+{
+	"compiler": {
+		"version": "0.7.4+commit.3f05b770"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newIntegration",
+						"type": "address"
+					}
+				],
+				"name": "addNewProtocol",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "availableProtocols",
+				"outputs": [
+					{
+						"internalType": "contract Integration",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/Integrator.sol": "Integrator"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/CompoundFacade.sol": {
+			"keccak256": "0xee79221967dbe126f790848d6a939b1aa5536a2d11816fd4601871fc82f2878c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f5ebfe2ed808049fb23319459fc7fe8d9011c2239fd5089fcb085941ccda287",
+				"dweb:/ipfs/QmUR6F8zps3D7onXZrVGe8rP3Q2ip9A4S45YYz2HURgmma"
+			]
+		},
+		"localhost/contracts/FacadeInterface.sol": {
+			"keccak256": "0x17005f846592c0976914c79aa7221afa360fa1c431317e1fdafcfdc3ffe04f9b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://56f23994b48d7c53e5370cb60ced3b543110b348828b2cf65850ea8aa075c21d",
+				"dweb:/ipfs/QmSejfdA6UPFRgdJqsHNqWZy15QRHZCXXgihdF6C2Xo4eP"
+			]
+		},
+		"localhost/contracts/IERC20.sol": {
+			"keccak256": "0x917b18ec908b66c182fcb54cf033eb8d6c850ac761fc4b6f4fd56a7f4f243266",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca8b2701a3aff778a8ef46c6c4fafb709fa4ebb7be67141959726873afb17a90",
+				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
+			]
+		},
+		"localhost/contracts/Integrator.sol": {
+			"keccak256": "0xf5e00f825b761f9994b91cb55bf8a270df90662fddeaeeee8527598faac301ed",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4722ee6b8d95e2402c82aa89702f999fb9b819741bb18f045eaed130eeb36300",
+				"dweb:/ipfs/QmancfNCBsjFFi5yMdMBte37SPUMnFT1MMcFwBYgfez23b"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,303 @@
+{
+	"compiler": {
+		"version": "0.7.4+commit.3f05b770"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "contract ERC20",
+						"name": "underlyingAsset",
+						"type": "address"
+					},
+					{
+						"internalType": "contract ERC20",
+						"name": "mintingAsset",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "facade",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "depositor",
+						"type": "address"
+					}
+				],
+				"name": "Deposit",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "facade",
+						"type": "address"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "assistant",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositToUnderlying",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "destroy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minimumUnderlyingForDeposit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintedAssetSymbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintedBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintingAssetAddress",
+				"outputs": [
+					{
+						"internalType": "contract ERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newAssistant",
+						"type": "address"
+					}
+				],
+				"name": "setAssistant",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "underlyingAssetAddress",
+				"outputs": [
+					{
+						"internalType": "contract ERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "underlyingAssetSymbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "underlyingBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"assistant()": {
+					"notice": "An address that is allowed to assist in certain functions to help with automation This address never has full control over funds e.g. sending funds back to `owner`'s wallet."
+				},
+				"depositToUnderlying()": {
+					"notice": "This deposits funds into the underlying contract"
+				},
+				"destroy()": {
+					"notice": "Destroys the facade and transfers all funds to user wallet"
+				},
+				"minimumUnderlyingForDeposit()": {
+					"notice": "The amount required before a deposit will be approved"
+				},
+				"mintedAssetSymbol()": {
+					"notice": "Returns the symbol for the minted token that is available for withdrawing This is available directly on the asset address, but providing a convenience function e.g. cUSDC, cDAI"
+				},
+				"mintedBalance()": {
+					"notice": "Returns the amount of the minted balance that is available for withdrawing e.g. cUSDC, cDAI"
+				},
+				"mintingAssetAddress()": {
+					"notice": "The address of the token being minted e.g. cUSDC address"
+				},
+				"owner()": {
+					"notice": "The owner of the specific account instance"
+				},
+				"underlyingAssetAddress()": {
+					"notice": "The address of the underlying token e.g. USDC address"
+				},
+				"underlyingAssetSymbol()": {
+					"notice": "Returns the symbol for the underlying token that is available for deposit This is available directly on the asset address, but providing a convenience function e.g. USDC, DAI"
+				},
+				"underlyingBalance()": {
+					"notice": "Returns the amount of the underlying token that is available for deposit e.g. USDC, DAI"
+				},
+				"withdraw()": {
+					"notice": "Withdraws funds from underlying contract, to EOA e.g. Comound -> Account -> EOA"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/CompoundFacade.sol": "CompoundFacade"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/CompoundFacade.sol": {
+			"keccak256": "0xee79221967dbe126f790848d6a939b1aa5536a2d11816fd4601871fc82f2878c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f5ebfe2ed808049fb23319459fc7fe8d9011c2239fd5089fcb085941ccda287",
+				"dweb:/ipfs/QmUR6F8zps3D7onXZrVGe8rP3Q2ip9A4S45YYz2HURgmma"
+			]
+		},
+		"localhost/contracts/FacadeInterface.sol": {
+			"keccak256": "0x17005f846592c0976914c79aa7221afa360fa1c431317e1fdafcfdc3ffe04f9b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://56f23994b48d7c53e5370cb60ced3b543110b348828b2cf65850ea8aa075c21d",
+				"dweb:/ipfs/QmSejfdA6UPFRgdJqsHNqWZy15QRHZCXXgihdF6C2Xo4eP"
+			]
+		},
+		"localhost/contracts/IERC20.sol": {
+			"keccak256": "0x917b18ec908b66c182fcb54cf033eb8d6c850ac761fc4b6f4fd56a7f4f243266",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca8b2701a3aff778a8ef46c6c4fafb709fa4ebb7be67141959726873afb17a90",
+				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
+			]
+		}
+	},
+	"version": 1
+}
