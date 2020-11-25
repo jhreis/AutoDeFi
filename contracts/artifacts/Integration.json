@@ -47,9 +47,9 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addPair(address,address)": "b6f3e087",
+			"addAvailablePair(address,address)": "0e0af570",
 			"availablePairs(uint256)": "42a9a7b2",
-			"deploy(uint256)": "a5e38751",
+			"deployUserInstance(address,uint256)": "5ced3166",
 			"owner()": "8da5cb5b"
 		}
 	},
@@ -67,7 +67,7 @@
 					"type": "address"
 				}
 			],
-			"name": "addPair",
+			"name": "addAvailablePair",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -99,12 +99,17 @@
 		{
 			"inputs": [
 				{
+					"internalType": "address payable",
+					"name": "_owner",
+					"type": "address"
+				},
+				{
 					"internalType": "uint256",
 					"name": "pairIndex",
 					"type": "uint256"
 				}
 			],
-			"name": "deploy",
+			"name": "deployUserInstance",
 			"outputs": [
 				{
 					"internalType": "contract Facade",

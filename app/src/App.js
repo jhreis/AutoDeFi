@@ -4,6 +4,7 @@ import { Drizzle } from "@drizzle/store";
 import drizzleOptions from "./drizzleOptions";
 import MyComponent from "./MyComponent";
 import "./App.css";
+import "./sticker.scss";
 
 const drizzle = new Drizzle(drizzleOptions);
 

@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -40,11 +45,37 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "newIntegration",
+						"type": "address"
+					}
+				],
+				"name": "addNewProtocol",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
-						"name": "facadeIndex",
+						"name": "",
 						"type": "uint256"
 					}
 				],
+				"name": "availableProtocols",
+				"outputs": [
+					{
+						"internalType": "contract Integration",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "destroyFacade",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -53,14 +84,28 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"name": "facadeOwners",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"name": "facades",
@@ -69,6 +114,19 @@
 						"internalType": "contract Facade",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "foo",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -88,22 +146,22 @@
 					}
 				],
 				"name": "generateNewFacade",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "contract Facade",
+						"name": "",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "integrations",
+				"inputs": [],
+				"name": "owner",
 				"outputs": [
 					{
-						"internalType": "contract Integration",
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
@@ -118,18 +176,19 @@
 			"version": 1
 		},
 		"userdoc": {
-			"events": {
-				"LogFacadeCreated(address,address)": {
-					"notice": "All user addresses that have facades"
-				}
-			},
 			"kind": "user",
 			"methods": {
-				"facades(address,uint256)": {
-					"notice": "User Address => Facade Address, make type safe"
+				"availableProtocols(uint256)": {
+					"notice": "The available protocols that are available to create facades from"
 				},
-				"integrations(uint256)": {
-					"notice": "The available protocols that are available to create facades for"
+				"facadeOwners(uint256)": {
+					"notice": "All user addresses that have facades"
+				},
+				"facades(address)": {
+					"notice": "TODO: Eventually make this an array User Address => Facade Address, make type safe"
+				},
+				"owner()": {
+					"notice": "The owner of this contract"
 				}
 			},
 			"version": 1
@@ -151,44 +210,36 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/contracts/CompoundFacade.sol": {
-			"keccak256": "0xee79221967dbe126f790848d6a939b1aa5536a2d11816fd4601871fc82f2878c",
+		"localhost/contracts/ERC20/IERC20.sol": {
+			"keccak256": "0x6e10e93f99a4376805223abc135e394de4631ec31f5bab207a6c6b3dabe7b42d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5f5ebfe2ed808049fb23319459fc7fe8d9011c2239fd5089fcb085941ccda287",
-				"dweb:/ipfs/QmUR6F8zps3D7onXZrVGe8rP3Q2ip9A4S45YYz2HURgmma"
+				"bzz-raw://96d84f66fa98d3fe5c635a96b8cca93a64266bc6beb9173f161ba7741ba83459",
+				"dweb:/ipfs/QmYpiX9CaiQnUBq2niE45WCHeCqTX18igiWcnTNQqcoYwa"
 			]
 		},
-		"localhost/contracts/FacadeInterface.sol": {
-			"keccak256": "0x17005f846592c0976914c79aa7221afa360fa1c431317e1fdafcfdc3ffe04f9b",
+		"localhost/contracts/Facades/FacadeInterface.sol": {
+			"keccak256": "0xe47376935d32e4f177e7ac0b9a968dd6b7a01ce5be9473b61f50205d4fa603a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://56f23994b48d7c53e5370cb60ced3b543110b348828b2cf65850ea8aa075c21d",
-				"dweb:/ipfs/QmSejfdA6UPFRgdJqsHNqWZy15QRHZCXXgihdF6C2Xo4eP"
+				"bzz-raw://58886f401a222ef6defa7a74dadc02dd9805e77620102c22c37508e8b79c9b2d",
+				"dweb:/ipfs/QmaJjrFyP5HBHCKEKS35qU85VYsy38kD5xCUAked5Cmitx"
 			]
 		},
 		"localhost/contracts/Generator.sol": {
-			"keccak256": "0x51a964bbe01a5040b47eca648eced36aaa867525a213c306594f8d56dec1f75f",
+			"keccak256": "0xd48e09e881f0d837e7fe585044e19e677c77f2487323af1ca3b7a5b5ff41867d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f8fde399ebfaccc739f4c62abb6fe42b3bb6bd9130e64d28e962d1e47fe4b2ed",
-				"dweb:/ipfs/QmdbnYroTDJTNDRBPdtGxjsHvhwan9taopjQSmP5bdEjpr"
+				"bzz-raw://94d4ccdb8a990377e576ffeb8b339c2a7751ca1e7aaf7c74a25c430ef6ea5c14",
+				"dweb:/ipfs/QmasZQbbUP1TT2aqhG4kDt85i8UQVgrPZoTPCk7k7xiPzU"
 			]
 		},
-		"localhost/contracts/IERC20.sol": {
-			"keccak256": "0x917b18ec908b66c182fcb54cf033eb8d6c850ac761fc4b6f4fd56a7f4f243266",
+		"localhost/contracts/Integrations/Integration.sol": {
+			"keccak256": "0x843fb8d9581c129cc89e8c3bb69dcb6fdfc06aa6fbee60b551f992b01adebd5d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ca8b2701a3aff778a8ef46c6c4fafb709fa4ebb7be67141959726873afb17a90",
-				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
-			]
-		},
-		"localhost/contracts/Integrator.sol": {
-			"keccak256": "0x0b265896371f7fa5d1eaa2c7c4126b383d3d8c2832fb3cfd52ba3d0ae7a5ef30",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://a94a3d3dec86fab8b07d2087ee3a345fd7ef75db5760a17a631a877adead9307",
-				"dweb:/ipfs/QmYX6zMpQbnGXfYAbNhWkKzu1gzfgeRufpGGpnfEpj6M8Y"
+				"bzz-raw://92e4309328a002b5d1da033ea56fe76b75803e248d0e250c2f6010a007693792",
+				"dweb:/ipfs/QmTebpKEYjcdZWCp7KuTEHVsT5qr75GX9noq36wb7zBMYG"
 			]
 		}
 	},

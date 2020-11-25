@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.7.4+commit.3f05b770"
+		"version": "0.7.5+commit.eb77ed08"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/contracts/Integrator.sol": "CurveIntegration"
+			"localhost/contracts/Integration.sol": "CurveIntegration"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -56,12 +56,12 @@
 				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
 			]
 		},
-		"localhost/contracts/Integrator.sol": {
-			"keccak256": "0xf5e00f825b761f9994b91cb55bf8a270df90662fddeaeeee8527598faac301ed",
+		"localhost/contracts/Integration.sol": {
+			"keccak256": "0xc240895db1af3769586b983e056bebf14a88bb795c280f15159cff5fcd645f90",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4722ee6b8d95e2402c82aa89702f999fb9b819741bb18f045eaed130eeb36300",
-				"dweb:/ipfs/QmancfNCBsjFFi5yMdMBte37SPUMnFT1MMcFwBYgfez23b"
+				"bzz-raw://93b88dbe05834f8cecf7158285a439d1d3d2cce521bbd78ecc95dfaee3d6ee00",
+				"dweb:/ipfs/QmWpfQDno9qRUAGs2iSYfzev3DrMUd6zB7zhwg9fxt82kw"
 			]
 		}
 	},

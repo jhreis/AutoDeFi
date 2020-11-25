@@ -16,6 +16,8 @@ interface Facade {
     /// Destroys the facade and transfers all funds to user wallet
     function destroy() external;
     
+    ////// Convenience functions that should forward to the underlying contract
+    
     /// Returns the amount of the underlying token that is available for deposit
     /// e.g. USDC, DAI
     function underlyingBalance() external view returns(uint256);

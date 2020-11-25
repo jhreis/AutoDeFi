@@ -1,0 +1,184 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap);
+@import url(https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css);
+
+$ruler: 16px;
+$form-width: $ruler*20;
+$color-green: #00c5bb;
+$color-bg: #EBECF0;
+$color-shadow: #858586;
+$color-white: #FFF;
+
+body, html {
+  background-color:$color-bg;
+  padding-top: 30px;
+}
+
+body, p, input, select, textarea, button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: $ruler;
+}
+
+h1 {
+  font-size: 42px;
+  margin: 0px;
+}
+
+h3 {
+  margin-top: 0px;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+.darkish {
+  color: #383838;
+}
+
+.truncate {
+  width: $form-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade;
+}
+
+p.skinny {
+  // width: 320px;
+  // margin-top: 0px;
+  margin-bottom: 30px;
+  padding: 0px 0px 0px 0px;
+}
+
+div, p {
+  color: $color-shadow;
+  text-shadow: 1px 1px 1px $color-white;
+}
+
+
+form {
+  padding: $ruler;
+  width: $form-width;
+  margin: 0 auto;
+}
+
+.segment {
+  // padding: $ruler 0;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+button, input {
+  border: 0;
+  outline: 0;
+  font-size: $ruler;
+  border-radius: $ruler*20;
+  padding: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
+}
+
+label {
+  display: block;
+  margin-bottom: $ruler*1.5;
+  width: 100%;
+}
+
+.bottom-buffer {
+  padding-bottom: 20px;
+}
+
+input {
+  margin-right: $ruler/2;
+  box-shadow:  inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &:focus {
+    box-shadow:  inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+  }
+}
+
+button {
+  color:#61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  
+  &:hover {
+    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+  }
+  
+  &:active {
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+  }
+  
+  .icon {
+    margin-right: $ruler/2;
+  }
+  
+  &.unit {
+    border-radius: $ruler/2;
+    line-height: 0;
+    width: $ruler*3;
+    height: $ruler*3;
+    display:inline-flex;
+    justify-content: center;
+    align-items:center;
+    margin: 0 $ruler/2;
+    font-size: $ruler*1.2;
+    
+    .icon {
+      margin-right: 0; 
+    }
+  }
+
+    
+  &.unit2 {
+    border-radius: $ruler/2;
+    line-height: 0;
+    width: $ruler*12;
+    height: $ruler*12;
+    display:inline-flex;
+    justify-content: center;
+    align-items:center;
+    margin: 0 $ruler/2;
+    font-size: $ruler*1.2;
+  }
+  
+  &.green {
+    display: block;
+    width: 100%;
+    color:$color-green;
+  }
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  
+  label {
+    margin: 0;
+    flex: 1;
+  }
+}
+
+// body {
+  // min-height: 100vh;
+  // min-height: -webkit-fill-available;
+  // display: grid;
+  // place-content: center;
+  // font-family: sans-serif;
+  // background-color: #d1dbe8;
+  // line-height: 1;
+  // color: var(--c5);
+// }

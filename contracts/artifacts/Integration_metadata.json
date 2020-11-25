@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.7.4+commit.3f05b770"
+		"version": "0.7.5+commit.eb77ed08"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 						"type": "address"
 					}
 				],
-				"name": "addPair",
+				"name": "addAvailablePair",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -50,12 +50,17 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address payable",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "pairIndex",
 						"type": "uint256"
 					}
 				],
-				"name": "deploy",
+				"name": "deployUserInstance",
 				"outputs": [
 					{
 						"internalType": "contract Facade",
@@ -93,7 +98,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/contracts/Integrator.sol": "Integration"
+			"localhost/contracts/Integration.sol": "Integration"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -116,11 +121,11 @@
 			]
 		},
 		"localhost/contracts/FacadeInterface.sol": {
-			"keccak256": "0x17005f846592c0976914c79aa7221afa360fa1c431317e1fdafcfdc3ffe04f9b",
+			"keccak256": "0xe47376935d32e4f177e7ac0b9a968dd6b7a01ce5be9473b61f50205d4fa603a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://56f23994b48d7c53e5370cb60ced3b543110b348828b2cf65850ea8aa075c21d",
-				"dweb:/ipfs/QmSejfdA6UPFRgdJqsHNqWZy15QRHZCXXgihdF6C2Xo4eP"
+				"bzz-raw://58886f401a222ef6defa7a74dadc02dd9805e77620102c22c37508e8b79c9b2d",
+				"dweb:/ipfs/QmaJjrFyP5HBHCKEKS35qU85VYsy38kD5xCUAked5Cmitx"
 			]
 		},
 		"localhost/contracts/IERC20.sol": {
@@ -131,12 +136,12 @@
 				"dweb:/ipfs/QmU6K3AKZxbecTTcB8Mj8EdyPfkbzQphDubk8ngUkq5xcw"
 			]
 		},
-		"localhost/contracts/Integrator.sol": {
-			"keccak256": "0xf5e00f825b761f9994b91cb55bf8a270df90662fddeaeeee8527598faac301ed",
+		"localhost/contracts/Integration.sol": {
+			"keccak256": "0x05ce5efd2da562137a9902a3260c0a65f67c754547ebadd132dd28ab2caf62bd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4722ee6b8d95e2402c82aa89702f999fb9b819741bb18f045eaed130eeb36300",
-				"dweb:/ipfs/QmancfNCBsjFFi5yMdMBte37SPUMnFT1MMcFwBYgfez23b"
+				"bzz-raw://e2694061ca8efbc9905768e9999a461d3187bf61ce81d246c7f688809a56bddf",
+				"dweb:/ipfs/QmbReAUYYBjnzgh9dk3nf6fSReZQCfCiYPsYiFsWCBUg3q"
 			]
 		}
 	},
