@@ -21,7 +21,7 @@ contract("Generator", accounts => {
   })
 
   it("It should have Compound Protocol attached", async () => {
-    const genInstance = await Generator.deployed();
+    const genInstance = await Generator.deployed()
     const firstIntegrationAddress = await genInstance.availableProtocols(0)
     const firstIntegration = new Integration(firstIntegrationAddress)
     const firstIntegrationName = await firstIntegration.description()
@@ -29,6 +29,7 @@ contract("Generator", accounts => {
   })
 
   it("It should generate a new facade", async () => {
+    return
     const genInstance = await Generator.deployed()
     const newFacade = await genInstance.generateNewFacade(0, 0)
     const firstFacade = await genInstance.facades(accounts[0])
@@ -48,14 +49,42 @@ contract("Generator", accounts => {
     assert.equal(await genInstance.owner(), accounts[0], "The owner was not correct.")
   })
 
-  // Technically on the facade tests!
-  it("It should have a ERC20 pair deployed", async () => {
+  ////////////////////////////////////////
+  // Technically on the Integration tests!
+  ////////////////////////////////////////
+
+  it("Compound should have a ERC20 pair deployed", async () => {
+    console.log("ASDIFJASDIFJADSIF")
     const compIntegration = await CompoundIntegration.deployed();
-    console.log("WHAT", await compIntegration.availablePairs(0))
+    const pair = await compIntegration.availablePairs(0)
 
-    let facade = await compIntegration.deployUserInstance(accounts[0], 0)
-    console.log("YOOOO", {facade})
-
+    assert.isNotNull(pair.underlyingAsset, "Underlying asset was incorrectly null")
+    assert.isNotNull(pair.mintingAsset, "Minting asset was incorrectly null")
     assert.equal(await compIntegration.owner(), accounts[0], "The owner was not correct.")
   })
+
+  it("Compound Integration should deploy a Compound Facade", async () => {
+    console.log("ASDIFJASDIFJADSIF")
+    const compIntegration = await CompoundIntegration.deployed();
+    // const pair = await compIntegration.availablePairs(0)
+    // console.log("WHAT", pair.underlyingAsset, pair.mintingAsset)
+
+    // assert.isNotNull(pair.underlyingAsset, "Underlying asset was incorrectly null")
+    // assert.isNotNull(pair.mintingAsset, "Minting asset was incorrectly null")
+    // expect(pair.underlyingAsset).to.be.
+    console.log("test000000")
+    // let facade = await compIntegration.deployUserInstance(accounts[0], 0)
+    console.log("test11111")
+    // console.log("YOOOO", {facade})
+
+    // assert.equal(await facade.owner(), accounts[0], "The owner was not correct.")
+  })
+
+  it("There should be a valid Compound Integration deployed", async () => {
+    const compIntegration = await CompoundIntegration.deployed();
+    const firstIntegrationName = await compIntegration.description()
+    assert.equal(firstIntegrationName, "Compound Protocol", "The deployed Integration is not a Compound one.")
+  })
+
+  
 })

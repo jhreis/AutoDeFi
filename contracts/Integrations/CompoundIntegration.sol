@@ -11,7 +11,7 @@ contract CompoundIntegration is Integration {
         // address USDC = 0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b;
         // address cUSDC = 0x5B281A6DdA0B271e91ae35DE655Ad301C976edb1;
         
-        Facade userCustomFacade = new CompoundFacade(_owner, pair.underlyingAsset, pair.mintingAsset);
+        Facade userCustomFacade = new CompoundFacade(_owner, address(pair.underlyingAsset), address(pair.mintingAsset));
         return userCustomFacade;
     }
 

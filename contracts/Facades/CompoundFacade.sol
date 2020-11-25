@@ -40,12 +40,13 @@ contract CompoundFacade is Facade {
         _;
     }
     
-    constructor(address payable _owner, ERC20 _underlyingAsset, ERC20 _mintingAsset) {
+    /// For some using ERC20 in the interface absolutely breaks everything... ugh
+    constructor(address payable _owner, address _underlyingAsset, address _mintingAsset) {
         owner = _owner;
         assistant = msg.sender;
         
-        underlyingAsset = _underlyingAsset;
-        mintingAsset = _mintingAsset;
+        underlyingAsset = ERC20(_underlyingAsset);
+        mintingAsset = ERC20(_mintingAsset);
         
         // This approves the contract (e.g. compound) to withdraw funds from the smart contract account
         underlyingAsset.approve(address(mintingAsset), MAX_INT);

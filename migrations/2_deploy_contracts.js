@@ -12,7 +12,7 @@ module.exports = async function(deployer, network, accounts) {
     console.log({network})
     
 
-    getERC20s
+    // getERC20s
   
     // deployer.deploy(CompoundFacade, accounts[0], USDC, cUSDC)
   }
@@ -31,15 +31,16 @@ module.exports = async function(deployer, network, accounts) {
       return generator.addNewProtocol(compoundIntegration.address)
     })
     .then(() => getERC20s(deployer, network))
-    .then((addresses) => {
+    .then(addresses => {
       const [underlying, minting] = addresses
+      console.log({underlying, minting})
       console.log("Connecting asset pair into Compound")
       return compoundIntegration.addAvailablePair(underlying, minting)
     })
-    .then((pairIndex) => {
-      // console.log("Deployed pair with index", pairIndex)
-    })
-};
+    // .then((pairIndex) => {
+    //   console.log("Deployed pair with index", pairIndex)
+    // })
+}
 
 ///
 function localNetworkDeployments(deployer) {
