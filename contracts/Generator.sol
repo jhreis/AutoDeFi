@@ -30,10 +30,11 @@ contract Generator {
         owner = msg.sender;
     }
     
-    function addNewProtocol(address newIntegration) public isOwner() {
+    function addNewProtocol(address newIntegration) public isOwner() returns(uint) {
         Integration integration = Integration(newIntegration);
         // TODO: Prevent duplicate protocols
         availableProtocols.push(integration);
+        return availableProtocols.length - 1;
     }
     
     function generateNewFacade(uint integrationIndex, uint pairIndex) public returns(Facade) {

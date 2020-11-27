@@ -15,14 +15,24 @@ contract("Generator", (accounts) => {
 
   it("It should add a new protocol", async () => {
     const genInstance = await Generator.deployed()
-    const fakeInstance = "0xf25186B5081Ff5cE73482AD761DB0eB0d25abfBF"
+
+    // This doesn't need to be real for the attachment to happen,
+    //  there are more tests below to cover more detailed integrations.
+    const fakeInstance = "0xE0485f1aabeF0473Fa338bab9A57eBd3880Df630"
 
     // Attach the deployed Compound facade to the generator functions
-    await genInstance.addNewProtocol(fakeInstance)
 
-    const firstProtocol = await genInstance.availableProtocols(0)
+    const newlyAddedIndex = await genInstance.addNewProtocol(fakeInstance)
+    const correctProtocol = await genInstance.availableProtocols(1)
+
+    // console.log("added, ")
+
+    // const firstIntegration = new Integration(firstIntegrationAddress)
+    // const firstIntegrationName = await firstIntegration.description()
+
+    console.log("what", newlyAddedIndex, correctProtocol)
     assert.equal(
-      firstProtocol,
+      correctProtocol,
       fakeInstance,
       "The new protocol was not properly deployed."
     )
@@ -33,6 +43,7 @@ contract("Generator", (accounts) => {
     const firstIntegrationAddress = await genInstance.availableProtocols(0)
     const firstIntegration = new Integration(firstIntegrationAddress)
     const firstIntegrationName = await firstIntegration.description()
+
     assert.equal(
       firstIntegrationName,
       "Compound Protocol",
@@ -70,54 +81,6 @@ contract("Generator", (accounts) => {
       await genInstance.owner(),
       accounts[0],
       "The owner was not correct."
-    )
-  })
-
-  ////////////////////////////////////////
-  // Technically on the Integration tests!
-  ////////////////////////////////////////
-
-  it("Compound should have a ERC20 pair deployed", async () => {
-    console.log("ASDIFJASDIFJADSIF")
-    const compIntegration = await CompoundIntegration.deployed()
-    const pair = await compIntegration.availablePairs(0)
-
-    assert.isNotNull(
-      pair.underlyingAsset,
-      "Underlying asset was incorrectly null"
-    )
-    assert.isNotNull(pair.mintingAsset, "Minting asset was incorrectly null")
-    assert.equal(
-      await compIntegration.owner(),
-      accounts[0],
-      "The owner was not correct."
-    )
-  })
-
-  it("Compound Integration should deploy a Compound Facade", async () => {
-    console.log("ASDIFJASDIFJADSIF")
-    const compIntegration = await CompoundIntegration.deployed()
-    // const pair = await compIntegration.availablePairs(0)
-    // console.log("WHAT", pair.underlyingAsset, pair.mintingAsset)
-
-    // assert.isNotNull(pair.underlyingAsset, "Underlying asset was incorrectly null")
-    // assert.isNotNull(pair.mintingAsset, "Minting asset was incorrectly null")
-    // expect(pair.underlyingAsset).to.be.
-    console.log("test000000")
-    // let facade = await compIntegration.deployUserInstance(accounts[0], 0)
-    console.log("test11111")
-    // console.log("YOOOO", {facade})
-
-    // assert.equal(await facade.owner(), accounts[0], "The owner was not correct.")
-  })
-
-  it("There should be a valid Compound Integration deployed", async () => {
-    const compIntegration = await CompoundIntegration.deployed()
-    const firstIntegrationName = await compIntegration.description()
-    assert.equal(
-      firstIntegrationName,
-      "Compound Protocol",
-      "The deployed Integration is not a Compound one."
     )
   })
 })
