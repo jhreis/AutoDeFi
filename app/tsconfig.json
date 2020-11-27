@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2018",
+    "outDir": "./lib",
+    "lib": ["ESNext", "DOM"],
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  },
+  "exclude": ["node_modules"]
+}
