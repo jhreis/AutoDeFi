@@ -6,7 +6,7 @@ function Generator(props) {
   }
   const { drizzle, drizzleState, facadeAddress } = props
 
-  let generateBtn: (prop: any) => ReactElement = (prop) => {
+  const generateBtn: (prop: any) => ReactElement = (prop) => {
     return (
       <div>
         <div className="segment">
