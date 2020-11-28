@@ -1171,7 +1171,7 @@
     prop-types "^15.7.2"
     react "^16.8.6"
 
-"@drizzle/react-plugin@^1.5.1":
+"@drizzle/react-plugin@^1.5.3":
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/@drizzle/react-plugin/-/react-plugin-1.5.3.tgz#cb3bb0fc3a8d74076c196db16d4084ad340cf240"
   integrity sha512-UT58IMGcSRk0Opcs7U29sEX1jWXaTNhE5RwHrHD6wTYv2zuS3bXfK3q+ojwLfWRnrcBn0MsulRm/FnJ3bD4TyQ==
@@ -1850,6 +1850,13 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/web3@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/web3/-/web3-1.2.2.tgz#d95a101547ce625c5ebd0470baa5dbd4b9f3c015"
+  integrity sha512-eFiYJKggNrOl0nsD+9cMh2MLk4zVBfXfGnVeRFbpiZzBE20eet4KLA3fXcjSuHaBn0RnQzwLAGdgzgzdet4C0A==
+  dependencies:
+    web3 "*"
 
 "@types/yargs-parser@*":
   version "15.0.0"
@@ -12866,7 +12873,7 @@ web3-utils@1.3.0:
     underscore "1.9.1"
     utf8 "3.0.0"
 
-web3@^1.2.1:
+web3@*, web3@^1.2.1, web3@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.3.0.tgz#8fe4cd6e2a21c91904f343ba75717ee4c76bb349"
   integrity sha512-4q9dna0RecnrlgD/bD1C5S+81Untbd6Z/TBD7rb+D5Bvvc0Wxjr4OP70x+LlnwuRDjDtzBwJbNUblh2grlVArw==

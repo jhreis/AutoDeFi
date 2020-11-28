@@ -1,9 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
+import { DrizzleContext } from "@drizzle/react-plugin"
+import { Drizzle } from "@drizzle/store"
+import drizzleOptions from "./drizzleOptions"
+import Dashboard from "./Components/Dashboard"
+
+const drizzle = new Drizzle(drizzleOptions)
+// console.log({ drizzle })
 
 export default function App() {
   useEffect(() => {
-    console.log("test")
+    console.log("IS THIS REAL?")
   }, [])
 
-  return <div>WHAT?</div>
+  return (
+    <DrizzleContext.Provider drizzle={drizzle}>
+      <DrizzleContext.Consumer>
+        {(drizzleContext: any) => {
+          const { drizzle, drizzleState, initialized } = drizzleContext
+
+          if (!initialized) {
+            return "Loading..."
+          }
+
+          return <Dashboard drizzle={drizzle} drizzleState={drizzleState} />
+        }}
+      </DrizzleContext.Consumer>
+    </DrizzleContext.Provider>
+  )
 }

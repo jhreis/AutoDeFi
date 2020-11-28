@@ -6,7 +6,9 @@
     "lib": ["ESNext", "DOM"],
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "jsx": "react"
   },
+  "include": ["./typings-custom/**/*.ts"],
   "exclude": ["node_modules"]
 }

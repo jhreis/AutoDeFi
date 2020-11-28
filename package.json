@@ -22,7 +22,7 @@
   "homepage": "https://github.com/truffle-box/drizzle-box#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^2.4.0",
-    "@types/node-sass": "^4.11.1",
-    "node-sass": "^4.14.1"
+    "@types/node-sass": "^5.0.0",
+    "node-sass": "^5.0.0"
   }
 }
