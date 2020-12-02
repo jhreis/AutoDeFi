@@ -8,10 +8,6 @@ const drizzle = new Drizzle(drizzleOptions)
 // console.log({ drizzle })
 
 export default function App() {
-  useEffect(() => {
-    console.log("IS THIS REAL?")
-  }, [])
-
   return (
     <DrizzleContext.Provider drizzle={drizzle}>
       <DrizzleContext.Consumer>

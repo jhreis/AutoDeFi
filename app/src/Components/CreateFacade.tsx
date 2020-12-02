@@ -20,12 +20,12 @@ export default function BasicInfo({ userAddress }: Props) {
     <section className="segment">
       <h2>{Strings.title}</h2>
       <p className="skinny">{Strings.description}</p>
-      {generateBtns()}
+      {generateButtons()}
     </section>
   )
 }
 
-function generateBtns() {
+function generateButtons() {
   return (
     <div>
       <button className="unit" type="button">
