@@ -56,16 +56,18 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
     }
 
     setWallet(wallet)
+  }, [drizzleState.accounts[0]])
 
-    // With wallet, identify account
-    const _facade = drizzleState.contracts.Generator.facades[wallet]
-    console.log("facade?", _facade)
+  useEffect(() => {
+    async function run() {
+      const displayData = drizzle.contracts.Generator.methods.facades(wallet)
+      const _facade = await displayData.call()
 
-    setFacade(_facade)
-  }, [
-    drizzleState.accounts[0],
-    drizzleState.contracts.Generator.facades[wallet],
-  ])
+      setFacade(_facade)
+      console.log(`Updated facade from wallet change`, { wallet, _facade })
+    }
+    run()
+  }, [wallet])
 
   // Call a contract!
   // drizzle.contracts.SimpleStorage.methods.set(storage + 1).send()
