@@ -35,7 +35,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
       const displayData =
         drizzleState.contracts.SimpleStorage.storedData[storageKey]
 
-      console.log("Simple", displayData.value)
+      // console.log("Simple", displayData.value)
 
       if (displayData) {
         setStorage(parseInt(displayData.value))
@@ -75,11 +75,11 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
   return (
     <div className="App">
-      <Header />
-      {storage}
-      <br />
-      {wallet}
-      <br />
+      <Header
+        drizzle={drizzle}
+        drizzleState={drizzleState}
+        userAddress={wallet}
+      />
       {facade}
       {/* <BasicInfo userAddress={wallet} /> */}
 
