@@ -24,6 +24,9 @@ const SimpleStorage = require("./contracts/SimpleStorage.json")
 // console.log("ASDFASDF", Generator)
 
 const options: any = {
+  polls: {
+    accounts: 2000,
+  },
   web3: {
     block: false,
     // customProvider: new Web3("ws://localhost:8545"),

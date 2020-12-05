@@ -8,7 +8,7 @@ import CreateFacade from "./CreateFacade"
 
 // const Generator = require("../contracts/Generator.json")
 // const SimpleStorage = require("../contracts/SimpleStorage.json")
-import SimpleStorage from "../contracts/SimpleStorage.json"
+// import SimpleStorage from "../contracts/SimpleStorage.json"
 
 // import Web3 from "web3"
 
@@ -25,17 +25,17 @@ interface Props {
 
 export default function Dashboard({ drizzle, drizzleState }: Props) {
   const [storage, setStorage] = useState(0)
+  const [facade, setFacade] = useState<undefined | any>(undefined)
+  const [wallet, setWallet] = useState<string>("bad address")
 
   useEffect(() => {
     async function setupStorage() {
-      const storageKey = await drizzle.contracts.SimpleStorage.methods[
-        "storedData"
-      ].cacheCall() // This is weird
+      const storageKey = drizzle.contracts.SimpleStorage.methods.storedData.cacheCall() // This is weird
 
       const displayData =
         drizzleState.contracts.SimpleStorage.storedData[storageKey]
 
-      console.log("What??", displayData)
+      console.log("Simple", displayData.value)
 
       if (displayData) {
         setStorage(parseInt(displayData.value))
@@ -44,22 +44,50 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
     setupStorage()
   }, [drizzleState.contracts.SimpleStorage.storedData])
-  // ^ re-process if the underly store is modified
+  // ^ re-process if the underlying store is modified
 
-  const userWallet = drizzleState.accounts[0]
+  useEffect(() => {
+    const wallet = drizzleState.accounts[0]
+
+    // Validate wallet is real address
+    if (typeof wallet !== "string" || !wallet.startsWith("0x")) {
+      setWallet("bad address")
+      return
+    }
+
+    setWallet(wallet)
+
+    // With wallet, identify account
+    const _facade = drizzleState.contracts.Generator.facades[wallet]
+    console.log("facade?", _facade)
+
+    setFacade(_facade)
+  }, [
+    drizzleState.accounts[0],
+    drizzleState.contracts.Generator.facades[wallet],
+  ])
 
   // Call a contract!
   // drizzle.contracts.SimpleStorage.methods.set(storage + 1).send()
 
   // This is re-rendering far too often
-  console.log("Render", storage)
+  // console.log("Render", wallet)
+
   return (
     <div className="App">
       <Header />
       {storage}
-      <BasicInfo userAddress={userWallet} />
+      <br />
+      {wallet}
+      <br />
+      {facade}
+      {/* <BasicInfo userAddress={wallet} /> */}
 
-      <CreateFacade userAddress={userWallet} />
+      <CreateFacade
+        userAddress={wallet}
+        drizzle={drizzle}
+        drizzleState={drizzleState}
+      />
       {/* <form>
         <MainInput
           drizzle={drizzle}
