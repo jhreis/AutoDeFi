@@ -4,26 +4,35 @@ pragma solidity ^0.7.0;
 import '../ERC20/IERC20.sol';
 import './FacadeInterface.sol';
 
+/// @title A compound.finance facade implementation
+/// @author Joel Reis
+/// @notice Interfaces directly with compound.finance
+/// @dev This can be used as an example for generating other DeFi facade interfaces
 contract CompoundFacade is Facade {
+    // This is the max value for a uint256
     uint256 constant MAX_INT = 2**256 - 1;
     
     /// The owner of the specific account instance
     address payable public owner;
     
-    /// An address that is allowed to assist in certain functions to help with automation
-    /// This address never has full control over funds
-    /// e.g. sending funds back to `owner`'s wallet.
+    /// @notice Returns an address that is allowed to assist in certain functions to help with automation
+    ///         This address never has full control over funds
+    ///         e.g. sending funds back to `owner`'s wallet.
+    /// @dev Returns the pre-defined, unedited assistant
     address public assistant;
     
-    /// The address of the underlying token
-    /// e.g. USDC address
+    /// @notice Returns the underlying token
+    ///         e.g. USDC address
+    /// @dev Returns an ERC20 token that is used to deposit into Compound
     ERC20 public underlyingAsset;
     
-    /// The address of the token being minted
-    /// e.g. cUSDC address
+    /// @notice Returns the address of the token being minted
+    ///         e.g. cUSDC address
+    /// @dev Returns an ERC20 token that is used to deposit into Compound
     ERC20 public mintingAsset;
     
-    /// The amount required before a deposit will be approved
+    /// @notice Returns the amount required before a deposit will be approved
+    /// @dev Returns the value that must be met / exceeded before being able to desposit assets into Compound
     uint256 public minimumUnderlyingForDeposit = 100;
     
     // Modifiers
