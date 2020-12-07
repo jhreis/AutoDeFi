@@ -2,6 +2,9 @@ import React, { ReactElement } from "react"
 import { newContextComponents } from "@drizzle/react-components"
 const { AccountData, ContractData, ContractForm } = newContextComponents
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Web3 = require("web3")
+
 interface Props {
   facadeAddress: string
   drizzle: any
@@ -13,12 +16,29 @@ export default function Facade({
   drizzleState,
   facadeAddress,
 }: Props) {
+  // TODO: Dynamically update these with contract decimal data
+  const underlyingRenderer = (displayData: string) =>
+    balanceRenderer(displayData, 6)
+  const mintingRenderer = (displayData: string) =>
+    balanceRenderer(displayData, 8)
+
+  const balanceRenderer = (displayData: string, decimals: number) => {
+    let displayNum = 0
+    const parseAttempt = parseInt(displayData)
+    if (parseAttempt > 0) {
+      displayNum = parseAttempt / Math.pow(10, decimals)
+    }
+    return <span>{displayNum}</span>
+  }
+
   const underlyingBalance = (
     <ContractData
       drizzle={drizzle}
       drizzleState={drizzleState}
       contract={facadeAddress}
       method="underlyingBalance"
+      hideIndicator={true}
+      render={underlyingRenderer}
     />
   )
   const underlyingAssetSymbol = (
@@ -36,6 +56,8 @@ export default function Facade({
       drizzleState={drizzleState}
       contract={facadeAddress}
       method="mintedBalance"
+      hideIndicator={true}
+      render={mintingRenderer}
     />
   )
   const mintedAssetSymbol = (
@@ -75,7 +97,7 @@ export default function Facade({
     <ContractForm
       drizzle={drizzle}
       contract={facadeAddress}
-      method="deposit"
+      method="depositToUnderlying"
       render={depositRender}
     />
   )
