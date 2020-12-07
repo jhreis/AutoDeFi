@@ -1,7 +1,10 @@
 import React from "react"
+import Facade from "./Facade"
 
 interface Props {
   facadeAddress: string
+  drizzle: any
+  drizzleState: any
 }
 
 const Strings = {
@@ -12,11 +15,21 @@ const Strings = {
   },
 }
 
-export default function BasicInfo({ facadeAddress }: Props) {
+export default function AccountSummary({
+  facadeAddress,
+  drizzle,
+  drizzleState,
+}: Props) {
   return (
     <section>
-      {Strings.title}
-      {Strings.description}
+      {/* TODO: This contract name should be on the actual contract yo */}
+      <Facade
+        drizzle={drizzle}
+        drizzleState={drizzleState}
+        facadeAddress={facadeAddress}
+      />
+      {/* {Strings.title} */}
+      {/* {facadeAddress} */}
     </section>
   )
 }

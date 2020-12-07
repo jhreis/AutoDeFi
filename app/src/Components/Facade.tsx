@@ -1,12 +1,23 @@
 import React, { ReactElement } from "react"
+import { newContextComponents } from "@drizzle/react-components"
+const { AccountData, ContractData, ContractForm } = newContextComponents
 
-export default function Facade() {
-  const { drizzle, drizzleState, contractName } = this.props
+interface Props {
+  facadeAddress: string
+  drizzle: any
+  drizzleState: any
+}
+
+export default function Facade({
+  drizzle,
+  drizzleState,
+  facadeAddress,
+}: Props) {
   const underlyingBalance = (
     <ContractData
       drizzle={drizzle}
       drizzleState={drizzleState}
-      contract={contractName}
+      contract={facadeAddress}
       method="underlyingBalance"
     />
   )
@@ -14,7 +25,7 @@ export default function Facade() {
     <ContractData
       drizzle={drizzle}
       drizzleState={drizzleState}
-      contract={contractName}
+      contract={facadeAddress}
       method="underlyingAssetSymbol"
     />
   )
@@ -23,7 +34,7 @@ export default function Facade() {
     <ContractData
       drizzle={drizzle}
       drizzleState={drizzleState}
-      contract={contractName}
+      contract={facadeAddress}
       method="mintedBalance"
     />
   )
@@ -31,7 +42,7 @@ export default function Facade() {
     <ContractData
       drizzle={drizzle}
       drizzleState={drizzleState}
-      contract={contractName}
+      contract={facadeAddress}
       method="mintedAssetSymbol"
     />
   )
@@ -63,7 +74,7 @@ export default function Facade() {
   const deposit = (
     <ContractForm
       drizzle={drizzle}
-      contract={contractName}
+      contract={facadeAddress}
       method="deposit"
       render={depositRender}
     />
@@ -71,7 +82,7 @@ export default function Facade() {
   const withdraw = (
     <ContractForm
       drizzle={drizzle}
-      contract={contractName}
+      contract={facadeAddress}
       method="withdraw"
       render={withdrawRender}
     />
@@ -81,28 +92,26 @@ export default function Facade() {
     <div>
       <div className="segment">
         <h2>Your Account</h2>
-        <p className="skinny truncate">{contractName}</p>
+        <p className="skinny truncate">{facadeAddress}</p>
       </div>
 
       <div className="segment">
         <h2>Balances</h2>
 
-        <p>
-          <div className="input-group center">
-            <label>
-              <div className="bottom-buffer">
-                {underlyingBalance} {underlyingAssetSymbol}
-              </div>
-              <div className="bottom-buffer">{deposit}</div>
-            </label>
-            <label>
-              <div className="bottom-buffer">
-                {mintedBalance} {mintedAssetSymbol}
-              </div>
-              <div className="bottom-buffer">{withdraw}</div>
-            </label>
-          </div>
-        </p>
+        <div className="input-group center">
+          <label>
+            <div className="bottom-buffer">
+              {underlyingBalance} {underlyingAssetSymbol}
+            </div>
+            <div className="bottom-buffer">{deposit}</div>
+          </label>
+          <label>
+            <div className="bottom-buffer">
+              {mintedBalance} {mintedAssetSymbol}
+            </div>
+            <div className="bottom-buffer">{withdraw}</div>
+          </label>
+        </div>
       </div>
     </div>
   )

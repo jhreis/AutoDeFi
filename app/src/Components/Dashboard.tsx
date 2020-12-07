@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react"
 import { newContextComponents } from "@drizzle/react-components"
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Web3 = require("web3")
+
 import MainInput from "./MainInput"
 import BasicInfo from "./BasicInfo"
 import Header from "./Header"
+import AccountSummary from "./AccountSummary"
 import CreateFacade from "./CreateFacade"
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+// const CompoundFacade: any = require("../contracts/CompoundFacade.json")
+const Facade: any = require("../contracts/Facade.json")
 
 // const Generator = require("../contracts/Generator.json")
 // const SimpleStorage = require("../contracts/SimpleStorage.json")
@@ -23,9 +31,17 @@ interface Props {
   drizzleState: any
 }
 
+function is0Address(address: string): boolean {
+  // TODO: Future improvement
+  return address == "0x0000000000000000000000000000000000000000"
+}
+
 export default function Dashboard({ drizzle, drizzleState }: Props) {
   const [storage, setStorage] = useState(0)
-  const [facade, setFacade] = useState<undefined | any>(undefined)
+  const [facade, setFacade] = useState<string | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  // TODO: update this so that it is actually undefined
   const [wallet, setWallet] = useState<string>("bad address")
 
   useEffect(() => {
@@ -60,20 +76,94 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
   useEffect(() => {
     async function run() {
-      const displayData = drizzle.contracts.Generator.methods.facades(wallet)
-      const _facade = await displayData.call()
+      setIsLoading(true)
 
-      setFacade(_facade)
-      console.log(`Updated facade from wallet change`, { wallet, _facade })
+      const displayData = drizzle.contracts.Generator.methods.facades(wallet)
+      let newFacade: string | undefined = await displayData.call()
+
+      // The first part of this conditional is only required due to typescript narrowing
+      if (!newFacade || is0Address(newFacade)) {
+        newFacade = undefined
+      }
+
+      if (facade == newFacade) {
+        console.log("No facade updates", facade)
+        setIsLoading(false)
+        return
+      }
+
+      // Add new facade
+      if (newFacade) {
+        console.log("Attempting to attach new facade", newFacade, facade)
+        const web3 = new Web3()
+        const web3Contract = new web3.eth.Contract(Facade.abi, newFacade, {
+          from: drizzleState.accounts[0],
+        })
+        web3Contract.setProvider(drizzle.web3.currentProvider)
+        const contractConfig = { web3Contract, contractName: newFacade }
+
+        // TODO: Update these log messages with the correct ones
+        const events = ["Deposit", "Withdraw"]
+        drizzle.addContract(contractConfig, events)
+        console.log("Added new contract", newFacade, "added?", web3Contract)
+      } else {
+        console.log(
+          `Address ${newFacade}, was invalid, so not attaching observers`
+        )
+      }
+
+      setFacade(newFacade)
+      console.log(`Updated facade from wallet change`, {
+        wallet,
+        newFacade,
+        facade,
+      })
+
+      // Remove and add new drizzle contract
+      if (facade /* if old facade exists, remove it */) {
+        drizzle.deleteContract(facade)
+        console.log("Removed old contract", facade)
+      } else {
+        console.log("No old facade, skipping deletion")
+      }
+
+      setIsLoading(false)
     }
     run()
-  }, [wallet])
+  }, [wallet, drizzleState.contracts.Generator])
+  // ^ These observers capture two types of changes, 1. Wallet change 2. If the user creates or destroys a facade
 
   // Call a contract!
   // drizzle.contracts.SimpleStorage.methods.set(storage + 1).send()
 
   // This is re-rendering far too often
   // console.log("Render", wallet)
+
+  const childComponent = () => {
+    console.log("Attempting child", facade)
+
+    if (isLoading) {
+      return <span>LOADING??</span>
+    }
+
+    if (facade) {
+      return (
+        <AccountSummary
+          facadeAddress={facade}
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+        />
+      )
+    }
+
+    return (
+      <CreateFacade
+        userAddress={wallet}
+        drizzle={drizzle}
+        drizzleState={drizzleState}
+      />
+    )
+  }
 
   return (
     <div className="App">
@@ -82,14 +172,9 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
         drizzleState={drizzleState}
         userAddress={wallet}
       />
-      {facade}
+      Test {facade}
       {/* <BasicInfo userAddress={wallet} /> */}
-
-      <CreateFacade
-        userAddress={wallet}
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-      />
+      {childComponent()}
       {/* <form>
         <MainInput
           drizzle={drizzle}
