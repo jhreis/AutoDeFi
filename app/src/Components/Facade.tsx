@@ -16,100 +16,6 @@ export default function Facade({
   drizzleState,
   facadeAddress,
 }: Props) {
-  // TODO: Dynamically update these with contract decimal data
-  const underlyingRenderer = (displayData: string) =>
-    balanceRenderer(displayData, 6)
-  const mintingRenderer = (displayData: string) =>
-    balanceRenderer(displayData, 8)
-
-  const balanceRenderer = (displayData: string, decimals: number) => {
-    let displayNum = 0
-    const parseAttempt = parseInt(displayData)
-    if (parseAttempt > 0) {
-      displayNum = parseAttempt / Math.pow(10, decimals)
-    }
-    return <span>{displayNum}</span>
-  }
-
-  const underlyingBalance = (
-    <ContractData
-      drizzle={drizzle}
-      drizzleState={drizzleState}
-      contract={facadeAddress}
-      method="underlyingBalance"
-      hideIndicator={true}
-      render={underlyingRenderer}
-    />
-  )
-  const underlyingAssetSymbol = (
-    <ContractData
-      drizzle={drizzle}
-      drizzleState={drizzleState}
-      contract={facadeAddress}
-      method="underlyingAssetSymbol"
-    />
-  )
-
-  const mintedBalance = (
-    <ContractData
-      drizzle={drizzle}
-      drizzleState={drizzleState}
-      contract={facadeAddress}
-      method="mintedBalance"
-      hideIndicator={true}
-      render={mintingRenderer}
-    />
-  )
-  const mintedAssetSymbol = (
-    <ContractData
-      drizzle={drizzle}
-      drizzleState={drizzleState}
-      contract={facadeAddress}
-      method="mintedAssetSymbol"
-    />
-  )
-
-  const depositRender: (prop: any) => ReactElement = (prop) => {
-    return (
-      <button
-        key="submit"
-        className="pure-button"
-        type="button"
-        onClick={prop.handleSubmit}
-      >
-        Early Deposit
-      </button>
-    )
-  }
-  const withdrawRender: (prop: any) => ReactElement = (prop) => {
-    return (
-      <button
-        key="submit"
-        className="pure-button"
-        type="button"
-        onClick={prop.handleSubmit}
-      >
-        Withdraw All
-      </button>
-    )
-  }
-  const deposit = (
-    <ContractForm
-      drizzle={drizzle}
-      contract={facadeAddress}
-      method="depositToUnderlying"
-      render={depositRender}
-    />
-  )
-  const withdraw = (
-    <ContractForm
-      drizzle={drizzle}
-      contract={facadeAddress}
-      method="withdraw"
-      render={withdrawRender}
-    />
-  )
-
   return (
     <div>
       <div className="segment">
@@ -121,20 +27,115 @@ export default function Facade({
         <h2>Balances</h2>
 
         <div className="input-group center">
-          <label>
-            <div className="bottom-buffer">
-              {underlyingBalance} {underlyingAssetSymbol}
-            </div>
-            <div className="bottom-buffer">{deposit}</div>
-          </label>
-          <label>
-            <div className="bottom-buffer">
-              {mintedBalance} {mintedAssetSymbol}
-            </div>
-            <div className="bottom-buffer">{withdraw}</div>
-          </label>
+          <FacadeBalance
+            facadeAddress={facadeAddress}
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            decimals={6}
+            methods={{
+              balance: "underlyingBalance",
+              symbol: "underlyingAssetSymbol",
+              buttonAction: "depositToUnderlying",
+              buttonTitle: "Withdraw All",
+            }}
+          />
+
+          <FacadeBalance
+            facadeAddress={facadeAddress}
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            decimals={8}
+            methods={{
+              balance: "mintedBalance",
+              symbol: "mintedAssetSymbol",
+              buttonAction: "withdraw",
+              buttonTitle: "Early Deposit",
+            }}
+          />
         </div>
       </div>
     </div>
+  )
+}
+
+interface FacadeBalanceProps {
+  facadeAddress: string
+  drizzle: any
+  drizzleState: any
+  decimals: number
+  methods: {
+    balance: string
+    symbol: string
+    buttonAction: string
+    buttonTitle: string
+  }
+}
+
+function FacadeBalance({
+  facadeAddress,
+  drizzle,
+  drizzleState,
+  decimals,
+  methods: { balance, symbol, buttonAction, buttonTitle },
+}: FacadeBalanceProps) {
+  // TODO: Dynamically update these with contract decimal data
+
+  const balanceRenderer = (displayData: string) => {
+    let displayNum = 0
+    const parseAttempt = parseInt(displayData)
+    if (parseAttempt > 0) {
+      displayNum = parseAttempt / Math.pow(10, decimals)
+    }
+    return <span>{displayNum}</span>
+  }
+
+  const balanceUI = (
+    <ContractData
+      drizzle={drizzle}
+      drizzleState={drizzleState}
+      contract={facadeAddress}
+      method={balance}
+      hideIndicator={true}
+      render={balanceRenderer}
+    />
+  )
+  const assetSymbolUI = (
+    <ContractData
+      drizzle={drizzle}
+      drizzleState={drizzleState}
+      contract={facadeAddress}
+      method={symbol}
+    />
+  )
+
+  const withdrawRender: (prop: any) => ReactElement = (prop) => {
+    return (
+      <button
+        key="submit"
+        className="pure-button"
+        type="button"
+        onClick={prop.handleSubmit}
+      >
+        {buttonTitle}
+      </button>
+    )
+  }
+
+  const action = (
+    <ContractForm
+      drizzle={drizzle}
+      contract={facadeAddress}
+      method={buttonAction}
+      render={withdrawRender}
+    />
+  )
+
+  return (
+    <label>
+      <div className="bottom-buffer">
+        {balanceUI} {assetSymbolUI}
+      </div>
+      <div className="bottom-buffer">{action}</div>
+    </label>
   )
 }
