@@ -41,16 +41,24 @@ contract Generator {
         require(facades[msg.sender] == Facade(0), "Facade already created for this address.");
         Facade newFacade = availableProtocols[integrationIndex].deployUserInstance(msg.sender, pairIndex);
         facades[msg.sender] = newFacade;
+        facadeOwners.push(msg.sender);
         return newFacade;
     }
 
     function destroyFacade() public {
         // Can only delete your own facade
         facades[msg.sender].destroy();
+        // Burning owner
         delete facades[msg.sender];
+
+        // TODO: Currently leaving the owners array intact to preserve data.
+        //  So if fetching owners in a consuming way, will want to sort out owners with no facades
+        //  A future improvement here would be to create a struct for facades that also includes an array index.
+        //   and then cleanup the array and move items around to clean up empty slots. However, this is certainly 
+        //   not needed for a fully functioning solution
     }
     
-    function foo() public view returns(bool) {
-        return address(facades[msg.sender]) == address(0);
+    function numberOfOwners() public view returns(uint) {
+        return facadeOwners.length;
     }
 }
