@@ -11,7 +11,6 @@ import AccountSummary from "./AccountSummary"
 import CreateFacade from "./CreateFacade"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const CompoundFacade: any = require("../contracts/CompoundFacade.json")
 const Facade: any = require("../contracts/Facade.json")
 
 // const Generator = require("../contracts/Generator.json")
