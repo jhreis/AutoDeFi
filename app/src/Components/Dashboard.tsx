@@ -92,7 +92,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
       }
 
       // Add new facade
-      if (newFacade) {
+      if (newFacade && !drizzle.contracts[newFacade]) {
         console.log("Attempting to attach new facade", newFacade, facade)
         const web3 = new Web3()
         const web3Contract = new web3.eth.Contract(Facade.abi, newFacade, {
@@ -107,7 +107,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
         console.log("Added new contract", newFacade, "added?", web3Contract)
       } else {
         console.log(
-          `Address ${newFacade}, was invalid, so not attaching observers`
+          `Address ${newFacade}, was invalid or already exists, so not attaching observers`
         )
       }
 
