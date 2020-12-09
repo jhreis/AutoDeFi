@@ -53,9 +53,15 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
       allValidFacadeAddress.push(facade)
     }
 
-    console.log("Updated all owner addresses!", allValidFacadeAddress.length)
+    console.log(
+      "AllFacadeList: Updated all owner addresses!",
+      allValidFacadeAddress.length
+    )
     setFacadeInstances(allValidFacadeAddress)
-  }, [drizzleState.contracts.Generator.facadeOwners])
+  }, [
+    drizzleState.contracts.Generator.facadeOwners,
+    drizzleState.contracts.Generator.numberOfOwners,
+  ])
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedFacadeAddress(undefined)
