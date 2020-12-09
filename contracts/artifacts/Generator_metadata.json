@@ -51,7 +51,13 @@
 					}
 				],
 				"name": "addNewProtocol",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -79,6 +85,25 @@
 				"name": "destroyFacade",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "facadeEnabled",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -120,19 +145,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "foo",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -158,6 +170,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "numberOfOwners",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -167,6 +192,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "facadeIndex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "enabled",
+						"type": "bool"
+					}
+				],
+				"name": "setEnabled",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -181,11 +224,14 @@
 				"availableProtocols(uint256)": {
 					"notice": "The available protocols that are available to create facades from"
 				},
+				"facadeEnabled(uint256)": {
+					"notice": "Determines whether a specific facade can be created or not"
+				},
 				"facadeOwners(uint256)": {
 					"notice": "All user addresses that have facades"
 				},
 				"facades(address)": {
-					"notice": "TODO: Eventually make this an array User Address => Facade Address, make type safe"
+					"notice": "TODO Improvement: Eventually make this an array User Address => Facade Address, make type safe"
 				},
 				"owner()": {
 					"notice": "The owner of this contract"
@@ -196,7 +242,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/contracts/Generator.sol": "Generator"
+			"localhost/Generator.sol": "Generator"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -210,15 +256,15 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/contracts/ERC20/IERC20.sol": {
-			"keccak256": "0x6e10e93f99a4376805223abc135e394de4631ec31f5bab207a6c6b3dabe7b42d",
+		"localhost/ERC20/IERC20.sol": {
+			"keccak256": "0x62466abff37d667690074a7dbb90a23e497509bb187f42f5641cc4119043f85f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://96d84f66fa98d3fe5c635a96b8cca93a64266bc6beb9173f161ba7741ba83459",
-				"dweb:/ipfs/QmYpiX9CaiQnUBq2niE45WCHeCqTX18igiWcnTNQqcoYwa"
+				"bzz-raw://bd7092310ea37334592c5c3648e5f27c25154fbfc9b690054d09e034ad5deb3c",
+				"dweb:/ipfs/QmVzZwN44iXKWp9fgqxNzDHpAcJskEAnRknUu7KXEt7M6z"
 			]
 		},
-		"localhost/contracts/Facades/FacadeInterface.sol": {
+		"localhost/Facades/FacadeInterface.sol": {
 			"keccak256": "0xe47376935d32e4f177e7ac0b9a968dd6b7a01ce5be9473b61f50205d4fa603a0",
 			"license": "MIT",
 			"urls": [
@@ -226,15 +272,15 @@
 				"dweb:/ipfs/QmaJjrFyP5HBHCKEKS35qU85VYsy38kD5xCUAked5Cmitx"
 			]
 		},
-		"localhost/contracts/Generator.sol": {
-			"keccak256": "0xd48e09e881f0d837e7fe585044e19e677c77f2487323af1ca3b7a5b5ff41867d",
+		"localhost/Generator.sol": {
+			"keccak256": "0x4b17e9427f93718c97a1f977863bd718410093f65c9dcb49fd454587b54ef0d4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://94d4ccdb8a990377e576ffeb8b339c2a7751ca1e7aaf7c74a25c430ef6ea5c14",
-				"dweb:/ipfs/QmasZQbbUP1TT2aqhG4kDt85i8UQVgrPZoTPCk7k7xiPzU"
+				"bzz-raw://3852b31a4f9456f5cfb00219a9ef0542ce29f9ca9581cee551e7ab2641d3b292",
+				"dweb:/ipfs/QmWwUn2tTMJWWpoGyvUmVq4gUQiEdhnmnSA4cDikH5diW8"
 			]
 		},
-		"localhost/contracts/Integrations/Integration.sol": {
+		"localhost/Integrations/Integration.sol": {
 			"keccak256": "0x843fb8d9581c129cc89e8c3bb69dcb6fdfc06aa6fbee60b551f992b01adebd5d",
 			"license": "MIT",
 			"urls": [

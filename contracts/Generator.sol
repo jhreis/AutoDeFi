@@ -11,12 +11,15 @@ contract Generator {
     /// The available protocols that are available to create facades from
     Integration[] public availableProtocols;
     
-    /// TODO: Eventually make this an array
+    /// TODO Improvement: Eventually make this an array
     /// User Address => Facade Address, make type safe
     mapping(address => Facade) public facades;
     
     /// All user addresses that have facades
     address[] public facadeOwners;
+    
+    /// Determines whether a specific facade can be created or not
+    bool[] public facadeEnabled;
     
     modifier isOwner() {
         require(msg.sender == owner, "Must be owner!");
@@ -32,12 +35,14 @@ contract Generator {
     
     function addNewProtocol(address newIntegration) public isOwner() returns(uint) {
         Integration integration = Integration(newIntegration);
-        // TODO: Prevent duplicate protocols
+        // No real need to prevent duplicate protocols, as this is owner controlled, and no negatives.
         availableProtocols.push(integration);
+        facadeEnabled.push(true);
         return availableProtocols.length - 1;
     }
     
     function generateNewFacade(uint integrationIndex, uint pairIndex) public returns(Facade) {
+        require(facadeEnabled[integrationIndex], "This integration is currently disabled.");
         require(facades[msg.sender] == Facade(0), "Facade already created for this address.");
         Facade newFacade = availableProtocols[integrationIndex].deployUserInstance(msg.sender, pairIndex);
         facades[msg.sender] = newFacade;
@@ -56,6 +61,10 @@ contract Generator {
         //  A future improvement here would be to create a struct for facades that also includes an array index.
         //   and then cleanup the array and move items around to clean up empty slots. However, this is certainly 
         //   not needed for a fully functioning solution
+    }
+    
+    function setEnabled(uint facadeIndex, bool enabled) public isOwner() {
+        facadeEnabled[facadeIndex] = enabled;
     }
     
     function numberOfOwners() public view returns(uint) {
