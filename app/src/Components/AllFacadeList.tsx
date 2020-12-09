@@ -128,18 +128,6 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
     ))
   }
 
-  console.log("BEFORE CRASH", selectedFacadeAddress)
-
-  const balanceRenderer = (displayData: string) => {
-    console.log("I'm in", selectedFacadeAddress)
-    let displayNum = 0
-    const parseAttempt = parseInt(displayData)
-    if (parseAttempt > 0) {
-      displayNum = parseAttempt / Math.pow(10, 6)
-    }
-    return <span>{displayNum}</span>
-  }
-
   const accountTitle = "Viewing Compound account:"
   return (
     <section>

@@ -12,9 +12,5 @@ export default function MainInput({ drizzle, facadeAddress }: Props) {
     return address == "0x0000000000000000000000000000000000000000"
   }
 
-  let facadeComponent = null
-
-  console.log("yoyoyo", facadeAddress)
-
   return <div>This is just a test</div>
 }

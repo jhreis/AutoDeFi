@@ -50,8 +50,6 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
       const displayData =
         drizzleState.contracts.SimpleStorage.storedData[storageKey]
 
-      // console.log("Simple", displayData.value)
-
       if (displayData) {
         setStorage(parseInt(displayData.value))
       }
@@ -85,7 +83,6 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
       if (facade == newFacade) {
         console.log("No facade updates", facade)
-        // setIsLoading(false)
         return
       }
 
@@ -132,15 +129,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
   }, [wallet, drizzleState.contracts.Generator])
   // ^ These observers capture two types of changes, 1. Wallet change 2. If the user creates or destroys a facade
 
-  // Call a contract!
-  // drizzle.contracts.SimpleStorage.methods.set(storage + 1).send()
-
-  // This is re-rendering far too often
-  // console.log("Render", wallet)
-
   const childComponent = () => {
-    console.log("Attempting child", drizzleState.contracts)
-
     if (isLoading) {
       return <span>LOADING??</span>
     }

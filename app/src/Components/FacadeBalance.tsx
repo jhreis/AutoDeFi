@@ -77,7 +77,6 @@ export default function FacadeBalance({
     />
   )
 
-  console.log({ balanceUI }, drizzle.contracts)
   return (
     <label>
       <div className="bottom-buffer">
