@@ -31,10 +31,6 @@ contract CompoundFacade is Facade {
     /// @dev Returns an ERC20 token that is used to deposit into Compound
     ERC20 public mintingAsset;
     
-    /// @notice Returns the amount required before a deposit will be approved
-    /// @dev Returns the value that must be met / exceeded before being able to desposit assets into Compound
-    uint256 public minimumUnderlyingForDeposit = 100;
-    
     // Modifiers
     
     // Checks if caller is owner
