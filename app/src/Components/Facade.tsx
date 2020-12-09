@@ -18,42 +18,35 @@ export default function Facade({
   drizzleState,
 }: Props) {
   return (
-    <div>
-      <div className="segment">
-        <h2>Your Account</h2>
-        <p className="skinny truncate">{facadeAddress}</p>
-      </div>
+    <div className="segment">
+      <h2>Balances</h2>
 
-      <div className="segment">
-        <h2>Balances</h2>
+      <div className="input-group center">
+        <FacadeBalance
+          facadeAddress={facadeAddress}
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          decimals={6}
+          methods={{
+            balance: "underlyingBalance",
+            symbol: "underlyingAssetSymbol",
+            buttonAction: "depositToUnderlying",
+            buttonTitle: "Early Deposit",
+          }}
+        />
 
-        <div className="input-group center">
-          <FacadeBalance
-            facadeAddress={facadeAddress}
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            decimals={6}
-            methods={{
-              balance: "underlyingBalance",
-              symbol: "underlyingAssetSymbol",
-              buttonAction: "depositToUnderlying",
-              buttonTitle: "Early Deposit",
-            }}
-          />
-
-          <FacadeBalance
-            facadeAddress={facadeAddress}
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            decimals={8}
-            methods={{
-              balance: "mintedBalance",
-              symbol: "mintedAssetSymbol",
-              buttonAction: "withdraw",
-              buttonTitle: "Withdraw All",
-            }}
-          />
-        </div>
+        <FacadeBalance
+          facadeAddress={facadeAddress}
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          decimals={8}
+          methods={{
+            balance: "mintedBalance",
+            symbol: "mintedAssetSymbol",
+            buttonAction: "withdraw",
+            buttonTitle: "Withdraw All",
+          }}
+        />
       </div>
     </div>
   )

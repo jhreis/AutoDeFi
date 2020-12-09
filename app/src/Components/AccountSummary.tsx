@@ -7,29 +7,22 @@ interface Props {
   drizzleState: any
 }
 
-const Strings = {
-  title: "Balances",
-  Buttons: {
-    deposit: "Early Deposit",
-    withdraw: "Withdraw All",
-  },
-}
-
 export default function AccountSummary({
   facadeAddress,
   drizzle,
   drizzleState,
 }: Props) {
   return (
-    <section>
-      {/* TODO: This contract name should be on the actual contract yo */}
+    <section className="center">
+      <div className="segment">
+        <h2>Your account</h2>
+        <code>{facadeAddress}</code>
+      </div>
       <Facade
         drizzle={drizzle}
         drizzleState={drizzleState}
         facadeAddress={facadeAddress}
       />
-      {/* {Strings.title} */}
-      {/* {facadeAddress} */}
     </section>
   )
 }

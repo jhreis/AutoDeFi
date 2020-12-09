@@ -134,7 +134,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
   const childComponent = () => {
     if (isLoading) {
-      return <span>LOADING??</span>
+      return <span>LOADING...</span>
     }
 
     if (facade) {

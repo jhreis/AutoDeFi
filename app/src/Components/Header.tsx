@@ -26,16 +26,8 @@ export default function BasicInfo({
       <h1>{Strings.title}</h1>
       <h3 className="darkish">{Strings.subtitle}</h3>
 
-      <p>
-        Your wallet:
-        <br />
-        {userAddress}
-      </p>
-      {/* <AccountData
-        accountIndex={0}
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-      /> */}
+      <h2>Your wallet</h2>
+      <code>{userAddress}</code>
     </section>
   )
 }

@@ -6,8 +6,6 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* background-color: darkolivegreen; */
 }
 
 body {
@@ -17,8 +15,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-color: aquamarine;
 }
 
 .App {
@@ -35,9 +31,9 @@ code {
 
 /* https://codepen.io/swapnet/pen/QWwPVwE */
 
-/* body,
+body,
 html {
-  background-color: darkolivegreen;
+  background-color: #ebecf0;
 }
 body,
 p,
@@ -134,4 +130,4 @@ button.red {
 .input-group label {
   margin: 0;
   flex: 1;
-} */
+}
