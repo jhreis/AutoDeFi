@@ -75,8 +75,6 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
   useEffect(() => {
     async function run() {
-      setIsLoading(true)
-
       const displayData = drizzle.contracts.Generator.methods.facades(wallet)
       let newFacade: string | undefined = await displayData.call()
 
@@ -87,9 +85,11 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
       if (facade == newFacade) {
         console.log("No facade updates", facade)
-        setIsLoading(false)
+        // setIsLoading(false)
         return
       }
+
+      setIsLoading(true)
 
       // Add new facade
       if (newFacade && !drizzle.contracts[newFacade]) {
@@ -139,7 +139,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
   // console.log("Render", wallet)
 
   const childComponent = () => {
-    console.log("Attempting child", facade)
+    console.log("Attempting child", drizzleState.contracts)
 
     if (isLoading) {
       return <span>LOADING??</span>
