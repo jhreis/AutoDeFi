@@ -23,6 +23,7 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
   const [selectedFacade, setSelectedFacade] = useState<string | undefined>(
     undefined
   )
+  const [countKey, setCountKey] = useState<any>(undefined)
 
   function is0Address(address: string): boolean {
     // TODO: Future improvement
@@ -31,36 +32,47 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
 
   useEffect(() => {
     const countKey = drizzle.contracts.Generator.methods.numberOfOwners.cacheCall()
-    const count =
-      drizzleState.contracts.Generator.numberOfOwners[countKey]?.value
-    const allValidFacadeAddress = []
+    setCountKey(countKey)
+  }, [])
 
-    for (let i = 0; i < count; i++) {
-      const facadeOwnerKey = drizzle.contracts.Generator.methods.facadeOwners.cacheCall(
-        i
+  useEffect(() => {
+    const run = () => {
+      const count =
+        drizzleState.contracts.Generator.numberOfOwners[countKey]?.value
+      const allValidFacadeAddress = []
+
+      for (let i = 0; i < count; i++) {
+        const facadeOwnerKey = drizzle.contracts.Generator.methods.facadeOwners.cacheCall(
+          i
+        )
+        const facadeOwner =
+          drizzleState.contracts.Generator.facadeOwners[facadeOwnerKey]?.value
+        if (!facadeOwner) return
+
+        const facadeKey = drizzle.contracts.Generator.methods.facades.cacheCall(
+          facadeOwner
+        )
+        const facade =
+          drizzleState.contracts.Generator.facades[facadeKey]?.value
+        if (!facade) return
+        if (is0Address(facade)) return
+
+        allValidFacadeAddress.push(facade)
+      }
+
+      console.log(
+        "AllFacadeList: Updated all owner addresses!",
+        allValidFacadeAddress.length
       )
-      const facadeOwner =
-        drizzleState.contracts.Generator.facadeOwners[facadeOwnerKey]?.value
-      if (!facadeOwner) return
-
-      const facadeKey = drizzle.contracts.Generator.methods.facades.cacheCall(
-        facadeOwner
-      )
-      const facade = drizzleState.contracts.Generator.facades[facadeKey]?.value
-      if (!facade) return
-      if (is0Address(facade)) return
-
-      allValidFacadeAddress.push(facade)
+      setFacadeInstances(allValidFacadeAddress)
     }
 
-    console.log(
-      "AllFacadeList: Updated all owner addresses!",
-      allValidFacadeAddress.length
-    )
-    setFacadeInstances(allValidFacadeAddress)
+    // Flushing the runloop seems to be the best way for drizzle to not get wacked.
+    // Could also potentially use async func but this works well.
+    setTimeout(run, 1)
   }, [
     drizzleState.contracts.Generator.facadeOwners,
-    drizzleState.contracts.Generator.numberOfOwners,
+    drizzleState.contracts.Generator.facades,
   ])
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -138,7 +150,18 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
   return (
     <section>
       <h1>Depositing for Other Accounts</h1>
-      {facadeInstances && `Number of Facades: ${facadeInstances.length}`}
+
+      {facadeInstances && (
+        <span>
+          {"Number of Facades: "}
+          <ContractData
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            contract={"Generator"}
+            method={"numberOfOwners"}
+          />
+        </span>
+      )}
       <select onChange={handleChange}>{Options()}</select>
       {selectedFacadeAddress && (
         <>
