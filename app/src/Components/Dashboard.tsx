@@ -55,6 +55,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
       }
     }
 
+    // Run async function
     setupStorage()
   }, [drizzleState.contracts.SimpleStorage.storedData])
   // ^ re-process if the underlying store is modified
@@ -125,6 +126,8 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
       setIsLoading(false)
     }
+
+    // Run async function
     run()
   }, [wallet, drizzleState.contracts.Generator])
   // ^ These observers capture two types of changes, 1. Wallet change 2. If the user creates or destroys a facade
@@ -142,8 +145,6 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
             drizzle={drizzle}
             drizzleState={drizzleState}
           />
-
-          <AllFacadeList drizzle={drizzle} drizzleState={drizzleState} />
         </>
       )
     }
@@ -164,16 +165,8 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
         drizzleState={drizzleState}
         userAddress={wallet}
       />
-      Test {facade}
-      {/* <BasicInfo userAddress={wallet} /> */}
       {childComponent()}
-      {/* <form>
-        <MainInput
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-          facadeAddress={"test"}
-        />
-      </form> */}
+      <AllFacadeList drizzle={drizzle} drizzleState={drizzleState} />
     </div>
   )
 }
