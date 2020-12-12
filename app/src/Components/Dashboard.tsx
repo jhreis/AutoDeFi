@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { newContextComponents } from "@drizzle/react-components"
-const { AccountData, ContractData, ContractForm } = newContextComponents
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Web3 = require("web3")
 
-import MainInput from "./MainInput"
-import BasicInfo from "./BasicInfo"
 import Header from "./Header"
 import AccountSummary from "./AccountSummary"
 import CreateFacade from "./CreateFacade"
@@ -14,16 +10,6 @@ import AllFacadeList from "./AllFacadeList"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Facade: any = require("../contracts/Facade.json")
-
-// const Generator = require("../contracts/Generator.json")
-// const SimpleStorage = require("../contracts/SimpleStorage.json")
-// import SimpleStorage from "../contracts/SimpleStorage.json"
-
-// import Web3 from "web3"
-
-// import CompoundFacade from "./contracts/CompoundFacade.json"
-
-const enableCollectInfo = true
 
 interface Props {
   drizzle: any

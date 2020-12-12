@@ -1,8 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from "react"
-import FacadeComponent from "./Facade"
 import FacadeBalance from "./FacadeBalance"
 import { newContextComponents } from "@drizzle/react-components"
-const { AccountData, ContractData, ContractForm } = newContextComponents
+const { ContractData } = newContextComponents
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Facade: any = require("../contracts/Facade.json")
@@ -20,9 +19,6 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
   const [selectedFacadeAddress, setSelectedFacadeAddress] = useState<
     string | undefined
   >(undefined)
-  const [selectedFacade, setSelectedFacade] = useState<string | undefined>(
-    undefined
-  )
   const [countKey, setCountKey] = useState<any>(undefined)
 
   function is0Address(address: string): boolean {

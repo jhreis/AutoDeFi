@@ -1,9 +1,11 @@
 import React from "react"
 
+// Currently not used!
+
 export default function CollectInfoComponent() {
   return (
     <div className="segment">
-      <h3>Coinbase API Information</h3>
+      <h3>API Information</h3>
       <label>
         <input type="password" placeholder="Passphrase" />
       </label>

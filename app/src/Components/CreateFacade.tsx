@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { newContextComponents } from "@drizzle/react-components"
 
-const { AccountData, ContractData, ContractForm } = newContextComponents
+const { ContractData } = newContextComponents
 
 interface Props {
   userAddress: string
@@ -61,7 +61,7 @@ interface ButtonProps {
   drizzleState: any
 }
 
-function Buttons({ drizzle, drizzleState }: ButtonProps) {
+function Buttons({ drizzle }: ButtonProps) {
   const handleCompoundClick = (event: any) => {
     event.preventDefault()
     drizzle.contracts.Generator.methods.generateNewFacade.cacheSend(0, 0)

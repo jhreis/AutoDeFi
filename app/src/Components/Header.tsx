@@ -1,6 +1,4 @@
 import React from "react"
-import { newContextComponents } from "@drizzle/react-components"
-const { AccountData } = newContextComponents
 
 const Strings = {
   title: "AutoDeFi",
@@ -15,11 +13,7 @@ interface Props {
   drizzleState: any
 }
 
-export default function BasicInfo({
-  userAddress,
-  drizzle,
-  drizzleState,
-}: Props) {
+export default function BasicInfo({ userAddress }: Props) {
   return (
     <section className="center">
       <img className="main_logo" src={Strings.logo} alt="autodefi-logo" />

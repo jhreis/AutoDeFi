@@ -1,10 +1,5 @@
-import React, { ReactElement } from "react"
-import { newContextComponents } from "@drizzle/react-components"
-const { AccountData, ContractData, ContractForm } = newContextComponents
+import React from "react"
 import FacadeBalance from "./FacadeBalance"
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Web3 = require("web3")
 
 interface Props {
   facadeAddress: string
