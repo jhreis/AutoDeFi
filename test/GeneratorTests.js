@@ -25,12 +25,6 @@ contract("Generator", (accounts) => {
     const newlyAddedIndex = await genInstance.addNewProtocol(fakeInstance)
     const correctProtocol = await genInstance.availableProtocols(1)
 
-    // console.log("added, ")
-
-    // const firstIntegration = new Integration(firstIntegrationAddress)
-    // const firstIntegrationName = await firstIntegration.description()
-
-    console.log("what", newlyAddedIndex, correctProtocol)
     assert.equal(
       correctProtocol,
       fakeInstance,

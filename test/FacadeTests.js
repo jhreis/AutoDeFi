@@ -26,6 +26,7 @@ contract("CompoundFacade", (accounts) => {
   })
   //////////////////
 
+  /// Test facade deployments
   context("Deployments - Verifying deployments function correct.", () => {
     it("Should deploy and construct a valid Compound Facade", async () => {
       const facade = idealFacade
@@ -86,6 +87,10 @@ contract("CompoundFacade", (accounts) => {
 
     it("Deploying new contract should trigger an event.", async () => {})
   })
+
+  ////////////////////////////////////////////////
+  ////// Future tests that could be written //////
+  ////////////////////////////////////////////////
 
   context(
     "Editing Post Deployment - These are editing the contract post deployment.",
