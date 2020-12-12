@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Strings = {
-  title: "Create Account",
+  title: "Create new account",
   description:
     "Please choose which Dapp you would like your account to interact with.",
   Images: {
