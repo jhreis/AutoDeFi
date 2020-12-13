@@ -30,28 +30,6 @@ export default function CreateFacade({
       <h2>{Strings.title}</h2>
       <p className="skinny">{Strings.description}</p>
       <Buttons drizzle={drizzle} drizzleState={drizzleState} />
-      <ContractData
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-        contract={"Generator"}
-        method="owner"
-      />
-
-      <ContractData
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-        contract={"Generator"}
-        method={"availableProtocols"}
-        methodArgs={["0"]}
-      />
-
-      <ContractData
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-        contract={"Generator"}
-        method={"facades"}
-        methodArgs={[userAddress]}
-      />
     </section>
   )
 }
