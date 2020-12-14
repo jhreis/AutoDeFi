@@ -1,4 +1,4 @@
 [build]
 base = "app"
-command = "yarn run build"
-publish = "app/build"
+command = "yarn build2"
+publish = "build"
