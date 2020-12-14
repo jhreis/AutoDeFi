@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Web3 = require("web3")
-
 import Header from "./Header"
 import AccountSummary from "./AccountSummary"
 import CreateFacade from "./CreateFacade"
 import AllFacadeList from "./AllFacadeList"
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Web3 = require("web3")
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Facade: any = require("../contracts/Facade.json")
