@@ -177,19 +177,25 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
       <select onChange={handleChange}>{Options()}</select>
       {selectedFacadeAddress && (
         <>
-          {accountTitle} {selectedFacadeAddress}
-          <FacadeBalance
-            facadeAddress={selectedFacadeAddress}
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            decimals={6}
-            methods={{
-              balance: "underlyingBalance",
-              symbol: "underlyingAssetSymbol",
-              buttonAction: "depositToUnderlying",
-              buttonTitle: "Perform Custodial Deposit!",
-            }}
-          />
+          {accountTitle}
+          <br />
+          <code>{selectedFacadeAddress}</code>
+          <br />
+          <br />
+          <section className="segment">
+            <FacadeBalance
+              facadeAddress={selectedFacadeAddress}
+              drizzle={drizzle}
+              drizzleState={drizzleState}
+              decimals={6}
+              methods={{
+                balance: "underlyingBalance",
+                symbol: "underlyingAssetSymbol",
+                buttonAction: "depositToUnderlying",
+                buttonTitle: "Perform Custodial Deposit!",
+              }}
+            />
+          </section>
         </>
       )}
     </section>

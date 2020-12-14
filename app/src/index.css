@@ -6,7 +6,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 620px;
+  max-width: 450px;
 }
 
 body {
@@ -46,6 +46,11 @@ button {
   letter-spacing: -0.2px;
   font-size: 16px;
 }
+
+body {
+  margin-bottom: 100px;
+}
+
 div,
 p {
   color: #babecc;
@@ -60,6 +65,11 @@ form {
   padding: 32px 0;
   text-align: center;
 }
+
+select {
+  margin: 30px;
+}
+
 button,
 input,
 select {
@@ -133,4 +143,8 @@ button.red {
 .input-group label {
   margin: 0;
   flex: 1;
+}
+
+.bottom-buffer {
+  padding-bottom: 10px;
 }
