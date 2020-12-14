@@ -25,7 +25,7 @@ export default function App() {
           const { drizzle, drizzleState, initialized } = drizzleContext
 
           if (!initialized) {
-            return <h1>"Loading...PLEASE ATTACH WALLET"</h1>
+            return <h2>Loading...PLEASE ATTACH WALLET</h2>
           }
 
           return <Dashboard drizzle={drizzle} drizzleState={drizzleState} />

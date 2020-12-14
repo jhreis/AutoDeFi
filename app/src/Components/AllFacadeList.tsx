@@ -180,8 +180,6 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
           {accountTitle}
           <br />
           <code>{selectedFacadeAddress}</code>
-          <br />
-          <br />
           <section className="segment">
             <FacadeBalance
               facadeAddress={selectedFacadeAddress}

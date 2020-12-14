@@ -53,7 +53,7 @@ body {
 
 div,
 p {
-  color: #babecc;
+  color: #8d92a6;
   text-shadow: 1px 1px 1px #fff;
 }
 form {
@@ -147,4 +147,8 @@ button.red {
 
 .bottom-buffer {
   padding-bottom: 10px;
+}
+
+.side-padding {
+  padding: 8px;
 }

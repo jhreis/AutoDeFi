@@ -75,7 +75,7 @@ export default function FacadeBalance({
   )
 
   return (
-    <label>
+    <label className="side-padding">
       <div className="bottom-buffer">
         {balanceUI} {assetSymbolUI}
       </div>
