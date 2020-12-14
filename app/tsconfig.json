@@ -3,13 +3,27 @@
     "strict": true,
     "target": "es2018",
     "outDir": "./lib",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react",
-    // "resolveJsonModule": true
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["./typings-custom/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./typings-custom/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
