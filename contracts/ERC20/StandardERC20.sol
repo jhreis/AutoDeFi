@@ -7,11 +7,30 @@ import './IERC20.sol';
 // It is only deployed to local blockchains to provide the necessary asset
 //  pairs to the Compound Facade.
 
+/// @title A boilerplate ERC20 token implementation
+/// @author Joel Reis
+/// @notice A sample ERC20 token, solely used for testing
+/// @dev `AutoDeFi` requires ERC20 tokens to function, instances of this are created
+///      for local blockchains to properly display token information / balances.
 contract StandardERC20 is ERC20 {
+    // This is the max value for a uint256
     uint256 constant private MAX_UINT256 = 2**256 - 1;
+
+    /// @notice The balances of all token holders
+    /// @dev This tracks the balance of any adddress that has ever had tokens
+    /// @return The balance of a specific address
     mapping (address => uint256) public balances;
+
+    /// @notice The spend permission of all token holders
+    /// @dev This tracks the spending permissions of any adddress that has ever had or given spending permissions
+    /// @return The spend allowance of a specific address pair
     mapping (address => mapping (address => uint256)) public allowed;
+
+    /// @notice The totoal amount of tokens
+    /// @dev The current token supply. Can be modified
+    /// @return The total amount of tokens currently available
     uint256 public totalSupply;
+
     /*
     NOTE:
     The following variables are OPTIONAL vanities. One does not have to include them.
@@ -22,6 +41,12 @@ contract StandardERC20 is ERC20 {
     uint8 public decimals;                // How many decimals to show.
     string override public symbol;        // An identifier: eg USDC
 
+    /// @notice Constructor for a new `ERC20` deployment
+    /// @dev Deploys a new `ERC20` token
+    /// @param _initialAmount The starting supply of tokens
+    /// @param _tokenName The name that will be associated with this token
+    /// @param _decimalUnits The amount of decimals that this token will use
+    /// @param _tokenSymbol The symbol that will be associated with this token
     constructor(uint256 _initialAmount, string memory _tokenName, uint8 _decimalUnits, string  memory _tokenSymbol) {
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
         totalSupply = _initialAmount;                        // Update total supply
@@ -33,7 +58,8 @@ contract StandardERC20 is ERC20 {
     /// @notice send `_value` token to `_to` from `msg.sender`
     /// @param _to The address of the recipient
     /// @param _value The amount of token to be transferred
-    /// @return success Whether the transfer was successful or not    function transfer(address _to, uint256 _value) public override returns (bool success) {
+    /// @return success Whether the transfer was successful or not
+    function transfer(address _to, uint256 _value) public override returns (bool success) {
         require(balances[msg.sender] >= _value, "token balance is lower than the value requested");
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -58,6 +84,10 @@ contract StandardERC20 is ERC20 {
         return true;
     }
 
+    /// @notice provides the amount of tokens a specific address has
+    /// @dev necessary to know how many specific tokens an ETH address has
+    /// @param _owner The address from which the balance will be retrieved
+    /// @return balance the balance
     function balanceOf(address _owner) public override view returns (uint256 balance) {
         return balances[_owner];
     }
