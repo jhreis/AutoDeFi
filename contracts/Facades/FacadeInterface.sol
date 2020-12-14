@@ -7,13 +7,13 @@ pragma solidity ^0.7.0;
 /// @dev This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex
 ///      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform
 interface Facade {
-    /// @notice An event used to communicate
+    /// @notice An event used to communicate that a "Deposit" was performed
     /// @dev Logs when a deposit has been performed for a given `Facade`
     /// @param facade The address of the `Facade` that had the action performed
     /// @param depositor The address of the custodian that performed, and paid for the deposit transaction
     event LogDeposit(address indexed facade, address indexed depositor);
 
-    /// @notice An event used to communicate
+    /// @notice An event used to communicate a "Withdrawal" was performed
     /// @dev Logs when a withdrawal has been performed for a given `Facade`
     /// @param facade The address of the `Facade` that had the action performed
     event LogWithdraw(address indexed facade);

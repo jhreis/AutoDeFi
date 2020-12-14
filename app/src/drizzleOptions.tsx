@@ -2,7 +2,6 @@
 const Generator = require("./contracts/Generator.json")
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const SimpleStorage = require("./contracts/SimpleStorage.json")
 
 // contracts: [
 //   truffleArtifact, // A regular Truffle contract artifact
@@ -20,7 +19,7 @@ const options: any = {
     block: false,
     // customProvider: new Web3("ws://localhost:8545"),
   },
-  contracts: [Generator, SimpleStorage],
+  contracts: [Generator],
   // events: {
   //   Generator: ["FacadeCreated"],
   // },

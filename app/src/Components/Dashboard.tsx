@@ -22,29 +22,11 @@ function is0Address(address: string): boolean {
 }
 
 export default function Dashboard({ drizzle, drizzleState }: Props) {
-  const [storage, setStorage] = useState(0)
   const [facade, setFacade] = useState<string | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   // TODO: update this so that it is actually undefined
   const [wallet, setWallet] = useState<string>("bad address")
-
-  useEffect(() => {
-    async function setupStorage() {
-      const storageKey = drizzle.contracts.SimpleStorage.methods.storedData.cacheCall() // This is weird
-
-      const displayData =
-        drizzleState.contracts.SimpleStorage.storedData[storageKey]
-
-      if (displayData) {
-        setStorage(parseInt(displayData.value))
-      }
-    }
-
-    // Run async function
-    setupStorage()
-  }, [drizzleState.contracts.SimpleStorage.storedData])
-  // ^ re-process if the underlying store is modified
 
   useEffect(() => {
     const wallet = drizzleState.accounts[0]
