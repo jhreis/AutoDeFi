@@ -1,0 +1,1226 @@
+{
+  "contractName": "Facade",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "facade",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "depositor",
+          "type": "address"
+        }
+      ],
+      "name": "LogDeposit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "facade",
+          "type": "address"
+        }
+      ],
+      "name": "LogWithdraw",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "depositToUnderlying",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "destroy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "underlyingBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "mintedBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "underlyingAssetSymbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "mintedAssetSymbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"facade\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"depositor\",\"type\":\"address\"}],\"name\":\"LogDeposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"facade\",\"type\":\"address\"}],\"name\":\"LogWithdraw\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"depositToUnderlying\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"destroy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mintedAssetSymbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mintedBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingAssetSymbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Joel Reis\",\"details\":\"This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform\",\"events\":{\"LogDeposit(address,address)\":{\"details\":\"Logs when a deposit has been performed for a given `Facade`\",\"params\":{\"depositor\":\"The address of the custodian that performed, and paid for the deposit transaction\",\"facade\":\"The address of the `Facade` that had the action performed\"}},\"LogWithdraw(address)\":{\"details\":\"Logs when a withdrawal has been performed for a given `Facade`\",\"params\":{\"facade\":\"The address of the `Facade` that had the action performed\"}}},\"kind\":\"dev\",\"methods\":{\"depositToUnderlying()\":{\"details\":\"Deposits the asset associated with the asset pair\"},\"destroy()\":{\"details\":\"This should be a protected function to prevent abuse of withdrawing      Withdrawing should always deposit funds back to the `owner`\"},\"mintedAssetSymbol()\":{\"details\":\"Should forward requests to the minting token\",\"returns\":{\"_0\":\"The symbol for the minted token that is available for withdrawing\"}},\"mintedBalance()\":{\"details\":\"Should forward requests to the minting token e.g. cUSDC, cDAI\",\"returns\":{\"_0\":\"The amount of the minted balance that is available for withdrawing\"}},\"underlyingAssetSymbol()\":{\"details\":\"Should forward requests to the underlying token\",\"returns\":{\"_0\":\"The symbol for the underlying token that is available for deposit\"}},\"underlyingBalance()\":{\"details\":\"Should forward requests to the underlying token\",\"returns\":{\"_0\":\"The amount of the underlying token that is available for deposit\"}},\"withdraw()\":{\"details\":\"This should be a protected function to prevent abuse of withdrawing      Withdrawing should always deposit funds back to the `owner`\"}},\"title\":\"An interface that defines what a `Facade` implementation should be able to do\",\"version\":1},\"userdoc\":{\"events\":{\"LogDeposit(address,address)\":{\"notice\":\"An event used to communicate that a \\\"Deposit\\\" was performed\"},\"LogWithdraw(address)\":{\"notice\":\"An event used to communicate a \\\"Withdrawal\\\" was performed\"}},\"kind\":\"user\",\"methods\":{\"depositToUnderlying()\":{\"notice\":\"This deposits assets into the underlying contract, from the current account e.g. Account -> Compound\"},\"destroy()\":{\"notice\":\"Destroys the facade and transfers all funds to user wallet\"},\"mintedAssetSymbol()\":{\"notice\":\"The asset symbol for the minting token e.g. cUSDC, cDAI\"},\"mintedBalance()\":{\"notice\":\"The balance inside the account of the minting token\"},\"underlyingAssetSymbol()\":{\"notice\":\"The asset symbol for the underlying token e.g. USDC, DAI\"},\"underlyingBalance()\":{\"notice\":\"The balance inside the account of the underlying token e.g. USDC, DAI\"},\"withdraw()\":{\"notice\":\"Withdraws funds from underlying contract, to EOA e.g. Comound -> Account -> EOA\"}},\"notice\":\"Use this interface to define a new `Facade` implementation for a new DeFi protocol\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol\":\"Facade\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol\":{\"keccak256\":\"0xbb8bf70cbec66a32707e20d8d3c487d85044a34bb1ebe3d6a2422817aaf75d7f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fdb3a1cc7f3150b973d8761ef67bd882139c89ee9c2684e360c09ecd070ed1e7\",\"dweb:/ipfs/Qmaaw7tgbMMH4SY8WTBAvn7sP5kzoe5UususTus3yoqBob\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.7.0;\n\n/// @title An interface that defines what a `Facade` implementation should be able to do\n/// @author Joel Reis\n/// @notice Use this interface to define a new `Facade` implementation for a new DeFi protocol\n/// @dev This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex\n///      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform\ninterface Facade {\n    /// @notice An event used to communicate that a \"Deposit\" was performed\n    /// @dev Logs when a deposit has been performed for a given `Facade`\n    /// @param facade The address of the `Facade` that had the action performed\n    /// @param depositor The address of the custodian that performed, and paid for the deposit transaction\n    event LogDeposit(address indexed facade, address indexed depositor);\n\n    /// @notice An event used to communicate a \"Withdrawal\" was performed\n    /// @dev Logs when a withdrawal has been performed for a given `Facade`\n    /// @param facade The address of the `Facade` that had the action performed\n    event LogWithdraw(address indexed facade);\n\n    /// @notice This deposits assets into the underlying contract, from the current account\n    /// e.g. Account -> Compound\n    /// @dev Deposits the asset associated with the asset pair\n    function depositToUnderlying() external;\n\n    /// @notice Withdraws funds from underlying contract, to EOA\n    /// e.g. Comound -> Account -> EOA\n    /// @dev This should be a protected function to prevent abuse of withdrawing\n    ///      Withdrawing should always deposit funds back to the `owner`\n    function withdraw() external;\n\n    /// @notice Destroys the facade and transfers all funds to user wallet\n    /// @dev This should be a protected function to prevent abuse of withdrawing\n    ///      Withdrawing should always deposit funds back to the `owner`\n    function destroy() external;\n\n    ////// Convenience functions that should forward to the underlying contract\n\n    /// @notice The balance inside the account of the underlying token\n    /// e.g. USDC, DAI\n    /// @dev Should forward requests to the underlying token\n    /// @return The amount of the underlying token that is available for deposit\n    function underlyingBalance() external view returns (uint256);\n\n    /// @notice The balance inside the account of the minting token\n    /// @dev Should forward requests to the minting token\n    /// e.g. cUSDC, cDAI\n    /// @return The amount of the minted balance that is available for withdrawing\n    function mintedBalance() external view returns (uint256);\n\n    /// @notice The asset symbol for the underlying token\n    /// e.g. USDC, DAI\n    /// @dev Should forward requests to the underlying token\n    /// @return The symbol for the underlying token that is available for deposit\n    function underlyingAssetSymbol() external view returns (string memory);\n\n    /// @notice The asset symbol for the minting token\n    /// e.g. cUSDC, cDAI\n    /// @dev Should forward requests to the minting token\n    /// @return The symbol for the minted token that is available for withdrawing\n    function mintedAssetSymbol() external view returns (string memory);\n}\n",
+  "sourcePath": "/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol",
+    "exportedSymbols": {
+      "Facade": [
+        669
+      ]
+    },
+    "id": 670,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 619,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 620,
+          "nodeType": "StructuredDocumentation",
+          "src": "57:438:3",
+          "text": "@title An interface that defines what a `Facade` implementation should be able to do\n @author Joel Reis\n @notice Use this interface to define a new `Facade` implementation for a new DeFi protocol\n @dev This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex\n      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform"
+        },
+        "fullyImplemented": false,
+        "id": 669,
+        "linearizedBaseContracts": [
+          669
+        ],
+        "name": "Facade",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 621,
+              "nodeType": "StructuredDocumentation",
+              "src": "518:331:3",
+              "text": "@notice An event used to communicate that a \"Deposit\" was performed\n @dev Logs when a deposit has been performed for a given `Facade`\n @param facade The address of the `Facade` that had the action performed\n @param depositor The address of the custodian that performed, and paid for the deposit transaction"
+            },
+            "id": 627,
+            "name": "LogDeposit",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 626,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 623,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "facade",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 627,
+                  "src": "871:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 622,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "871:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 625,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "depositor",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 627,
+                  "src": "895:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 624,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "895:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "870:51:3"
+            },
+            "src": "854:68:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 628,
+              "nodeType": "StructuredDocumentation",
+              "src": "928:225:3",
+              "text": "@notice An event used to communicate a \"Withdrawal\" was performed\n @dev Logs when a withdrawal has been performed for a given `Facade`\n @param facade The address of the `Facade` that had the action performed"
+            },
+            "id": 632,
+            "name": "LogWithdraw",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 631,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 630,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "facade",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 632,
+                  "src": "1176:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 629,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1176:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1175:24:3"
+            },
+            "src": "1158:42:3"
+          },
+          {
+            "documentation": {
+              "id": 633,
+              "nodeType": "StructuredDocumentation",
+              "src": "1206:183:3",
+              "text": "@notice This deposits assets into the underlying contract, from the current account\n e.g. Account -> Compound\n @dev Deposits the asset associated with the asset pair"
+            },
+            "functionSelector": "02248209",
+            "id": 636,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "depositToUnderlying",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 634,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1422:2:3"
+            },
+            "returnParameters": {
+              "id": 635,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1433:0:3"
+            },
+            "scope": 669,
+            "src": "1394:40:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 637,
+              "nodeType": "StructuredDocumentation",
+              "src": "1440:253:3",
+              "text": "@notice Withdraws funds from underlying contract, to EOA\n e.g. Comound -> Account -> EOA\n @dev This should be a protected function to prevent abuse of withdrawing\n      Withdrawing should always deposit funds back to the `owner`"
+            },
+            "functionSelector": "3ccfd60b",
+            "id": 640,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdraw",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 638,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1715:2:3"
+            },
+            "returnParameters": {
+              "id": 639,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1726:0:3"
+            },
+            "scope": 669,
+            "src": "1698:29:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 641,
+              "nodeType": "StructuredDocumentation",
+              "src": "1733:224:3",
+              "text": "@notice Destroys the facade and transfers all funds to user wallet\n @dev This should be a protected function to prevent abuse of withdrawing\n      Withdrawing should always deposit funds back to the `owner`"
+            },
+            "functionSelector": "83197ef0",
+            "id": 644,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "destroy",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 642,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1978:2:3"
+            },
+            "returnParameters": {
+              "id": 643,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1989:0:3"
+            },
+            "scope": 669,
+            "src": "1962:28:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 645,
+              "nodeType": "StructuredDocumentation",
+              "src": "2077:231:3",
+              "text": "@notice The balance inside the account of the underlying token\n e.g. USDC, DAI\n @dev Should forward requests to the underlying token\n @return The amount of the underlying token that is available for deposit"
+            },
+            "functionSelector": "59356c5c",
+            "id": 650,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 646,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2339:2:3"
+            },
+            "returnParameters": {
+              "id": 649,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 648,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 650,
+                  "src": "2365:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 647,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2365:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2364:9:3"
+            },
+            "scope": 669,
+            "src": "2313:61:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 651,
+              "nodeType": "StructuredDocumentation",
+              "src": "2380:229:3",
+              "text": "@notice The balance inside the account of the minting token\n @dev Should forward requests to the minting token\n e.g. cUSDC, cDAI\n @return The amount of the minted balance that is available for withdrawing"
+            },
+            "functionSelector": "ad7b68fe",
+            "id": 656,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mintedBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 652,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2636:2:3"
+            },
+            "returnParameters": {
+              "id": 655,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 654,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 656,
+                  "src": "2662:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 653,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2662:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2661:9:3"
+            },
+            "scope": 669,
+            "src": "2614:57:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 657,
+              "nodeType": "StructuredDocumentation",
+              "src": "2677:219:3",
+              "text": "@notice The asset symbol for the underlying token\n e.g. USDC, DAI\n @dev Should forward requests to the underlying token\n @return The symbol for the underlying token that is available for deposit"
+            },
+            "functionSelector": "33340e8e",
+            "id": 662,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingAssetSymbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 658,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2931:2:3"
+            },
+            "returnParameters": {
+              "id": 661,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 660,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 662,
+                  "src": "2957:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 659,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2957:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2956:15:3"
+            },
+            "scope": 669,
+            "src": "2901:71:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 663,
+              "nodeType": "StructuredDocumentation",
+              "src": "2978:215:3",
+              "text": "@notice The asset symbol for the minting token\n e.g. cUSDC, cDAI\n @dev Should forward requests to the minting token\n @return The symbol for the minted token that is available for withdrawing"
+            },
+            "functionSelector": "906a3dd0",
+            "id": 668,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mintedAssetSymbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 664,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3224:2:3"
+            },
+            "returnParameters": {
+              "id": 667,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 666,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 668,
+                  "src": "3250:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 665,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3250:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3249:15:3"
+            },
+            "scope": 669,
+            "src": "3198:67:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 670,
+        "src": "495:2772:3"
+      }
+    ],
+    "src": "32:3236:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol",
+    "exportedSymbols": {
+      "Facade": [
+        669
+      ]
+    },
+    "id": 670,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 619,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 620,
+          "nodeType": "StructuredDocumentation",
+          "src": "57:438:3",
+          "text": "@title An interface that defines what a `Facade` implementation should be able to do\n @author Joel Reis\n @notice Use this interface to define a new `Facade` implementation for a new DeFi protocol\n @dev This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex\n      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform"
+        },
+        "fullyImplemented": false,
+        "id": 669,
+        "linearizedBaseContracts": [
+          669
+        ],
+        "name": "Facade",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 621,
+              "nodeType": "StructuredDocumentation",
+              "src": "518:331:3",
+              "text": "@notice An event used to communicate that a \"Deposit\" was performed\n @dev Logs when a deposit has been performed for a given `Facade`\n @param facade The address of the `Facade` that had the action performed\n @param depositor The address of the custodian that performed, and paid for the deposit transaction"
+            },
+            "id": 627,
+            "name": "LogDeposit",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 626,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 623,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "facade",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 627,
+                  "src": "871:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 622,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "871:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 625,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "depositor",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 627,
+                  "src": "895:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 624,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "895:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "870:51:3"
+            },
+            "src": "854:68:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 628,
+              "nodeType": "StructuredDocumentation",
+              "src": "928:225:3",
+              "text": "@notice An event used to communicate a \"Withdrawal\" was performed\n @dev Logs when a withdrawal has been performed for a given `Facade`\n @param facade The address of the `Facade` that had the action performed"
+            },
+            "id": 632,
+            "name": "LogWithdraw",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 631,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 630,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "facade",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 632,
+                  "src": "1176:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 629,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1176:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1175:24:3"
+            },
+            "src": "1158:42:3"
+          },
+          {
+            "documentation": {
+              "id": 633,
+              "nodeType": "StructuredDocumentation",
+              "src": "1206:183:3",
+              "text": "@notice This deposits assets into the underlying contract, from the current account\n e.g. Account -> Compound\n @dev Deposits the asset associated with the asset pair"
+            },
+            "functionSelector": "02248209",
+            "id": 636,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "depositToUnderlying",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 634,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1422:2:3"
+            },
+            "returnParameters": {
+              "id": 635,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1433:0:3"
+            },
+            "scope": 669,
+            "src": "1394:40:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 637,
+              "nodeType": "StructuredDocumentation",
+              "src": "1440:253:3",
+              "text": "@notice Withdraws funds from underlying contract, to EOA\n e.g. Comound -> Account -> EOA\n @dev This should be a protected function to prevent abuse of withdrawing\n      Withdrawing should always deposit funds back to the `owner`"
+            },
+            "functionSelector": "3ccfd60b",
+            "id": 640,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdraw",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 638,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1715:2:3"
+            },
+            "returnParameters": {
+              "id": 639,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1726:0:3"
+            },
+            "scope": 669,
+            "src": "1698:29:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 641,
+              "nodeType": "StructuredDocumentation",
+              "src": "1733:224:3",
+              "text": "@notice Destroys the facade and transfers all funds to user wallet\n @dev This should be a protected function to prevent abuse of withdrawing\n      Withdrawing should always deposit funds back to the `owner`"
+            },
+            "functionSelector": "83197ef0",
+            "id": 644,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "destroy",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 642,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1978:2:3"
+            },
+            "returnParameters": {
+              "id": 643,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1989:0:3"
+            },
+            "scope": 669,
+            "src": "1962:28:3",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 645,
+              "nodeType": "StructuredDocumentation",
+              "src": "2077:231:3",
+              "text": "@notice The balance inside the account of the underlying token\n e.g. USDC, DAI\n @dev Should forward requests to the underlying token\n @return The amount of the underlying token that is available for deposit"
+            },
+            "functionSelector": "59356c5c",
+            "id": 650,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 646,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2339:2:3"
+            },
+            "returnParameters": {
+              "id": 649,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 648,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 650,
+                  "src": "2365:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 647,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2365:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2364:9:3"
+            },
+            "scope": 669,
+            "src": "2313:61:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 651,
+              "nodeType": "StructuredDocumentation",
+              "src": "2380:229:3",
+              "text": "@notice The balance inside the account of the minting token\n @dev Should forward requests to the minting token\n e.g. cUSDC, cDAI\n @return The amount of the minted balance that is available for withdrawing"
+            },
+            "functionSelector": "ad7b68fe",
+            "id": 656,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mintedBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 652,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2636:2:3"
+            },
+            "returnParameters": {
+              "id": 655,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 654,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 656,
+                  "src": "2662:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 653,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2662:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2661:9:3"
+            },
+            "scope": 669,
+            "src": "2614:57:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 657,
+              "nodeType": "StructuredDocumentation",
+              "src": "2677:219:3",
+              "text": "@notice The asset symbol for the underlying token\n e.g. USDC, DAI\n @dev Should forward requests to the underlying token\n @return The symbol for the underlying token that is available for deposit"
+            },
+            "functionSelector": "33340e8e",
+            "id": 662,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingAssetSymbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 658,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2931:2:3"
+            },
+            "returnParameters": {
+              "id": 661,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 660,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 662,
+                  "src": "2957:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 659,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2957:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2956:15:3"
+            },
+            "scope": 669,
+            "src": "2901:71:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 663,
+              "nodeType": "StructuredDocumentation",
+              "src": "2978:215:3",
+              "text": "@notice The asset symbol for the minting token\n e.g. cUSDC, cDAI\n @dev Should forward requests to the minting token\n @return The symbol for the minted token that is available for withdrawing"
+            },
+            "functionSelector": "906a3dd0",
+            "id": 668,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mintedAssetSymbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 664,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3224:2:3"
+            },
+            "returnParameters": {
+              "id": 667,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 666,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 668,
+                  "src": "3250:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 665,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3250:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3249:15:3"
+            },
+            "scope": 669,
+            "src": "3198:67:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 670,
+        "src": "495:2772:3"
+      }
+    ],
+    "src": "32:3236:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-14T16:59:18.283Z",
+  "devdoc": {
+    "author": "Joel Reis",
+    "details": "This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform",
+    "events": {
+      "LogDeposit(address,address)": {
+        "details": "Logs when a deposit has been performed for a given `Facade`",
+        "params": {
+          "depositor": "The address of the custodian that performed, and paid for the deposit transaction",
+          "facade": "The address of the `Facade` that had the action performed"
+        }
+      },
+      "LogWithdraw(address)": {
+        "details": "Logs when a withdrawal has been performed for a given `Facade`",
+        "params": {
+          "facade": "The address of the `Facade` that had the action performed"
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "depositToUnderlying()": {
+        "details": "Deposits the asset associated with the asset pair"
+      },
+      "destroy()": {
+        "details": "This should be a protected function to prevent abuse of withdrawing      Withdrawing should always deposit funds back to the `owner`"
+      },
+      "mintedAssetSymbol()": {
+        "details": "Should forward requests to the minting token",
+        "returns": {
+          "_0": "The symbol for the minted token that is available for withdrawing"
+        }
+      },
+      "mintedBalance()": {
+        "details": "Should forward requests to the minting token e.g. cUSDC, cDAI",
+        "returns": {
+          "_0": "The amount of the minted balance that is available for withdrawing"
+        }
+      },
+      "underlyingAssetSymbol()": {
+        "details": "Should forward requests to the underlying token",
+        "returns": {
+          "_0": "The symbol for the underlying token that is available for deposit"
+        }
+      },
+      "underlyingBalance()": {
+        "details": "Should forward requests to the underlying token",
+        "returns": {
+          "_0": "The amount of the underlying token that is available for deposit"
+        }
+      },
+      "withdraw()": {
+        "details": "This should be a protected function to prevent abuse of withdrawing      Withdrawing should always deposit funds back to the `owner`"
+      }
+    },
+    "title": "An interface that defines what a `Facade` implementation should be able to do",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "LogDeposit(address,address)": {
+        "notice": "An event used to communicate that a \"Deposit\" was performed"
+      },
+      "LogWithdraw(address)": {
+        "notice": "An event used to communicate a \"Withdrawal\" was performed"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "depositToUnderlying()": {
+        "notice": "This deposits assets into the underlying contract, from the current account e.g. Account -> Compound"
+      },
+      "destroy()": {
+        "notice": "Destroys the facade and transfers all funds to user wallet"
+      },
+      "mintedAssetSymbol()": {
+        "notice": "The asset symbol for the minting token e.g. cUSDC, cDAI"
+      },
+      "mintedBalance()": {
+        "notice": "The balance inside the account of the minting token"
+      },
+      "underlyingAssetSymbol()": {
+        "notice": "The asset symbol for the underlying token e.g. USDC, DAI"
+      },
+      "underlyingBalance()": {
+        "notice": "The balance inside the account of the underlying token e.g. USDC, DAI"
+      },
+      "withdraw()": {
+        "notice": "Withdraws funds from underlying contract, to EOA e.g. Comound -> Account -> EOA"
+      }
+    },
+    "notice": "Use this interface to define a new `Facade` implementation for a new DeFi protocol",
+    "version": 1
+  }
+}

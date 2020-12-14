@@ -1,0 +1,2864 @@
+{
+  "contractName": "Integration",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogAddedPair",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "availablePairs",
+      "outputs": [
+        {
+          "internalType": "contract ERC20",
+          "name": "underlyingAsset",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ERC20",
+          "name": "mintingAsset",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "underlyingAssetAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "mintingAssetAddress",
+          "type": "address"
+        }
+      ],
+      "name": "addAvailablePair",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pairIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "deployUserInstance",
+      "outputs": [
+        {
+          "internalType": "contract Facade",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "description",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"LogAddedPair\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"underlyingAssetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"mintingAssetAddress\",\"type\":\"address\"}],\"name\":\"addAvailablePair\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"availablePairs\",\"outputs\":[{\"internalType\":\"contract ERC20\",\"name\":\"underlyingAsset\",\"type\":\"address\"},{\"internalType\":\"contract ERC20\",\"name\":\"mintingAsset\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"pairIndex\",\"type\":\"uint256\"}],\"name\":\"deployUserInstance\",\"outputs\":[{\"internalType\":\"contract Facade\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"description\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Joel Reis\",\"details\":\"This class must be overwritten and the abstract functions implemented by the child\",\"events\":{\"LogAddedPair(uint256)\":{\"details\":\"Logs when a new asset `Pair` is added to this specific `Integration`\",\"params\":{\"index\":\"The index of the newly added asset `Pair`\"}}},\"kind\":\"dev\",\"methods\":{\"addAvailablePair(address,address)\":{\"details\":\"Accepts two address, that are used to construct an asset pair and stored as an option on this `Integration`\",\"params\":{\"mintingAssetAddress\":\"The address for the minting asset to be used (e.g. `cUSDC`)\",\"underlyingAssetAddress\":\"The address for the underlying asset to be used (e.g. `USDC`)\"},\"returns\":{\"_0\":\"A new index for the associated `Pair` that was just added\"}},\"constructor\":{\"details\":\"Only handles setting up the owner from the deploying address\"},\"deployUserInstance(address,uint256)\":{\"details\":\"Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)\",\"params\":{\"_owner\":\"The address that will be the owner on the new deployment\",\"pairIndex\":\"The index associated with a specific asset `Pair`\"},\"returns\":{\"_0\":\"A newly deployed `Facade` instance\"}},\"description()\":{\"details\":\"Should provide a human-readable string that gives a short description what this `Integration` is (e.g. `Compound Protocol`)\",\"returns\":{\"_0\":\"A human-readable string that describes the `Integration` deployed\"}}},\"stateVariables\":{\"availablePairs\":{\"details\":\"Each `Integration` has a unique set of asset pairs that are contained here\",\"return\":\"A specific asset `Pair`\"},\"owner\":{\"details\":\"The owner of this contract, set from deployer and unchangable\",\"return\":\"The address with the most authority on this contract\"}},\"title\":\"An `Integration` for deploying `Facades`\",\"version\":1},\"userdoc\":{\"events\":{\"LogAddedPair(uint256)\":{\"notice\":\"An event used to communicate that a new asset `Pair` was added\"}},\"kind\":\"user\",\"methods\":{\"addAvailablePair(address,address)\":{\"notice\":\"Adds a new asset `Pair`\"},\"availablePairs(uint256)\":{\"notice\":\"All available asset pairs for this `Integration`\"},\"constructor\":{\"notice\":\"A simple constructor for deploying an `Integration`\"},\"deployUserInstance(address,uint256)\":{\"notice\":\"Deploys a new `Facade`\"},\"description()\":{\"notice\":\"The description of an `Integration`\"},\"owner()\":{\"notice\":\"The owner of this contract\"}},\"notice\":\"Defines an `Integration` for deploying `Facades`\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/metroid/Development/Block/Final_Project/contracts/Integrations/Integration.sol\":\"Integration\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/metroid/Development/Block/Final_Project/contracts/ERC20/IERC20.sol\":{\"keccak256\":\"0x6bf31f9696663b072577ea8d27c036c61dead4f4e708abe651a37a9eef6616e5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://781a75a19e604e0c02258ac6866de98a76768b12ddf29c06422871fd5c81fa56\",\"dweb:/ipfs/QmaUsTPLTVD4U6AGvm5wEjrqH5Sh6As6XQQp3PEtVzbT9e\"]},\"/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol\":{\"keccak256\":\"0xbb8bf70cbec66a32707e20d8d3c487d85044a34bb1ebe3d6a2422817aaf75d7f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fdb3a1cc7f3150b973d8761ef67bd882139c89ee9c2684e360c09ecd070ed1e7\",\"dweb:/ipfs/Qmaaw7tgbMMH4SY8WTBAvn7sP5kzoe5UususTus3yoqBob\"]},\"/Users/metroid/Development/Block/Final_Project/contracts/Integrations/Integration.sol\":{\"keccak256\":\"0xd3d0060761060796e5bca0ca9de52a36d0da8107be578b093e04c4dce42507e8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d8c5ebcd85245f27a1cad60ef0d5868c4396f0a1c906679c657273d7e2cc0b22\",\"dweb:/ipfs/QmW56VNUs43Xhz3hRZotQ7aW9FVa4dctifzFFNTKTJM5wJ\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.7.0;\n\nimport '../ERC20/IERC20.sol';\nimport '../Facades/FacadeInterface.sol';\n\n/// @title An `Integration` for deploying `Facades`\n/// @author Joel Reis\n/// @notice Defines an `Integration` for deploying `Facades`\n/// @dev This class must be overwritten and the abstract functions implemented by the child\nabstract contract Integration {\n    /// An asset pair that has a 1:1 assocaition between an asset and DeFi minting token\n    /// e.g. USDC:cUSDC\n    struct Pair {\n        ERC20 underlyingAsset;\n        ERC20 mintingAsset;\n    }\n    \n    /// @notice The owner of this contract\n    /// @dev The owner of this contract, set from deployer and unchangable\n    /// @return The address with the most authority on this contract\n    address public owner;\n\n    /// @notice All available asset pairs for this `Integration`\n    /// @dev Each `Integration` has a unique set of asset pairs that are contained here\n    /// @return A specific asset `Pair`\n    Pair[] public availablePairs;\n    \n    /// @notice Checks to make sure only the contract owner (deployer) can call a specific function\n    /// @dev The contract deployer has certain elevated permissions, which can be checked here.\n    modifier isOwner() {\n        require(msg.sender == owner, \"Must be owner!\");\n        _;\n    }\n\n    /// @notice An event used to communicate that a new asset `Pair` was added\n    /// @dev Logs when a new asset `Pair` is added to this specific `Integration`\n    /// @param index The index of the newly added asset `Pair`\n    event LogAddedPair(uint index);\n    \n    /// @notice A simple constructor for deploying an `Integration`\n    /// @dev Only handles setting up the owner from the deploying address\n    constructor() {\n        owner = msg.sender;\n    }\n    \n    /// @notice Adds a new asset `Pair`\n    /// @dev Accepts two address, that are used to construct an asset pair and stored as an option on this `Integration`\n    /// @param underlyingAssetAddress The address for the underlying asset to be used (e.g. `USDC`)\n    /// @param mintingAssetAddress The address for the minting asset to be used (e.g. `cUSDC`)\n    /// @return A new index for the associated `Pair` that was just added\n    function addAvailablePair(address underlyingAssetAddress, address mintingAssetAddress) external isOwner returns(uint) {\n        ERC20 underlyingAsset = ERC20(underlyingAssetAddress);\n        ERC20 mintingAsset = ERC20(mintingAssetAddress);\n        Pair memory newPair = Pair(underlyingAsset, mintingAsset);\n        \n        /// In the future could prevent duplicate pair additions, but not super necessary, since protected function (todo)\n        \n        availablePairs.push(newPair);\n        uint newIndex = availablePairs.length - 1;\n        emit LogAddedPair(newIndex);\n        return newIndex;\n    }\n    \n    // Abstract, children must implement this\n\n    /// @notice Deploys a new `Facade`\n    /// @dev Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)\n    /// @param _owner The address that will be the owner on the new deployment\n    /// @param pairIndex The index associated with a specific asset `Pair`\n    /// @return A newly deployed `Facade` instance\n    function deployUserInstance(address payable _owner, uint pairIndex) external virtual returns(Facade);\n\n    /// @notice The description of an `Integration`\n    /// @dev Should provide a human-readable string that gives a short description what this `Integration` is (e.g. `Compound Protocol`)\n    /// @return A human-readable string that describes the `Integration` deployed\n    function description() external virtual pure returns(string memory);\n}",
+  "sourcePath": "/Users/metroid/Development/Block/Final_Project/contracts/Integrations/Integration.sol",
+  "ast": {
+    "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Integrations/Integration.sol",
+    "exportedSymbols": {
+      "Integration": [
+        1063
+      ]
+    },
+    "id": 1064,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 952,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:6"
+      },
+      {
+        "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/ERC20/IERC20.sol",
+        "file": "../ERC20/IERC20.sol",
+        "id": 953,
+        "nodeType": "ImportDirective",
+        "scope": 1064,
+        "sourceUnit": 88,
+        "src": "57:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol",
+        "file": "../Facades/FacadeInterface.sol",
+        "id": 954,
+        "nodeType": "ImportDirective",
+        "scope": 1064,
+        "sourceUnit": 670,
+        "src": "87:40:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 955,
+          "nodeType": "StructuredDocumentation",
+          "src": "129:227:6",
+          "text": "@title An `Integration` for deploying `Facades`\n @author Joel Reis\n @notice Defines an `Integration` for deploying `Facades`\n @dev This class must be overwritten and the abstract functions implemented by the child"
+        },
+        "fullyImplemented": false,
+        "id": 1063,
+        "linearizedBaseContracts": [
+          1063
+        ],
+        "name": "Integration",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Integration.Pair",
+            "id": 960,
+            "members": [
+              {
+                "constant": false,
+                "id": 957,
+                "mutability": "mutable",
+                "name": "underlyingAsset",
+                "nodeType": "VariableDeclaration",
+                "scope": 960,
+                "src": "527:21:6",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_ERC20_$87",
+                  "typeString": "contract ERC20"
+                },
+                "typeName": {
+                  "id": 956,
+                  "name": "ERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 87,
+                  "src": "527:5:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$87",
+                    "typeString": "contract ERC20"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 959,
+                "mutability": "mutable",
+                "name": "mintingAsset",
+                "nodeType": "VariableDeclaration",
+                "scope": 960,
+                "src": "558:18:6",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_ERC20_$87",
+                  "typeString": "contract ERC20"
+                },
+                "typeName": {
+                  "id": 958,
+                  "name": "ERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 87,
+                  "src": "558:5:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$87",
+                    "typeString": "contract ERC20"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Pair",
+            "nodeType": "StructDefinition",
+            "scope": 1063,
+            "src": "505:78:6",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "documentation": {
+              "id": 961,
+              "nodeType": "StructuredDocumentation",
+              "src": "593:182:6",
+              "text": "@notice The owner of this contract\n @dev The owner of this contract, set from deployer and unchangable\n @return The address with the most authority on this contract"
+            },
+            "functionSelector": "8da5cb5b",
+            "id": 963,
+            "mutability": "mutable",
+            "name": "owner",
+            "nodeType": "VariableDeclaration",
+            "scope": 1063,
+            "src": "780:20:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 962,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "780:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "documentation": {
+              "id": 964,
+              "nodeType": "StructuredDocumentation",
+              "src": "807:188:6",
+              "text": "@notice All available asset pairs for this `Integration`\n @dev Each `Integration` has a unique set of asset pairs that are contained here\n @return A specific asset `Pair`"
+            },
+            "functionSelector": "42a9a7b2",
+            "id": 967,
+            "mutability": "mutable",
+            "name": "availablePairs",
+            "nodeType": "VariableDeclaration",
+            "scope": 1063,
+            "src": "1000:28:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+              "typeString": "struct Integration.Pair[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 965,
+                "name": "Pair",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 960,
+                "src": "1000:4:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Pair_$960_storage_ptr",
+                  "typeString": "struct Integration.Pair"
+                }
+              },
+              "id": 966,
+              "nodeType": "ArrayTypeName",
+              "src": "1000:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage_ptr",
+                "typeString": "struct Integration.Pair[]"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 979,
+              "nodeType": "Block",
+              "src": "1254:74:6",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 974,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 971,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1272:3:6",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 972,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "1272:10:6",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 973,
+                          "name": "owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 963,
+                          "src": "1286:5:6",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1272:19:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4d757374206265206f776e657221",
+                        "id": 975,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1293:16:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_67042a5b4e78742bb76c2192d241f07da3e2364fed2ba8683daf4d218370bbab",
+                          "typeString": "literal_string \"Must be owner!\""
+                        },
+                        "value": "Must be owner!"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_67042a5b4e78742bb76c2192d241f07da3e2364fed2ba8683daf4d218370bbab",
+                          "typeString": "literal_string \"Must be owner!\""
+                        }
+                      ],
+                      "id": 970,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1264:7:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 976,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1264:46:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 977,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1264:46:6"
+                },
+                {
+                  "id": 978,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1320:1:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 968,
+              "nodeType": "StructuredDocumentation",
+              "src": "1039:191:6",
+              "text": "@notice Checks to make sure only the contract owner (deployer) can call a specific function\n @dev The contract deployer has certain elevated permissions, which can be checked here."
+            },
+            "id": 980,
+            "name": "isOwner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 969,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1251:2:6"
+            },
+            "src": "1235:93:6",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 981,
+              "nodeType": "StructuredDocumentation",
+              "src": "1334:219:6",
+              "text": "@notice An event used to communicate that a new asset `Pair` was added\n @dev Logs when a new asset `Pair` is added to this specific `Integration`\n @param index The index of the newly added asset `Pair`"
+            },
+            "id": 985,
+            "name": "LogAddedPair",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 984,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 983,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 985,
+                  "src": "1577:10:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 982,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1577:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1576:12:6"
+            },
+            "src": "1558:31:6"
+          },
+          {
+            "body": {
+              "id": 994,
+              "nodeType": "Block",
+              "src": "1755:35:6",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 992,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 989,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 963,
+                      "src": "1765:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "expression": {
+                        "id": 990,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -15,
+                        "src": "1773:3:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 991,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "src": "1773:10:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "1765:18:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 993,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1765:18:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 986,
+              "nodeType": "StructuredDocumentation",
+              "src": "1599:137:6",
+              "text": "@notice A simple constructor for deploying an `Integration`\n @dev Only handles setting up the owner from the deploying address"
+            },
+            "id": 995,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 987,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1752:2:6"
+            },
+            "returnParameters": {
+              "id": 988,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1755:0:6"
+            },
+            "scope": 1063,
+            "src": "1741:49:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1045,
+              "nodeType": "Block",
+              "src": "2348:486:6",
+              "statements": [
+                {
+                  "assignments": [
+                    1008
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1008,
+                      "mutability": "mutable",
+                      "name": "underlyingAsset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2358:21:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ERC20_$87",
+                        "typeString": "contract ERC20"
+                      },
+                      "typeName": {
+                        "id": 1007,
+                        "name": "ERC20",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 87,
+                        "src": "2358:5:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1012,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1010,
+                        "name": "underlyingAssetAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 998,
+                        "src": "2388:22:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1009,
+                      "name": "ERC20",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87,
+                      "src": "2382:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ERC20_$87_$",
+                        "typeString": "type(contract ERC20)"
+                      }
+                    },
+                    "id": 1011,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2382:29:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$87",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2358:53:6"
+                },
+                {
+                  "assignments": [
+                    1014
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1014,
+                      "mutability": "mutable",
+                      "name": "mintingAsset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2421:18:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ERC20_$87",
+                        "typeString": "contract ERC20"
+                      },
+                      "typeName": {
+                        "id": 1013,
+                        "name": "ERC20",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 87,
+                        "src": "2421:5:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1018,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1016,
+                        "name": "mintingAssetAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1000,
+                        "src": "2448:19:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1015,
+                      "name": "ERC20",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87,
+                      "src": "2442:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ERC20_$87_$",
+                        "typeString": "type(contract ERC20)"
+                      }
+                    },
+                    "id": 1017,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2442:26:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$87",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2421:47:6"
+                },
+                {
+                  "assignments": [
+                    1020
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1020,
+                      "mutability": "mutable",
+                      "name": "newPair",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2478:19:6",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                        "typeString": "struct Integration.Pair"
+                      },
+                      "typeName": {
+                        "id": 1019,
+                        "name": "Pair",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 960,
+                        "src": "2478:4:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Pair_$960_storage_ptr",
+                          "typeString": "struct Integration.Pair"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1025,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1022,
+                        "name": "underlyingAsset",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1008,
+                        "src": "2505:15:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      {
+                        "id": 1023,
+                        "name": "mintingAsset",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1014,
+                        "src": "2522:12:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        },
+                        {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      ],
+                      "id": 1021,
+                      "name": "Pair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 960,
+                      "src": "2500:4:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Pair_$960_storage_ptr_$",
+                        "typeString": "type(struct Integration.Pair storage pointer)"
+                      }
+                    },
+                    "id": 1024,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2500:35:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                      "typeString": "struct Integration.Pair memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2478:57:6"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 1029,
+                        "name": "newPair",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1020,
+                        "src": "2706:7:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                          "typeString": "struct Integration.Pair memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                          "typeString": "struct Integration.Pair memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 1026,
+                        "name": "availablePairs",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 967,
+                        "src": "2686:14:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+                          "typeString": "struct Integration.Pair storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1028,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "src": "2686:19:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Pair_$960_storage_$returns$__$",
+                        "typeString": "function (struct Integration.Pair storage ref)"
+                      }
+                    },
+                    "id": 1030,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2686:28:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1031,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2686:28:6"
+                },
+                {
+                  "assignments": [
+                    1033
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1033,
+                      "mutability": "mutable",
+                      "name": "newIndex",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2724:13:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 1032,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2724:4:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1038,
+                  "initialValue": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 1037,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 1034,
+                        "name": "availablePairs",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 967,
+                        "src": "2740:14:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+                          "typeString": "struct Integration.Pair storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1035,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "2740:21:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "-",
+                    "rightExpression": {
+                      "hexValue": "31",
+                      "id": 1036,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2764:1:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_1_by_1",
+                        "typeString": "int_const 1"
+                      },
+                      "value": "1"
+                    },
+                    "src": "2740:25:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2724:41:6"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 1040,
+                        "name": "newIndex",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1033,
+                        "src": "2793:8:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1039,
+                      "name": "LogAddedPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 985,
+                      "src": "2780:12:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 1041,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2780:22:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1042,
+                  "nodeType": "EmitStatement",
+                  "src": "2775:27:6"
+                },
+                {
+                  "expression": {
+                    "id": 1043,
+                    "name": "newIndex",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 1033,
+                    "src": "2819:8:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1006,
+                  "id": 1044,
+                  "nodeType": "Return",
+                  "src": "2812:15:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 996,
+              "nodeType": "StructuredDocumentation",
+              "src": "1800:425:6",
+              "text": "@notice Adds a new asset `Pair`\n @dev Accepts two address, that are used to construct an asset pair and stored as an option on this `Integration`\n @param underlyingAssetAddress The address for the underlying asset to be used (e.g. `USDC`)\n @param mintingAssetAddress The address for the minting asset to be used (e.g. `cUSDC`)\n @return A new index for the associated `Pair` that was just added"
+            },
+            "functionSelector": "0e0af570",
+            "id": 1046,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 1003,
+                "modifierName": {
+                  "id": 1002,
+                  "name": "isOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 980,
+                  "src": "2326:7:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "2326:7:6"
+              }
+            ],
+            "name": "addAvailablePair",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1001,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 998,
+                  "mutability": "mutable",
+                  "name": "underlyingAssetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2256:30:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 997,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2256:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1000,
+                  "mutability": "mutable",
+                  "name": "mintingAssetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2288:27:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 999,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2288:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2255:61:6"
+            },
+            "returnParameters": {
+              "id": 1006,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1005,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2342:4:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1004,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2342:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2341:6:6"
+            },
+            "scope": 1063,
+            "src": "2230:604:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1047,
+              "nodeType": "StructuredDocumentation",
+              "src": "2891:325:6",
+              "text": "@notice Deploys a new `Facade`\n @dev Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)\n @param _owner The address that will be the owner on the new deployment\n @param pairIndex The index associated with a specific asset `Pair`\n @return A newly deployed `Facade` instance"
+            },
+            "functionSelector": "5ced3166",
+            "id": 1056,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deployUserInstance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1052,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1049,
+                  "mutability": "mutable",
+                  "name": "_owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3249:22:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 1048,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3249:15:6",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1051,
+                  "mutability": "mutable",
+                  "name": "pairIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3273:14:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1050,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3273:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3248:40:6"
+            },
+            "returnParameters": {
+              "id": 1055,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1054,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3314:6:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Facade_$669",
+                    "typeString": "contract Facade"
+                  },
+                  "typeName": {
+                    "id": 1053,
+                    "name": "Facade",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 669,
+                    "src": "3314:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Facade_$669",
+                      "typeString": "contract Facade"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3313:8:6"
+            },
+            "scope": 1063,
+            "src": "3221:101:6",
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1057,
+              "nodeType": "StructuredDocumentation",
+              "src": "3328:266:6",
+              "text": "@notice The description of an `Integration`\n @dev Should provide a human-readable string that gives a short description what this `Integration` is (e.g. `Compound Protocol`)\n @return A human-readable string that describes the `Integration` deployed"
+            },
+            "functionSelector": "7284e416",
+            "id": 1062,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "description",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1058,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3619:2:6"
+            },
+            "returnParameters": {
+              "id": 1061,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1060,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1062,
+                  "src": "3652:13:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1059,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3652:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3651:15:6"
+            },
+            "scope": 1063,
+            "src": "3599:68:6",
+            "stateMutability": "pure",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1064,
+        "src": "356:3313:6"
+      }
+    ],
+    "src": "32:3637:6"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Integrations/Integration.sol",
+    "exportedSymbols": {
+      "Integration": [
+        1063
+      ]
+    },
+    "id": 1064,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 952,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:6"
+      },
+      {
+        "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/ERC20/IERC20.sol",
+        "file": "../ERC20/IERC20.sol",
+        "id": 953,
+        "nodeType": "ImportDirective",
+        "scope": 1064,
+        "sourceUnit": 88,
+        "src": "57:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/metroid/Development/Block/Final_Project/contracts/Facades/FacadeInterface.sol",
+        "file": "../Facades/FacadeInterface.sol",
+        "id": 954,
+        "nodeType": "ImportDirective",
+        "scope": 1064,
+        "sourceUnit": 670,
+        "src": "87:40:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 955,
+          "nodeType": "StructuredDocumentation",
+          "src": "129:227:6",
+          "text": "@title An `Integration` for deploying `Facades`\n @author Joel Reis\n @notice Defines an `Integration` for deploying `Facades`\n @dev This class must be overwritten and the abstract functions implemented by the child"
+        },
+        "fullyImplemented": false,
+        "id": 1063,
+        "linearizedBaseContracts": [
+          1063
+        ],
+        "name": "Integration",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Integration.Pair",
+            "id": 960,
+            "members": [
+              {
+                "constant": false,
+                "id": 957,
+                "mutability": "mutable",
+                "name": "underlyingAsset",
+                "nodeType": "VariableDeclaration",
+                "scope": 960,
+                "src": "527:21:6",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_ERC20_$87",
+                  "typeString": "contract ERC20"
+                },
+                "typeName": {
+                  "id": 956,
+                  "name": "ERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 87,
+                  "src": "527:5:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$87",
+                    "typeString": "contract ERC20"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 959,
+                "mutability": "mutable",
+                "name": "mintingAsset",
+                "nodeType": "VariableDeclaration",
+                "scope": 960,
+                "src": "558:18:6",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_ERC20_$87",
+                  "typeString": "contract ERC20"
+                },
+                "typeName": {
+                  "id": 958,
+                  "name": "ERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 87,
+                  "src": "558:5:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$87",
+                    "typeString": "contract ERC20"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Pair",
+            "nodeType": "StructDefinition",
+            "scope": 1063,
+            "src": "505:78:6",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "documentation": {
+              "id": 961,
+              "nodeType": "StructuredDocumentation",
+              "src": "593:182:6",
+              "text": "@notice The owner of this contract\n @dev The owner of this contract, set from deployer and unchangable\n @return The address with the most authority on this contract"
+            },
+            "functionSelector": "8da5cb5b",
+            "id": 963,
+            "mutability": "mutable",
+            "name": "owner",
+            "nodeType": "VariableDeclaration",
+            "scope": 1063,
+            "src": "780:20:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 962,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "780:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "documentation": {
+              "id": 964,
+              "nodeType": "StructuredDocumentation",
+              "src": "807:188:6",
+              "text": "@notice All available asset pairs for this `Integration`\n @dev Each `Integration` has a unique set of asset pairs that are contained here\n @return A specific asset `Pair`"
+            },
+            "functionSelector": "42a9a7b2",
+            "id": 967,
+            "mutability": "mutable",
+            "name": "availablePairs",
+            "nodeType": "VariableDeclaration",
+            "scope": 1063,
+            "src": "1000:28:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+              "typeString": "struct Integration.Pair[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 965,
+                "name": "Pair",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 960,
+                "src": "1000:4:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Pair_$960_storage_ptr",
+                  "typeString": "struct Integration.Pair"
+                }
+              },
+              "id": 966,
+              "nodeType": "ArrayTypeName",
+              "src": "1000:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage_ptr",
+                "typeString": "struct Integration.Pair[]"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 979,
+              "nodeType": "Block",
+              "src": "1254:74:6",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 974,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 971,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1272:3:6",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 972,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "1272:10:6",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 973,
+                          "name": "owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 963,
+                          "src": "1286:5:6",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1272:19:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4d757374206265206f776e657221",
+                        "id": 975,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1293:16:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_67042a5b4e78742bb76c2192d241f07da3e2364fed2ba8683daf4d218370bbab",
+                          "typeString": "literal_string \"Must be owner!\""
+                        },
+                        "value": "Must be owner!"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_67042a5b4e78742bb76c2192d241f07da3e2364fed2ba8683daf4d218370bbab",
+                          "typeString": "literal_string \"Must be owner!\""
+                        }
+                      ],
+                      "id": 970,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1264:7:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 976,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1264:46:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 977,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1264:46:6"
+                },
+                {
+                  "id": 978,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1320:1:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 968,
+              "nodeType": "StructuredDocumentation",
+              "src": "1039:191:6",
+              "text": "@notice Checks to make sure only the contract owner (deployer) can call a specific function\n @dev The contract deployer has certain elevated permissions, which can be checked here."
+            },
+            "id": 980,
+            "name": "isOwner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 969,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1251:2:6"
+            },
+            "src": "1235:93:6",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 981,
+              "nodeType": "StructuredDocumentation",
+              "src": "1334:219:6",
+              "text": "@notice An event used to communicate that a new asset `Pair` was added\n @dev Logs when a new asset `Pair` is added to this specific `Integration`\n @param index The index of the newly added asset `Pair`"
+            },
+            "id": 985,
+            "name": "LogAddedPair",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 984,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 983,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 985,
+                  "src": "1577:10:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 982,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1577:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1576:12:6"
+            },
+            "src": "1558:31:6"
+          },
+          {
+            "body": {
+              "id": 994,
+              "nodeType": "Block",
+              "src": "1755:35:6",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 992,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 989,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 963,
+                      "src": "1765:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "expression": {
+                        "id": 990,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -15,
+                        "src": "1773:3:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 991,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "src": "1773:10:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "1765:18:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 993,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1765:18:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 986,
+              "nodeType": "StructuredDocumentation",
+              "src": "1599:137:6",
+              "text": "@notice A simple constructor for deploying an `Integration`\n @dev Only handles setting up the owner from the deploying address"
+            },
+            "id": 995,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 987,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1752:2:6"
+            },
+            "returnParameters": {
+              "id": 988,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1755:0:6"
+            },
+            "scope": 1063,
+            "src": "1741:49:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1045,
+              "nodeType": "Block",
+              "src": "2348:486:6",
+              "statements": [
+                {
+                  "assignments": [
+                    1008
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1008,
+                      "mutability": "mutable",
+                      "name": "underlyingAsset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2358:21:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ERC20_$87",
+                        "typeString": "contract ERC20"
+                      },
+                      "typeName": {
+                        "id": 1007,
+                        "name": "ERC20",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 87,
+                        "src": "2358:5:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1012,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1010,
+                        "name": "underlyingAssetAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 998,
+                        "src": "2388:22:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1009,
+                      "name": "ERC20",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87,
+                      "src": "2382:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ERC20_$87_$",
+                        "typeString": "type(contract ERC20)"
+                      }
+                    },
+                    "id": 1011,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2382:29:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$87",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2358:53:6"
+                },
+                {
+                  "assignments": [
+                    1014
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1014,
+                      "mutability": "mutable",
+                      "name": "mintingAsset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2421:18:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ERC20_$87",
+                        "typeString": "contract ERC20"
+                      },
+                      "typeName": {
+                        "id": 1013,
+                        "name": "ERC20",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 87,
+                        "src": "2421:5:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1018,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1016,
+                        "name": "mintingAssetAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1000,
+                        "src": "2448:19:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1015,
+                      "name": "ERC20",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87,
+                      "src": "2442:5:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ERC20_$87_$",
+                        "typeString": "type(contract ERC20)"
+                      }
+                    },
+                    "id": 1017,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2442:26:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$87",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2421:47:6"
+                },
+                {
+                  "assignments": [
+                    1020
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1020,
+                      "mutability": "mutable",
+                      "name": "newPair",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2478:19:6",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                        "typeString": "struct Integration.Pair"
+                      },
+                      "typeName": {
+                        "id": 1019,
+                        "name": "Pair",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 960,
+                        "src": "2478:4:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Pair_$960_storage_ptr",
+                          "typeString": "struct Integration.Pair"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1025,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 1022,
+                        "name": "underlyingAsset",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1008,
+                        "src": "2505:15:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      },
+                      {
+                        "id": 1023,
+                        "name": "mintingAsset",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1014,
+                        "src": "2522:12:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        },
+                        {
+                          "typeIdentifier": "t_contract$_ERC20_$87",
+                          "typeString": "contract ERC20"
+                        }
+                      ],
+                      "id": 1021,
+                      "name": "Pair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 960,
+                      "src": "2500:4:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Pair_$960_storage_ptr_$",
+                        "typeString": "type(struct Integration.Pair storage pointer)"
+                      }
+                    },
+                    "id": 1024,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2500:35:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                      "typeString": "struct Integration.Pair memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2478:57:6"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 1029,
+                        "name": "newPair",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1020,
+                        "src": "2706:7:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                          "typeString": "struct Integration.Pair memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Pair_$960_memory_ptr",
+                          "typeString": "struct Integration.Pair memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 1026,
+                        "name": "availablePairs",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 967,
+                        "src": "2686:14:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+                          "typeString": "struct Integration.Pair storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1028,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "src": "2686:19:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Pair_$960_storage_$returns$__$",
+                        "typeString": "function (struct Integration.Pair storage ref)"
+                      }
+                    },
+                    "id": 1030,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2686:28:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1031,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2686:28:6"
+                },
+                {
+                  "assignments": [
+                    1033
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1033,
+                      "mutability": "mutable",
+                      "name": "newIndex",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1045,
+                      "src": "2724:13:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 1032,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2724:4:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1038,
+                  "initialValue": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 1037,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 1034,
+                        "name": "availablePairs",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 967,
+                        "src": "2740:14:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Pair_$960_storage_$dyn_storage",
+                          "typeString": "struct Integration.Pair storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1035,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "2740:21:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "-",
+                    "rightExpression": {
+                      "hexValue": "31",
+                      "id": 1036,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2764:1:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_1_by_1",
+                        "typeString": "int_const 1"
+                      },
+                      "value": "1"
+                    },
+                    "src": "2740:25:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2724:41:6"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 1040,
+                        "name": "newIndex",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1033,
+                        "src": "2793:8:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1039,
+                      "name": "LogAddedPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 985,
+                      "src": "2780:12:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 1041,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2780:22:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1042,
+                  "nodeType": "EmitStatement",
+                  "src": "2775:27:6"
+                },
+                {
+                  "expression": {
+                    "id": 1043,
+                    "name": "newIndex",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 1033,
+                    "src": "2819:8:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1006,
+                  "id": 1044,
+                  "nodeType": "Return",
+                  "src": "2812:15:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 996,
+              "nodeType": "StructuredDocumentation",
+              "src": "1800:425:6",
+              "text": "@notice Adds a new asset `Pair`\n @dev Accepts two address, that are used to construct an asset pair and stored as an option on this `Integration`\n @param underlyingAssetAddress The address for the underlying asset to be used (e.g. `USDC`)\n @param mintingAssetAddress The address for the minting asset to be used (e.g. `cUSDC`)\n @return A new index for the associated `Pair` that was just added"
+            },
+            "functionSelector": "0e0af570",
+            "id": 1046,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 1003,
+                "modifierName": {
+                  "id": 1002,
+                  "name": "isOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 980,
+                  "src": "2326:7:6",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "2326:7:6"
+              }
+            ],
+            "name": "addAvailablePair",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1001,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 998,
+                  "mutability": "mutable",
+                  "name": "underlyingAssetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2256:30:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 997,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2256:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1000,
+                  "mutability": "mutable",
+                  "name": "mintingAssetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2288:27:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 999,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2288:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2255:61:6"
+            },
+            "returnParameters": {
+              "id": 1006,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1005,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1046,
+                  "src": "2342:4:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1004,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2342:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2341:6:6"
+            },
+            "scope": 1063,
+            "src": "2230:604:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1047,
+              "nodeType": "StructuredDocumentation",
+              "src": "2891:325:6",
+              "text": "@notice Deploys a new `Facade`\n @dev Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)\n @param _owner The address that will be the owner on the new deployment\n @param pairIndex The index associated with a specific asset `Pair`\n @return A newly deployed `Facade` instance"
+            },
+            "functionSelector": "5ced3166",
+            "id": 1056,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deployUserInstance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1052,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1049,
+                  "mutability": "mutable",
+                  "name": "_owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3249:22:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 1048,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3249:15:6",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1051,
+                  "mutability": "mutable",
+                  "name": "pairIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3273:14:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1050,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3273:4:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3248:40:6"
+            },
+            "returnParameters": {
+              "id": 1055,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1054,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1056,
+                  "src": "3314:6:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Facade_$669",
+                    "typeString": "contract Facade"
+                  },
+                  "typeName": {
+                    "id": 1053,
+                    "name": "Facade",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 669,
+                    "src": "3314:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Facade_$669",
+                      "typeString": "contract Facade"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3313:8:6"
+            },
+            "scope": 1063,
+            "src": "3221:101:6",
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1057,
+              "nodeType": "StructuredDocumentation",
+              "src": "3328:266:6",
+              "text": "@notice The description of an `Integration`\n @dev Should provide a human-readable string that gives a short description what this `Integration` is (e.g. `Compound Protocol`)\n @return A human-readable string that describes the `Integration` deployed"
+            },
+            "functionSelector": "7284e416",
+            "id": 1062,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "description",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1058,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3619:2:6"
+            },
+            "returnParameters": {
+              "id": 1061,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1060,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1062,
+                  "src": "3652:13:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1059,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3652:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3651:15:6"
+            },
+            "scope": 1063,
+            "src": "3599:68:6",
+            "stateMutability": "pure",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1064,
+        "src": "356:3313:6"
+      }
+    ],
+    "src": "32:3637:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-14T17:01:12.590Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "author": "Joel Reis",
+    "details": "This class must be overwritten and the abstract functions implemented by the child",
+    "events": {
+      "LogAddedPair(uint256)": {
+        "details": "Logs when a new asset `Pair` is added to this specific `Integration`",
+        "params": {
+          "index": "The index of the newly added asset `Pair`"
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "addAvailablePair(address,address)": {
+        "details": "Accepts two address, that are used to construct an asset pair and stored as an option on this `Integration`",
+        "params": {
+          "mintingAssetAddress": "The address for the minting asset to be used (e.g. `cUSDC`)",
+          "underlyingAssetAddress": "The address for the underlying asset to be used (e.g. `USDC`)"
+        },
+        "returns": {
+          "_0": "A new index for the associated `Pair` that was just added"
+        }
+      },
+      "constructor": {
+        "details": "Only handles setting up the owner from the deploying address"
+      },
+      "deployUserInstance(address,uint256)": {
+        "details": "Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)",
+        "params": {
+          "_owner": "The address that will be the owner on the new deployment",
+          "pairIndex": "The index associated with a specific asset `Pair`"
+        },
+        "returns": {
+          "_0": "A newly deployed `Facade` instance"
+        }
+      },
+      "description()": {
+        "details": "Should provide a human-readable string that gives a short description what this `Integration` is (e.g. `Compound Protocol`)",
+        "returns": {
+          "_0": "A human-readable string that describes the `Integration` deployed"
+        }
+      }
+    },
+    "stateVariables": {
+      "availablePairs": {
+        "details": "Each `Integration` has a unique set of asset pairs that are contained here",
+        "return": "A specific asset `Pair`"
+      },
+      "owner": {
+        "details": "The owner of this contract, set from deployer and unchangable",
+        "return": "The address with the most authority on this contract"
+      }
+    },
+    "title": "An `Integration` for deploying `Facades`",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "LogAddedPair(uint256)": {
+        "notice": "An event used to communicate that a new asset `Pair` was added"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "addAvailablePair(address,address)": {
+        "notice": "Adds a new asset `Pair`"
+      },
+      "availablePairs(uint256)": {
+        "notice": "All available asset pairs for this `Integration`"
+      },
+      "constructor": {
+        "notice": "A simple constructor for deploying an `Integration`"
+      },
+      "deployUserInstance(address,uint256)": {
+        "notice": "Deploys a new `Facade`"
+      },
+      "description()": {
+        "notice": "The description of an `Integration`"
+      },
+      "owner()": {
+        "notice": "The owner of this contract"
+      }
+    },
+    "notice": "Defines an `Integration` for deploying `Facades`",
+    "version": 1
+  }
+}
