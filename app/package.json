@@ -19,7 +19,7 @@
     "dev:api": "json-server --watch db.json",
     "dev:server": "webpack-dev-server --env development",
     "build": "webpack --env production",
-    "build2": "react-scripts build",
+    "build_prod": "react-scripts build",
     "clean": "rm -rf ./dist"
   },
   "eslintConfig": {

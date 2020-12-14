@@ -1,9 +1,9 @@
 import React from "react"
+import logo from '../assets/logoBW2.png'
 
 const Strings = {
   title: "AutoDeFi",
   subtitle: "Set. Forget. Earn.",
-  logo: "./src/assets/logoBW2.png",
 }
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 export default function BasicInfo({ userAddress }: Props) {
   return (
     <section className="center">
-      <img className="main_logo" src={Strings.logo} alt="autodefi-logo" />
+      <img className="main_logo" src={logo} alt="autodefi-logo" />
       <h1>{Strings.title}</h1>
       <h3 className="darkish">{Strings.subtitle}</h3>
 

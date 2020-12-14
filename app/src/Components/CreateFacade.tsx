@@ -1,5 +1,8 @@
 import React from "react"
 import { newContextComponents } from "@drizzle/react-components"
+import logo_compound from '../assets/logo_compound.png'
+import logo_curve from '../assets/logo_curve.png'
+import logo_cream from '../assets/logo_cream.png'
 
 const { ContractData } = newContextComponents
 
@@ -13,11 +16,6 @@ const Strings = {
   title: "Create new account",
   description:
     "Please choose which Dapp you would like your account to interact with.",
-  Images: {
-    compound: "./src/assets/logo_compound.png",
-    curve: "./src/assets/logo_curve.png",
-    cream: "./src/assets/logo_cream.png",
-  },
 }
 
 export default function CreateFacade({
@@ -54,13 +52,13 @@ function Buttons({ drizzle }: ButtonProps) {
   return (
     <div>
       <button className="unit" type="button" onClick={handleCompoundClick}>
-        <img src={Strings.Images.compound} height="24px" width="24px" />
+        <img src={logo_compound} height="24px" width="24px" />
       </button>
       <button className="unit" type="button" onClick={handleNotReady}>
-        <img src={Strings.Images.curve} height="24px" width="24px" />
+        <img src={logo_curve} height="24px" width="24px" />
       </button>
       <button className="unit" type="button" onClick={handleNotReady}>
-        <img src={Strings.Images.cream} height="24px" width="24px" />
+        <img src={logo_cream} height="24px" width="24px" />
       </button>
     </div>
   )
