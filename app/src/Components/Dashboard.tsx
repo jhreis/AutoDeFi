@@ -24,16 +24,14 @@ function is0Address(address: string): boolean {
 export default function Dashboard({ drizzle, drizzleState }: Props) {
   const [facade, setFacade] = useState<string | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  // TODO: update this so that it is actually undefined
-  const [wallet, setWallet] = useState<string>("bad address")
+  const [wallet, setWallet] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     const wallet = drizzleState.accounts[0]
 
     // Validate wallet is real address
     if (typeof wallet !== "string" || !wallet.startsWith("0x")) {
-      setWallet("bad address")
+      setWallet(undefined)
       return
     }
 
@@ -105,6 +103,10 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
       return <span>LOADING...</span>
     }
 
+    if (!wallet) {
+      return <span>Please attach a wallet</span>
+    }
+
     if (facade) {
       return (
         <>
@@ -128,12 +130,18 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
 
   return (
     <div className="App">
-      <Header
-        drizzle={drizzle}
-        drizzleState={drizzleState}
-        userAddress={wallet}
-      />
-      {childComponent()}
+      {wallet ? (
+        <>
+          <Header
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            userAddress={wallet}
+          />
+          {childComponent()}
+        </>
+      ) : (
+        "Please connect wallet..."
+      )}
       <AllFacadeList drizzle={drizzle} drizzleState={drizzleState} />
     </div>
   )
