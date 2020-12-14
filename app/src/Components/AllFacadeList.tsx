@@ -19,7 +19,9 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
   const [selectedFacadeAddress, setSelectedFacadeAddress] = useState<
     string | undefined
   >(undefined)
+  // Currently unused
   const [countKey, setCountKey] = useState<any>(undefined)
+  const [count, setCount] = useState<any>(undefined)
 
   function is0Address(address: string): boolean {
     // TODO: Future improvement
@@ -33,8 +35,10 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
 
   useEffect(() => {
     const run = () => {
-      const count =
-        drizzleState.contracts.Generator.numberOfOwners[countKey]?.value
+      console.log("This is count!", count)
+
+      // This is pretty inconsistent so using render callback to update `count`
+      // drizzleState.contracts.Generator.numberOfOwners[countKey]?.value
       const allValidFacadeAddress = []
 
       for (let i = 0; i < count; i++) {
@@ -67,6 +71,7 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
     // Could also potentially use async func but this works well.
     setTimeout(run, 1)
   }, [
+    count,
     drizzleState.contracts.Generator.facadeOwners,
     drizzleState.contracts.Generator.facades,
   ])
@@ -142,6 +147,11 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
     ))
   }
 
+  const countRender = (data: string) => {
+    setCount(parseInt(data))
+    return <span>{data}</span>
+  }
+
   const accountTitle = "Viewing Compound account:"
   return (
     <section>
@@ -160,6 +170,7 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
             drizzleState={drizzleState}
             contract={"Generator"}
             method={"numberOfOwners"}
+            render={countRender}
           />
         </span>
       )}
