@@ -6,27 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address payable",
-						"name": "_owner",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_underlyingAsset",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_mintingAsset",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -57,19 +36,6 @@
 				],
 				"name": "LogWithdraw",
 				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "assistant",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -113,45 +79,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "mintingAsset",
-				"outputs": [
-					{
-						"internalType": "contract ERC20",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address payable",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "underlyingAsset",
-				"outputs": [
-					{
-						"internalType": "contract ERC20",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "underlyingAssetSymbol",
 				"outputs": [
 					{
@@ -186,17 +113,24 @@
 		],
 		"devdoc": {
 			"author": "Joel Reis",
-			"details": "This can be used as an example for generating other DeFi facade interfaces",
-			"kind": "dev",
-			"methods": {
-				"constructor": {
-					"details": "Deploys a new `Facade` that interfaces directly against the Compound protocol",
+			"details": "This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform",
+			"events": {
+				"LogDeposit(address,address)": {
+					"details": "Logs when a deposit has been performed for a given `Facade`",
 					"params": {
-						"_mintingAsset": "The address of the token that Compound will mint, based on the underlying token (e.g. `cUSDC`)",
-						"_owner": "The address of who should own this contract",
-						"_underlyingAsset": "The address of the underlying asset (e.g. `USDC`)"
+						"depositor": "The address of the custodian that performed, and paid for the deposit transaction",
+						"facade": "The address of the `Facade` that had the action performed"
 					}
 				},
+				"LogWithdraw(address)": {
+					"details": "Logs when a withdrawal has been performed for a given `Facade`",
+					"params": {
+						"facade": "The address of the `Facade` that had the action performed"
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
 				"depositToUnderlying()": {
 					"details": "Deposits the asset associated with the asset pair"
 				},
@@ -231,25 +165,7 @@
 					"details": "This should be a protected function to prevent abuse of withdrawing      Withdrawing should always deposit funds back to the `owner`"
 				}
 			},
-			"stateVariables": {
-				"assistant": {
-					"details": "Returns the pre-defined, unedited assistant",
-					"return": "Assistant hich is permissioned to call specific functions"
-				},
-				"mintingAsset": {
-					"details": "Returns an ERC20 token that is minted from Compound",
-					"return": "The token that a specific DeFi protocols mints"
-				},
-				"owner": {
-					"details": "The owner of this contract, set from deployer and unchangable",
-					"return": "The address with the most authority on this contract"
-				},
-				"underlyingAsset": {
-					"details": "Returns an ERC20 token that is used to deposit into Compound",
-					"return": "The underlying token used"
-				}
-			},
-			"title": "A compound.finance facade implementation",
+			"title": "An interface that defines what a `Facade` implementation should be able to do",
 			"version": 1
 		},
 		"userdoc": {
@@ -263,50 +179,35 @@
 			},
 			"kind": "user",
 			"methods": {
-				"assistant()": {
-					"notice": "Returns an address that is allowed to assist in certain functions to help with automation         This address never has full control over funds         e.g. sending funds back to `owner`'s wallet."
-				},
-				"constructor": {
-					"notice": "Constructor for a new `CompoundFacade` deployment"
-				},
 				"depositToUnderlying()": {
-					"notice": "This deposits funds into the underlying contract"
+					"notice": "This deposits assets into the underlying contract, from the current account e.g. Account -> Compound"
 				},
 				"destroy()": {
-					"notice": "Destroys a given `Facade`, is protected"
+					"notice": "Destroys the facade and transfers all funds to user wallet"
 				},
 				"mintedAssetSymbol()": {
-					"notice": "This is available directly on the asset address, but is added for convenience"
+					"notice": "The asset symbol for the minting token e.g. cUSDC, cDAI"
 				},
 				"mintedBalance()": {
-					"notice": "This is available directly on the asset address, but is added for convenience"
-				},
-				"mintingAsset()": {
-					"notice": "Returns the address of the token being minted         e.g. cUSDC address"
-				},
-				"owner()": {
-					"notice": "The owner of this contract"
-				},
-				"underlyingAsset()": {
-					"notice": "Returns the underlying token         e.g. USDC address"
+					"notice": "The balance inside the account of the minting token"
 				},
 				"underlyingAssetSymbol()": {
-					"notice": "This is available directly on the asset address, but is added for convenience"
+					"notice": "The asset symbol for the underlying token e.g. USDC, DAI"
 				},
 				"underlyingBalance()": {
-					"notice": "This is available directly on the asset address, but is added for convenience"
+					"notice": "The balance inside the account of the underlying token e.g. USDC, DAI"
 				},
 				"withdraw()": {
-					"notice": "Withdraws all user funds, is protected"
+					"notice": "Withdraws funds from underlying contract, to EOA e.g. Comound -> Account -> EOA"
 				}
 			},
-			"notice": "Interfaces directly with compound.finance",
+			"notice": "Use this interface to define a new `Facade` implementation for a new DeFi protocol",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/Facades/CompoundFacade.sol": "CompoundFacade"
+			"localhost/Facades/FacadeInterface.sol": "Facade"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -320,22 +221,6 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/ERC20/IERC20.sol": {
-			"keccak256": "0x6bf31f9696663b072577ea8d27c036c61dead4f4e708abe651a37a9eef6616e5",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://781a75a19e604e0c02258ac6866de98a76768b12ddf29c06422871fd5c81fa56",
-				"dweb:/ipfs/QmaUsTPLTVD4U6AGvm5wEjrqH5Sh6As6XQQp3PEtVzbT9e"
-			]
-		},
-		"localhost/Facades/CompoundFacade.sol": {
-			"keccak256": "0x147a55a184fb1eb119ddb0fd1d3c704084c93251e73296100f9b4e2c59569d30",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://e973af4f05c57c76d3f91408eceef0afa85d342e726b275f2715def2be378e28",
-				"dweb:/ipfs/QmYJk4B57Fh9tpCNUjCKt7Rzz9egTwA1b2ntgQsXDJ1A8b"
-			]
-		},
 		"localhost/Facades/FacadeInterface.sol": {
 			"keccak256": "0xbb8bf70cbec66a32707e20d8d3c487d85044a34bb1ebe3d6a2422817aaf75d7f",
 			"license": "MIT",

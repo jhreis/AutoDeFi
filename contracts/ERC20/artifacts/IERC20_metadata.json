@@ -6,32 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_initialAmount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_tokenName",
-						"type": "string"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_decimalUnits",
-						"type": "uint8"
-					},
-					{
-						"internalType": "string",
-						"name": "_tokenSymbol",
-						"type": "string"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -109,30 +83,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "allowed",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "_spender",
 						"type": "address"
 					},
@@ -166,77 +116,6 @@
 					{
 						"internalType": "uint256",
 						"name": "balance",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "balances",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "decimals",
-				"outputs": [
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "symbol",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "totalSupply",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -299,7 +178,25 @@
 		],
 		"devdoc": {
 			"author": "Joel Reis",
-			"details": "`AutoDeFi` requires ERC20 tokens to function, instances of this are created      for local blockchains to properly display token information / balances.",
+			"details": "Interface of the ERC20 standard as defined in the EIP.",
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}.",
+					"params": {
+						"owner": "The address that currently holds the tokens",
+						"spender": "The address that can now spend `value` of `owner` tokens",
+						"value": "The new allowance"
+					}
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`).      The `value` may be zero.",
+					"params": {
+						"from": "The address sending the token[s]",
+						"to": "The address receiving the token[s]",
+						"value": "The amount of token[s] being transferred"
+					}
+				}
+			},
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -329,15 +226,6 @@
 						"balance": "the balance"
 					}
 				},
-				"constructor": {
-					"details": "Deploys a new `ERC20` token",
-					"params": {
-						"_decimalUnits": "The amount of decimals that this token will use",
-						"_initialAmount": "The starting supply of tokens",
-						"_tokenName": "The name that will be associated with this token",
-						"_tokenSymbol": "The symbol that will be associated with this token"
-					}
-				},
 				"transfer(address,uint256)": {
 					"params": {
 						"_to": "The address of the recipient",
@@ -358,29 +246,7 @@
 					}
 				}
 			},
-			"stateVariables": {
-				"allowed": {
-					"details": "This tracks the spending permissions of any adddress that has ever had or given spending permissions",
-					"return": "The spend allowance of a specific address pair"
-				},
-				"balances": {
-					"details": "This tracks the balance of any adddress that has ever had tokens",
-					"return": "The balance of a specific address"
-				},
-				"name": {
-					"details": "The name for the given token",
-					"return": "memory The name of the ERC20 token"
-				},
-				"symbol": {
-					"details": "Then symbol for the given token (e.g. `USDC`)",
-					"return": "memory The of the ERC20 symbol"
-				},
-				"totalSupply": {
-					"details": "The current token supply. Can be modified",
-					"return": "The total amount of tokens currently available"
-				}
-			},
-			"title": "A boilerplate ERC20 token implementation",
+			"title": "An interface that defines the ERC20 spec",
 			"version": 1
 		},
 		"userdoc": {
@@ -394,29 +260,11 @@
 			},
 			"kind": "user",
 			"methods": {
-				"allowed(address,address)": {
-					"notice": "The spend permission of all token holders"
-				},
 				"approve(address,uint256)": {
 					"notice": "`msg.sender` approves `_addr` to spend `_value` tokens"
 				},
 				"balanceOf(address)": {
 					"notice": "provides the amount of tokens a specific address has"
-				},
-				"balances(address)": {
-					"notice": "The balances of all token holders"
-				},
-				"constructor": {
-					"notice": "Constructor for a new `ERC20` deployment"
-				},
-				"name()": {
-					"notice": "Provides the name of the associated token"
-				},
-				"symbol()": {
-					"notice": "Provides the symbol of the associated token"
-				},
-				"totalSupply()": {
-					"notice": "The totoal amount of tokens"
 				},
 				"transfer(address,uint256)": {
 					"notice": "send `_value` token to `_to` from `msg.sender`"
@@ -425,13 +273,13 @@
 					"notice": "send `_value` token to `_to` from `_from` on the condition it is approved by `_from`"
 				}
 			},
-			"notice": "A sample ERC20 token, solely used for testing",
+			"notice": "Use this interface to define a new ERC20 asset",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/ERC20/StandardERC20.sol": "StandardERC20"
+			"localhost/ERC20/IERC20.sol": "IERC20"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -451,14 +299,6 @@
 			"urls": [
 				"bzz-raw://781a75a19e604e0c02258ac6866de98a76768b12ddf29c06422871fd5c81fa56",
 				"dweb:/ipfs/QmaUsTPLTVD4U6AGvm5wEjrqH5Sh6As6XQQp3PEtVzbT9e"
-			]
-		},
-		"localhost/ERC20/StandardERC20.sol": {
-			"keccak256": "0x993f2070f5393927a2d8cf32ee7600b99ad85423bdc4a07f98048719422b96de",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://9118e0e7c9074060a9114e768a645a814ccb4b10d9da256bbcc0ccb7d2996e9a",
-				"dweb:/ipfs/QmUH8wxQcKCeoZSYxC37Agh5zqgjVuaKyCaJSjkLmapZDG"
 			]
 		}
 	},

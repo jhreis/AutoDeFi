@@ -119,7 +119,15 @@
 		],
 		"devdoc": {
 			"author": "Joel Reis",
-			"details": "Provides the implementation details for deploying any number of `Facades` associated with the Compound protocol",
+			"details": "This class must be overwritten and the abstract functions implemented by the child",
+			"events": {
+				"LogAddedPair(uint256)": {
+					"details": "Logs when a new asset `Pair` is added to this specific `Integration`",
+					"params": {
+						"index": "The index of the newly added asset `Pair`"
+					}
+				}
+			},
 			"kind": "dev",
 			"methods": {
 				"addAvailablePair(address,address)": {
@@ -131,6 +139,9 @@
 					"returns": {
 						"_0": "A new index for the associated `Pair` that was just added"
 					}
+				},
+				"constructor": {
+					"details": "Only handles setting up the owner from the deploying address"
 				},
 				"deployUserInstance(address,uint256)": {
 					"details": "Accepts information for deploying a new `Facade` (e.g. `CompoundFacade`)",
@@ -149,7 +160,17 @@
 					}
 				}
 			},
-			"title": "A `CompoundIntegration` for deploying `CompoundFacades`",
+			"stateVariables": {
+				"availablePairs": {
+					"details": "Each `Integration` has a unique set of asset pairs that are contained here",
+					"return": "A specific asset `Pair`"
+				},
+				"owner": {
+					"details": "The owner of this contract, set from deployer and unchangable",
+					"return": "The address with the most authority on this contract"
+				}
+			},
+			"title": "An `Integration` for deploying `Facades`",
 			"version": 1
 		},
 		"userdoc": {
@@ -166,23 +187,26 @@
 				"availablePairs(uint256)": {
 					"notice": "All available asset pairs for this `Integration`"
 				},
+				"constructor": {
+					"notice": "A simple constructor for deploying an `Integration`"
+				},
 				"deployUserInstance(address,uint256)": {
-					"notice": "Deploys a Compound Facade"
+					"notice": "Deploys a new `Facade`"
 				},
 				"description()": {
-					"notice": "Describes this Compound Integration"
+					"notice": "The description of an `Integration`"
 				},
 				"owner()": {
 					"notice": "The owner of this contract"
 				}
 			},
-			"notice": "Helps deploy `CompoundFacades`",
+			"notice": "Defines an `Integration` for deploying `Facades`",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/Integrations/CompoundIntegration.sol": "CompoundIntegration"
+			"localhost/Integrations/Integration.sol": "Integration"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -204,28 +228,12 @@
 				"dweb:/ipfs/QmaUsTPLTVD4U6AGvm5wEjrqH5Sh6As6XQQp3PEtVzbT9e"
 			]
 		},
-		"localhost/Facades/CompoundFacade.sol": {
-			"keccak256": "0x147a55a184fb1eb119ddb0fd1d3c704084c93251e73296100f9b4e2c59569d30",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://e973af4f05c57c76d3f91408eceef0afa85d342e726b275f2715def2be378e28",
-				"dweb:/ipfs/QmYJk4B57Fh9tpCNUjCKt7Rzz9egTwA1b2ntgQsXDJ1A8b"
-			]
-		},
 		"localhost/Facades/FacadeInterface.sol": {
 			"keccak256": "0xbb8bf70cbec66a32707e20d8d3c487d85044a34bb1ebe3d6a2422817aaf75d7f",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://fdb3a1cc7f3150b973d8761ef67bd882139c89ee9c2684e360c09ecd070ed1e7",
 				"dweb:/ipfs/Qmaaw7tgbMMH4SY8WTBAvn7sP5kzoe5UususTus3yoqBob"
-			]
-		},
-		"localhost/Integrations/CompoundIntegration.sol": {
-			"keccak256": "0x83c2cab813f9fd5724426da843a14bc208a5124aa3ac02a237dde6a64bdcf05a",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://72827032a737e6636eb4870dc560c540d72b49064d87ebd22c68a7bae8729c04",
-				"dweb:/ipfs/QmTQTXeYyJxQXeiNJ9Wk4bodc786NBi5xaCPSS2tm8jLaZ"
 			]
 		},
 		"localhost/Integrations/Integration.sol": {

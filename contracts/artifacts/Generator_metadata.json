@@ -16,14 +16,20 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "from",
+						"name": "creator",
 						"type": "address"
 					},
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "creator",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "integrationIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "pairIndex",
+						"type": "uint256"
 					}
 				],
 				"name": "LogFacadeCreated",
@@ -35,11 +41,30 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "owner",
+						"name": "destroyer",
 						"type": "address"
 					}
 				],
 				"name": "LogFacadeDestroyed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "integrationAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "integrationIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "LogNewProtocolAdded",
 				"type": "event"
 			},
 			{
@@ -214,15 +239,122 @@
 			}
 		],
 		"devdoc": {
+			"author": "Joel Reis",
+			"details": "This is a simple interface that abstracts most of the complexities of the underlying `Integrations` that handle actual deploymnets.",
+			"events": {
+				"LogFacadeCreated(address,uint256,uint256)": {
+					"details": "States an address has now deployed a few `Facade` and provide enough info to perform lookups",
+					"params": {
+						"creator": "The address that created a `Facade`",
+						"integrationIndex": "The index of the `Integration` used in the deployment",
+						"pairIndex": "The index of the asset pair used for the deployment"
+					}
+				},
+				"LogFacadeDestroyed(address)": {
+					"details": "Will fire an event when a `Facade` has been destroyed",
+					"params": {
+						"destroyer": "The address that destroyed the `Facade`"
+					}
+				},
+				"LogNewProtocolAdded(address,uint256)": {
+					"details": "Logs when a new `Integration` is available for use",
+					"params": {
+						"integrationAddress": "The address of the new `Integration`",
+						"integrationIndex": "The index of the new `Integration`"
+					}
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"addNewProtocol(address)": {
+					"details": "An `Integration` must be manually deployed, and then the address is provided here to provide a link. This then allows wallets to create facade's against this new `Integration`",
+					"params": {
+						"newIntegration": "The address of a deployed `Integration`"
+					},
+					"returns": {
+						"_0": "The index associated with the new `Integration` address"
+					}
+				},
+				"constructor": {
+					"details": "Only handles setting up the owner from the deploying address"
+				},
+				"destroyFacade()": {
+					"details": "This is a public, unprotected function. However, the `Facade` implementation protects against unprotected deletion and will block any unauthorized deletions."
+				},
+				"generateNewFacade(uint256,uint256)": {
+					"details": "An `Integration` must be manually deployed, and then the address is provided here to provide a link. This then allows wallets to create facade's against this new `Integration`",
+					"params": {
+						"integrationIndex": "The index of a specific `Integration` to be deployed",
+						"pairIndex": "The index of the asset pair, on a given `Integration`, that should be used for the deployed `Facade`"
+					},
+					"returns": {
+						"_0": "The newly deployed `Facade` instance"
+					}
+				},
+				"numberOfOwners()": {
+					"details": "Provides the number of owners, which can be used to then query for all deployed `Facades`",
+					"returns": {
+						"_0": "The number of facade owners that exist"
+					}
+				},
+				"setEnabled(uint256,bool)": {
+					"details": "This only impacts the `Generators` control over deployments. ",
+					"params": {
+						"enabled": "Whether or not the given facade should be deployable or not",
+						"facadeIndex": "The index of a specific facade that should have their deployment flag modified"
+					}
+				}
+			},
+			"stateVariables": {
+				"availableProtocols": {
+					"details": "Provide the index desired, and this returns a specific `Integration`",
+					"return": "A specific `Integration`, given a provided index"
+				},
+				"facadeEnabled": {
+					"details": "This is a circuit-breaker, and is used to track which `Integrations` are currently enabled / disabled",
+					"return": "whehter an `Integration` is enabled. The indeces match  exactly with `availableProtocols`"
+				},
+				"facadeOwners": {
+					"details": "This is an array that contains all addresses that have ever deployed a facade, even if the facade has been destroyed",
+					"return": "An address that has deployed a facade"
+				},
+				"facades": {
+					"details": "This can be used to lookup any associated facade for an address. Currently mapping is 1:1",
+					"return": "A specific facacde for a given address"
+				},
+				"owner": {
+					"details": "The owner of this contract, set from deployer and unchangable",
+					"return": "The address with the most authority on this contract"
+				}
+			},
+			"title": "An interface that helps generate Facades on top of DeFi protocols",
 			"version": 1
 		},
 		"userdoc": {
+			"events": {
+				"LogFacadeCreated(address,uint256,uint256)": {
+					"notice": "An event used to communicate that a new `Facade` has been deployed"
+				},
+				"LogFacadeDestroyed(address)": {
+					"notice": "An event used to communicate that a `Facade` has been destroyed from this `Generator` interface"
+				},
+				"LogNewProtocolAdded(address,uint256)": {
+					"notice": "An event used to communicate that a new protocol `Integration` has been added to the `Generator`"
+				}
+			},
 			"kind": "user",
 			"methods": {
+				"addNewProtocol(address)": {
+					"notice": "The `owner` can add a new protocol to be used by the `Generator`"
+				},
 				"availableProtocols(uint256)": {
 					"notice": "The available protocols that are available to create facades from"
+				},
+				"constructor": {
+					"notice": "A simple constructor for deploying a `Generator`"
+				},
+				"destroyFacade()": {
+					"notice": "A function that attempts to destroy a `Facade`."
 				},
 				"facadeEnabled(uint256)": {
 					"notice": "Determines whether a specific facade can be created or not"
@@ -231,12 +363,22 @@
 					"notice": "All user addresses that have facades"
 				},
 				"facades(address)": {
-					"notice": "TODO Improvement: Eventually make this an array User Address => Facade Address, make type safe"
+					"notice": "TODO Improvement: Eventually make this an arrayProvides a Facade, given a wallet address"
+				},
+				"generateNewFacade(uint256,uint256)": {
+					"notice": "The `owner` can add a new protocol to be used by the `Generator`"
+				},
+				"numberOfOwners()": {
+					"notice": "The number of owners that have created `Facades`"
 				},
 				"owner()": {
 					"notice": "The owner of this contract"
+				},
+				"setEnabled(uint256,bool)": {
+					"notice": "Enables / Disables a specific facade deployment."
 				}
 			},
+			"notice": "Use this contract to create accounts that work directly with common DeFi protocols, like Compound",
 			"version": 1
 		}
 	},
@@ -257,35 +399,35 @@
 	},
 	"sources": {
 		"localhost/ERC20/IERC20.sol": {
-			"keccak256": "0x62466abff37d667690074a7dbb90a23e497509bb187f42f5641cc4119043f85f",
+			"keccak256": "0x6bf31f9696663b072577ea8d27c036c61dead4f4e708abe651a37a9eef6616e5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd7092310ea37334592c5c3648e5f27c25154fbfc9b690054d09e034ad5deb3c",
-				"dweb:/ipfs/QmVzZwN44iXKWp9fgqxNzDHpAcJskEAnRknUu7KXEt7M6z"
+				"bzz-raw://781a75a19e604e0c02258ac6866de98a76768b12ddf29c06422871fd5c81fa56",
+				"dweb:/ipfs/QmaUsTPLTVD4U6AGvm5wEjrqH5Sh6As6XQQp3PEtVzbT9e"
 			]
 		},
 		"localhost/Facades/FacadeInterface.sol": {
-			"keccak256": "0xe47376935d32e4f177e7ac0b9a968dd6b7a01ce5be9473b61f50205d4fa603a0",
+			"keccak256": "0xbb8bf70cbec66a32707e20d8d3c487d85044a34bb1ebe3d6a2422817aaf75d7f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://58886f401a222ef6defa7a74dadc02dd9805e77620102c22c37508e8b79c9b2d",
-				"dweb:/ipfs/QmaJjrFyP5HBHCKEKS35qU85VYsy38kD5xCUAked5Cmitx"
+				"bzz-raw://fdb3a1cc7f3150b973d8761ef67bd882139c89ee9c2684e360c09ecd070ed1e7",
+				"dweb:/ipfs/Qmaaw7tgbMMH4SY8WTBAvn7sP5kzoe5UususTus3yoqBob"
 			]
 		},
 		"localhost/Generator.sol": {
-			"keccak256": "0x4b17e9427f93718c97a1f977863bd718410093f65c9dcb49fd454587b54ef0d4",
+			"keccak256": "0xcd4727ae2c117cd0f0ceadf38d7a455f18ae75b816453b7aecd1209c403a6035",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3852b31a4f9456f5cfb00219a9ef0542ce29f9ca9581cee551e7ab2641d3b292",
-				"dweb:/ipfs/QmWwUn2tTMJWWpoGyvUmVq4gUQiEdhnmnSA4cDikH5diW8"
+				"bzz-raw://4c351bbe7b0fe68e3325322ed70b325c7668cd8b44ffc2b5638392483b46ab97",
+				"dweb:/ipfs/QmRhKTyxgEV2EYKCekDJUikTEDwwCMhMMuQtVqnjGm5tqQ"
 			]
 		},
 		"localhost/Integrations/Integration.sol": {
-			"keccak256": "0x843fb8d9581c129cc89e8c3bb69dcb6fdfc06aa6fbee60b551f992b01adebd5d",
+			"keccak256": "0xd3d0060761060796e5bca0ca9de52a36d0da8107be578b093e04c4dce42507e8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://92e4309328a002b5d1da033ea56fe76b75803e248d0e250c2f6010a007693792",
-				"dweb:/ipfs/QmTebpKEYjcdZWCp7KuTEHVsT5qr75GX9noq36wb7zBMYG"
+				"bzz-raw://d8c5ebcd85245f27a1cad60ef0d5868c4396f0a1c906679c657273d7e2cc0b22",
+				"dweb:/ipfs/QmW56VNUs43Xhz3hRZotQ7aW9FVa4dctifzFFNTKTJM5wJ"
 			]
 		}
 	},
