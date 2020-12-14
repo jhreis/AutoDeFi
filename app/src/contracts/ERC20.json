@@ -2182,7 +2182,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-14T16:59:18.269Z",
+  "updatedAt": "2020-12-14T20:12:55.982Z",
   "devdoc": {
     "author": "Joel Reis",
     "details": "Interface of the ERC20 standard as defined in the EIP, in addition to the most common      enhanced properties. These are implemented by almost all ERC20 tokens, and required for      `AutoDeFi` to work correctly. All ERC20 tokens used in this protocol, must conform to      this interface, and not the simplistic IERC20",

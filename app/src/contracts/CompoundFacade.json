@@ -7172,7 +7172,7 @@
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-14T16:59:18.280Z",
+  "updatedAt": "2020-12-14T20:12:55.992Z",
   "devdoc": {
     "author": "Joel Reis",
     "details": "This can be used as an example for generating other DeFi facade interfaces",

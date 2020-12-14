@@ -1460,8 +1460,8 @@
         }
       },
       "links": {},
-      "address": "0xc3024c6248B80bD62d9745EB7905B5D6e78376B8",
-      "transactionHash": "0xe18763c1adbccaa1a2489c464f1e6e0b5be7d74f7e3b00d5c48622a0c37f63b4"
+      "address": "0x0dbB14c5Fe6A0F92245f74B47bA4EB306C779141",
+      "transactionHash": "0x324dadb2fe84afd5d05a3647afba6393953895803736e662d05d6a88b6d2004d"
     },
     "5777": {
       "events": {
@@ -1485,7 +1485,7 @@
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-14T17:01:12.583Z",
+  "updatedAt": "2020-12-14T20:14:58.439Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Joel Reis",

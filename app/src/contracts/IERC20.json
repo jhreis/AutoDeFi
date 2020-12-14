@@ -2156,7 +2156,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-14T16:59:18.271Z",
+  "updatedAt": "2020-12-14T20:12:55.984Z",
   "devdoc": {
     "author": "Joel Reis",
     "details": "Interface of the ERC20 standard as defined in the EIP.",

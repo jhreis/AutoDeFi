@@ -1129,7 +1129,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-14T16:59:18.283Z",
+  "updatedAt": "2020-12-14T20:12:55.994Z",
   "devdoc": {
     "author": "Joel Reis",
     "details": "This is an interface that defines the required functionality for a `Facade`. The `Facade` may contain complex      logic to interface with a specific DeFi protocol, but the interface should always be simple and uniform",
