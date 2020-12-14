@@ -21,7 +21,6 @@ abstract contract Integration {
     /// @return The address with the most authority on this contract
     address public owner;
 
-
     /// @notice All available asset pairs for this `Integration`
     /// @dev Each `Integration` has a unique set of asset pairs that are contained here
     /// @return A specific asset `Pair`
@@ -33,6 +32,11 @@ abstract contract Integration {
         require(msg.sender == owner, "Must be owner!");
         _;
     }
+
+    /// @notice An event used to communicate that a new asset `Pair` was added
+    /// @dev Logs when a new asset `Pair` is added to this specific `Integration`
+    /// @param index The index of the newly added asset `Pair`
+    event LogAddedPair(uint index);
     
     /// @notice A simple constructor for deploying an `Integration`
     /// @dev Only handles setting up the owner from the deploying address
@@ -53,7 +57,9 @@ abstract contract Integration {
         /// In the future could prevent duplicate pair additions, but not super necessary, since protected function (todo)
         
         availablePairs.push(newPair);
-        return availablePairs.length - 1;
+        uint newIndex = availablePairs.length - 1;
+        emit LogAddedPair(newIndex);
+        return newIndex;
     }
     
     // Abstract, children must implement this
