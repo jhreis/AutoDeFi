@@ -1,8 +1,8 @@
 import React from "react"
 import { newContextComponents } from "@drizzle/react-components"
-import logo_compound from '../assets/logo_compound.png'
-import logo_curve from '../assets/logo_curve.png'
-import logo_cream from '../assets/logo_cream.png'
+import logo_compound from "../assets/logo_compound.png"
+import logo_curve from "../assets/logo_curve.png"
+import logo_cream from "../assets/logo_cream.png"
 
 const { ContractData } = newContextComponents
 
@@ -15,7 +15,7 @@ interface Props {
 const Strings = {
   title: "Create new account",
   description:
-    "Please choose which Dapp you would like your account to interact with.",
+    "Compound (far left) is the only supported DeFi protocol on test blockchains.",
 }
 
 export default function CreateFacade({
@@ -27,6 +27,17 @@ export default function CreateFacade({
     <section className="segment">
       <h2>{Strings.title}</h2>
       <p className="skinny">{Strings.description}</p>
+      <p className="skinny">
+        The AutoDeFi Compound deployer is located at:
+        <br />
+        <ContractData
+          drizzle={drizzle}
+          drizzleState={drizzleState}
+          contract={"Generator"}
+          method={"availableProtocols"}
+          methodArgs={["0"]}
+        />
+      </p>
       <Buttons drizzle={drizzle} drizzleState={drizzleState} />
     </section>
   )
