@@ -15,7 +15,7 @@ export default function AccountSummary({
   return (
     <section className="center">
       <div className="segment">
-        <h2>Your account</h2>
+        <h2>Your AutoDeFi account</h2>
         <code>{facadeAddress}</code>
       </div>
       <Facade

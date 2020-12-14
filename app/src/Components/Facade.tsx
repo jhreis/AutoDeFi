@@ -14,7 +14,7 @@ export default function Facade({
 }: Props) {
   return (
     <div className="segment">
-      <h2>Balances</h2>
+      <h2>Your Account Balances</h2>
 
       <div className="input-group center">
         <FacadeBalance

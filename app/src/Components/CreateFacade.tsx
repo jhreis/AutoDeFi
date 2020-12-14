@@ -46,7 +46,9 @@ function Buttons({ drizzle }: ButtonProps) {
   }
 
   const handleNotReady = () => {
-    alert("Not deployed yet.")
+    alert(
+      "Not available on test or local blockchains. Just here for demonstration purposes. Only Compound (far left) is deployed for testing."
+    )
   }
 
   return (

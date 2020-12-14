@@ -146,6 +146,11 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
   return (
     <section>
       <h1>Depositing for Other Accounts</h1>
+      <p>
+        This is the custodial portion of AutoDeFi. This lists all created
+        Facades. Any wallet can deposit for any other account! However, other
+        actions are highly protected (e.g. withdrawing).
+      </p>
 
       {facadeInstances && (
         <span>
