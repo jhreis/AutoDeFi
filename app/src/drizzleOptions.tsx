@@ -20,9 +20,9 @@ const options: any = {
     // customProvider: new Web3("ws://localhost:8545"),
   },
   contracts: [Generator],
-  // events: {
-  //   Generator: ["FacadeCreated"],
-  // },
+  events: {
+    Generator: ["LogFacadeCreated"],
+  },
 }
 
 export default options

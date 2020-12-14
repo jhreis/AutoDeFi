@@ -66,7 +66,7 @@ export default function Dashboard({ drizzle, drizzleState }: Props) {
         const contractConfig = { web3Contract, contractName: newFacade }
 
         // TODO: Update these log messages with the correct ones
-        const events = ["Deposit", "Withdraw"]
+        const events = ["LogDeposit", "LogWithdraw"]
         drizzle.addContract(contractConfig, events)
         console.log("Added new contract", newFacade, "added?", web3Contract)
       } else {

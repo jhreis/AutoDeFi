@@ -118,7 +118,7 @@ export default function AllFacadeList({ drizzle, drizzleState }: Props) {
       }
 
       // TODO: Update these log messages with the correct ones
-      const events = ["Deposit", "Withdraw"]
+      const events = ["LogDeposit", "LogWithdraw"]
       drizzle.addContract(contractConfig, events)
       console.log(
         "AllFacadeList: Added new contract",
