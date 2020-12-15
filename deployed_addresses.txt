@@ -1,0 +1,21 @@
+The main UI interface:
+https://auto-defi.netlify.app/
+
+The main `Generator` interface is deployed to the `Rinkeby` network at:
+0xbe5ba6548baeb68ce16d480bde161604f44f6157
+https://rinkeby.etherscan.io/address/0xbe5ba6548baeb68ce16d480bde161604f44f6157
+
+This is the main contract that will be interacted with.
+
+Other addresses for some of the dynamic / upgradable contracts:
+
+# CompoundIntegrator
+This is the contract that knows how to deploy Compound Facades that sit on top of Compound.
+This integrator is located at:
+0x0dbB14c5Fe6A0F92245f74B47bA4EB306C779141
+https://rinkeby.etherscan.io/address/0x0dbb14c5fe6a0f92245f74b47ba4eb306c779141
+
+# Compound Facades
+There will be many facades deployed (up to one for each address). One sample is located at:
+0xF7Ae3399C757319003F2e3E9Bb03E3becc0eFdF7
+https://rinkeby.etherscan.io/address/0xf7ae3399c757319003f2e3e9bb03e3becc0efdf7
